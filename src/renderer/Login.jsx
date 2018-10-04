@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { default as constants } from '../common/constant';
 
 const FORM_STYLE = {
     margin : "0 auto",
@@ -14,14 +15,12 @@ const SIGNUP_LINK_STYLE = {
 class Login extends Component {
     constructor(props){
         super(props)
-        this.state = {
-            id : '',
-            pw : ''
-        }
     }
-    // state = {
-        
-    // }
+
+    state = {
+        id : '',
+        pw : ''
+    }
 
     handleIdChange = (e) => {
         const v = e.target.value
@@ -31,6 +30,10 @@ class Login extends Component {
     handlePwChange = (e) => {
         const v = e.target.value
         this.setState({pw:v})
+    }
+
+    handleLoginOnClick = (e) => {
+        alert('클릭' + this.state.id+', '+this.state.pw)
     }
 
     render() {
@@ -55,9 +58,7 @@ class Login extends Component {
                 </div>
 
                 <div className="field">
-                    <button className="button" onClick={(e)=>{
-                        alert('클릭' + this.state.id+', '+this.state.pw)
-                    }}>login</button>
+                    <button className="button" onClick={this.handleLoginOnClick}>login</button>
                 </div>
             </form>
         );

@@ -22,6 +22,8 @@ function createWindow () {
     // when you should delete the corresponding element.
     win = null
   })
+
+  console.log('electron create')
 }
 
 // This method will be called when Electron has finished
@@ -44,6 +46,7 @@ app.on('activate', () => {
   if (win === null) {
     createWindow()
   }
+  console.log('electron activate')
 })
 
 // In this file you can include the rest of your app's specific main process
