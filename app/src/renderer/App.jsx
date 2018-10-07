@@ -6,7 +6,7 @@ class App extends Component {
         return (
             <div>
                 <button className="button is-primary" onClick={
-                    (e)=>alert('dsds')
+                    (e)=>alert('ddfdsds')
                 }>하인</button>
             </div>
         );

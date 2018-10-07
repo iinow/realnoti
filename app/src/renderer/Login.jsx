@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { default as constants } from '../common/constant';
 
 const FORM_STYLE = {
     margin : "0 auto",
@@ -33,7 +32,7 @@ class Login extends Component {
     }
 
     handleLoginOnClick = (e) => {
-        alert('클릭' + this.state.id+', '+this.state.pw)
+        alert('클릭22' + this.state.id+', '+this.state.pw)
     }
 
     render() {
@@ -58,7 +57,8 @@ class Login extends Component {
                 </div>
 
                 <div className="field">
-                    <button className="button" onClick={this.handleLoginOnClick}>login</button>
+                {/* type=submit default 값인데 자동 리로드가 된다 form 안에 있는 button 이라면  */}
+                    <button className="button" type="button" onClick={this.handleLoginOnClick}>login</button>
                 </div>
             </form>
         );

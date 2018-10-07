@@ -1,7 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import App from './renderer/App'
-import Login from './renderer/Login'
+import App from './src/renderer/App'
+import Login from './src/renderer/Login'
 // const app = () => {
 //     return (
 //         <div>
