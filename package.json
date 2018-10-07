@@ -8,17 +8,28 @@
     "com": "babel src -d .tmp -w",
     "dcom": "babel src -d .tmp -w --source-maps",
     "rcom": "babel src -d .tmp -w --compact=true --source-maps",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack --mode production",
+    "bstart": "webpack-dev-server --open --mode development",
+    "dev": "electron-webpack dev",
+    "compile":"electron-webpack"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "babel-cli": "^6.26.0",
-    "babel-preset-es2015": "^6.24.1",
-    "babel-preset-react": "^6.24.1",
-    "babel-preset-stage-1": "^6.24.1",
-    "babel-preset-stage-2": "^6.24.1",
-    "electron": "^3.0.2"
+    "@babel/cli": "^7.1.2",
+    "@babel/core": "^7.1.2",
+    "@babel/preset-env": "^7.1.0",
+    "@babel/preset-react": "^7.0.0",
+    "@babel/preset-stage-1": "^7.0.0",
+    "@babel/preset-stage-2": "^7.0.0",
+    "babel-loader": "^8.0.2",
+    "electron": "^3.0.2",
+    "electron-builder": "^20.28.4",
+    "electron-webpack": "^2.3.1",
+    "webpack": "^4.20.2",
+    "webpack-cli": "^3.1.2",
+    "webpack-dev-server": "^3.1.9"
   },
   "dependencies": {
     "bulma": "^0.7.1",
