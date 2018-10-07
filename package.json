@@ -2,7 +2,7 @@
   "name": "realnoti",
   "version": "1.0.0",
   "description": "",
-  "main": ".tmp/electron-starter.js",
+  "main": "main_process.js",
   "scripts": {
     "start": "babel src -d .tmp --source-maps && electron .",
     "com": "babel src -d .tmp -w",
@@ -12,21 +12,22 @@
     "build": "webpack --mode production",
     "bstart": "webpack-dev-server --open --mode development",
     "dev": "electron-webpack dev",
-    "compile":"electron-webpack"
+    "compile": "electron-webpack",
+    "bundle": "webpack --mode development"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "@babel/cli": "^7.1.2",
-    "@babel/core": "^7.1.2",
-    "@babel/preset-env": "^7.1.0",
-    "@babel/preset-react": "^7.0.0",
-    "@babel/preset-stage-1": "^7.0.0",
-    "@babel/preset-stage-2": "^7.0.0",
+    "babel-core": "^6.26.3",
     "babel-loader": "^8.0.2",
+    "babel-preset-react": "^6.24.1",
+    "css-loader": "^1.0.0",
     "electron": "^3.0.2",
     "electron-builder": "^20.28.4",
+    "electron-reload": "^1.2.5",
     "electron-webpack": "^2.3.1",
+    "extract-text-webpack-plugin": "^4.0.0-beta.0",
+    "file-loader": "^2.0.0",
     "webpack": "^4.20.2",
     "webpack-cli": "^3.1.2",
     "webpack-dev-server": "^3.1.9"
