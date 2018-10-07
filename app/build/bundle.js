@@ -164,9 +164,21 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 
+const BodyBackgroundColor = '#F9F9F9';
 const FORM_STYLE = {
   margin: "0 auto",
-  padding: 30
+  padding: 30,
+  width: 300,
+  border: "1px solid #D7DDE1",
+  borderRadius: "7px",
+  backgroundColor: "white" // marginLeft: "auto",
+  // marginRight: "auto",
+  // marginTop: "auto",
+  // marginBottom: "auto"
+  // margin-left:auto,
+  // margin-right:auto;
+  // backgroundColor: "red"
+
 };
 const SIGNUP_LINK_STYLE = {
   display: "inline-block",
@@ -180,6 +192,10 @@ class Login extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
     _defineProperty(this, "state", {
       id: '',
       pw: ''
+    });
+
+    _defineProperty(this, "componentWillMount", () => {
+      document.body.style.backgroundColor = BodyBackgroundColor;
     });
 
     _defineProperty(this, "handleIdChange", e => {
@@ -197,12 +213,24 @@ class Login extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
     });
 
     _defineProperty(this, "handleLoginOnClick", e => {
+      this.setState({
+        id: '',
+        pw: ''
+      });
       alert('클릭22' + this.state.id + ', ' + this.state.pw);
+      this.etxId.focus();
     });
   }
 
   render() {
-    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
+    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      style: {
+        width: 20,
+        height: 60,
+        padding: '10px',
+        margin: "0 auto"
+      }
+    }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       style: FORM_STYLE
     }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "field"
@@ -215,7 +243,8 @@ class Login extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
       type: "text",
       placeholder: "",
       value: this.state.id,
-      onChange: this.handleIdChange
+      onChange: this.handleIdChange,
+      ref: ref => this.etxId = ref
     }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "field"
     }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
@@ -227,14 +256,19 @@ class Login extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
       type: "text",
       placeholder: "",
       value: this.state.pw,
-      onChange: this.handlePwChange
+      onChange: this.handlePwChange,
+      onKeyPress: e => {
+        if (e.key == 'Enter') {
+          this.handleLoginOnClick();
+        }
+      }
     }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "field"
     }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
       className: "button",
       type: "button",
       onClick: this.handleLoginOnClick
-    }, "login")));
+    }, "login"))));
   }
 
 }
