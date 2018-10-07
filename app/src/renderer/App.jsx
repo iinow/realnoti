@@ -1,16 +1,15 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import React, { Component } from 'react'
+import { Route } from 'react-router-dom'
+import { Login, Home } from '../pages/index'
+import PropTypes from 'prop-types'
 
-class App extends Component {
-    render() {
-        return (
-            <div>
-                <button className="button is-primary" onClick={
-                    (e)=>alert('ddfdsds')
-                }>하인</button>
-            </div>
-        );
-    }
+const App = () => {
+    return (
+        <div>
+            <Route exact path="/" component={Home}/>
+            <Route exact path="/login" component={Login}/>
+        </div>
+    )
 }
 
 App.propTypes = {
