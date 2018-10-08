@@ -1,13 +1,15 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { Link, HashRouter } from 'react-router-dom'
+import { URL_HOME } from '../util/constant'
 
 const BodyBackgroundColor = '#F9F9F9'
 const FORM_STYLE = {
     margin: "0 auto",
     padding: 30,
     width: 300,
-    border : "1px solid #D7DDE1",
-    borderRadius:"7px",
+    border: "1px solid #D7DDE1",
+    borderRadius: "7px",
     backgroundColor: "white"
     // marginLeft: "auto",
     // marginRight: "auto",
@@ -48,19 +50,24 @@ class Login extends Component {
     }
 
     handleLoginOnClick = (e) => {
-        this.setState({
-            id:'',
-            pw:''
-        })
-        alert('클릭22' + this.state.id + ', ' + this.state.pw)
-        this.etxId.focus()
+        const { id, pw } = this.state
+        if (id === '' || pw === '') {
+            this.setState({
+                id: '',
+                pw: ''
+            })
+            alert('클릭22' + this.state.id + ', ' + this.state.pw)
+            this.etxId.focus()
+        } else {
+            this.props.history.push(URL_HOME)
+        }
     }
 
     render() {
         return (
             <form>
-                <div style={{ width: 20, height: 60, padding: '10px', margin: "0 auto"}}>
-                    
+                <div style={{ width: 20, height: 60, padding: '10px', margin: "0 auto" }}>
+
                 </div>
                 <div style={FORM_STYLE}>
                     <div className="field">
@@ -68,8 +75,8 @@ class Login extends Component {
                         <div className="control">
                             <input className="input" type="text" placeholder=""
                                 value={this.state.id}
-                                onChange={this.handleIdChange} 
-                                ref={(ref)=>this.etxId = ref}/>
+                                onChange={this.handleIdChange}
+                                ref={(ref) => this.etxId = ref} />
                         </div>
                     </div>
 
@@ -78,12 +85,12 @@ class Login extends Component {
                         <div className="control">
                             <input className="input" type="text" placeholder=""
                                 value={this.state.pw}
-                                onChange={this.handlePwChange} 
-                                onKeyPress={(e)=>{
-                                    if(e.key == 'Enter'){
+                                onChange={this.handlePwChange}
+                                onKeyPress={(e) => {
+                                    if (e.key == 'Enter') {
                                         this.handleLoginOnClick()
                                     }
-                                }}/>
+                                }} />
                         </div>
                     </div>
 

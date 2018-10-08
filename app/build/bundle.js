@@ -86,34 +86,6 @@
 /************************************************************************/
 /******/ ({
 
-/***/ "./app/Root.js":
-/*!*********************!*\
-  !*** ./app/Root.js ***!
-  \*********************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/es/index.js");
-/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
-/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _src_renderer_App__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./src/renderer/App */ "./app/src/renderer/App.jsx");
-
-
-
-
-
-const Root = () => {
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["BrowserRouter"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_src_renderer_App__WEBPACK_IMPORTED_MODULE_3__["default"], null));
-};
-
-/* harmony default export */ __webpack_exports__["default"] = (Root);
-
-/***/ }),
-
 /***/ "./app/index.js":
 /*!**********************!*\
   !*** ./app/index.js ***!
@@ -127,11 +99,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
 /* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_dom__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _Root__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Root */ "./app/Root.js");
+/* harmony import */ var _src_renderer_App__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./src/renderer/App */ "./app/src/renderer/App.jsx");
 
 
 
-react_dom__WEBPACK_IMPORTED_MODULE_1___default.a.render(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Root__WEBPACK_IMPORTED_MODULE_2__["default"], null), document.getElementById('root'));
+react_dom__WEBPACK_IMPORTED_MODULE_1___default.a.render(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_src_renderer_App__WEBPACK_IMPORTED_MODULE_2__["default"], null), document.getElementById('root'));
 
 /***/ }),
 
@@ -176,7 +148,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
 /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/es/index.js");
+/* harmony import */ var _util_constant__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../util/constant */ "./app/src/util/constant.js");
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+
 
 
 
@@ -229,12 +205,21 @@ class Login extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
     });
 
     _defineProperty(this, "handleLoginOnClick", e => {
-      this.setState({
-        id: '',
-        pw: ''
-      });
-      alert('클릭22' + this.state.id + ', ' + this.state.pw);
-      this.etxId.focus();
+      const {
+        id,
+        pw
+      } = this.state;
+
+      if (id === '' || pw === '') {
+        this.setState({
+          id: '',
+          pw: ''
+        });
+        alert('클릭22' + this.state.id + ', ' + this.state.pw);
+        this.etxId.focus();
+      } else {
+        this.props.history.push(_util_constant__WEBPACK_IMPORTED_MODULE_3__["URL_HOME"]);
+      }
     });
   }
 
@@ -329,25 +314,44 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _pages_index__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../pages/index */ "./app/src/pages/index.js");
 /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
 /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _util_constant__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../util/constant */ "./app/src/util/constant.js");
 
 
 
 
 
-const App = () => {
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
-    exact: true,
-    path: "/",
-    component: _pages_index__WEBPACK_IMPORTED_MODULE_2__["Home"]
-  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
-    exact: true,
-    path: "/login",
-    component: _pages_index__WEBPACK_IMPORTED_MODULE_2__["Login"]
-  }));
-};
+
+const App = () => react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["HashRouter"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Switch"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
+  exact: true,
+  path: _util_constant__WEBPACK_IMPORTED_MODULE_4__["URL_LOGIN"],
+  component: _pages_index__WEBPACK_IMPORTED_MODULE_2__["Login"]
+}), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
+  exact: true,
+  path: _util_constant__WEBPACK_IMPORTED_MODULE_4__["URL_HOME"],
+  component: _pages_index__WEBPACK_IMPORTED_MODULE_2__["Home"]
+}))); // if(!location.hash.length){
+//     location.hash = '/'
+// }
+
 
 App.propTypes = {};
 /* harmony default export */ __webpack_exports__["default"] = (App);
+
+/***/ }),
+
+/***/ "./app/src/util/constant.js":
+/*!**********************************!*\
+  !*** ./app/src/util/constant.js ***!
+  \**********************************/
+/*! exports provided: URL_HOME, URL_LOGIN */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "URL_HOME", function() { return URL_HOME; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "URL_LOGIN", function() { return URL_LOGIN; });
+const URL_HOME = '/home';
+const URL_LOGIN = '/';
 
 /***/ }),
 
