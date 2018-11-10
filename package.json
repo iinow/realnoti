@@ -1,0 +1,26 @@
+{
+  "name": "realnoti",
+  "version": "1.0.0",
+  "description": "",
+  "main": ".tmp/electron-starter.js",
+  "scripts": {
+    "start": "babel src -d .tmp && electron .",
+    "com": "babel src -d .tmp -w",
+    "dcom": "babel src -d .tmp -w --source-maps",
+    "rcom": "babel src -d .tmp -w --compact=true --source-maps",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-react": "^6.24.1",
+    "electron": "^3.0.2"
+  },
+  "dependencies": {
+    "bulma": "^0.7.1",
+    "react": "^16.5.2",
+    "react-dom": "^16.5.2"
+  }
+}
