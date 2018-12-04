@@ -2,7 +2,7 @@
   "name": "realnoti",
   "version": "0.1.0",
   "private": true,
-  "main": "src/electron-starter.js",
+  "main": "src/electron/starter.js",
   "dependencies": {
     "axois": "^1.0.0",
     "react": "^16.6.3",

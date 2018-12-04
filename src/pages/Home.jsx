@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import {default as styles} from 'bulma/css/bulma.css'
-
+import Api from '../util/Api'
 class Home extends Component {
     state = {
         url: '',
