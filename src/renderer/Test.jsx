@@ -20,6 +20,10 @@ Test.propTypes = {
 };
 
 export const T = () => {
-    export const AV = 'av'
 }
-export default Test;
+
+export const Person = {
+    age : 11,
+    isStudent : () => this.age>10
+}
+export default Test
