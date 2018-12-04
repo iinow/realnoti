@@ -12,3 +12,7 @@
 ```node
 npm i
 ```
+```node
+npm start
+```
+하면 create-react-app 과 electron 이 실행된다.
