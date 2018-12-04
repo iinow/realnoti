@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Link, HashRouter } from 'react-router-dom'
 import { URL_HOME } from '../util/constant'
-import 'bulma/css/bulma.css'
+
 const BodyBackgroundColor = '#F9F9F9'
 const FORM_STYLE = {
     margin: "0 auto",
