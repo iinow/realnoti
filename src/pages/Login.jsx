@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Link, HashRouter } from 'react-router-dom'
-import { URL_HOME } from '../util/constant'
+import { URL_HOME, URL_REG } from '../util/constant'
 
 const BodyBackgroundColor = '#F9F9F9'
 const FORM_STYLE = {
@@ -40,7 +40,9 @@ class Login extends Component {
     }
 
     componentWillMount = () => {
-        // document.body.style.backgroundColor = BodyBackgroundColor
+        document.body.style.backgroundColor = BodyBackgroundColor
+        document.body.style.height = '100vh'
+        // document.body.style.width = '100vh'
     }
 
     handleIdChange = (e) => {
@@ -67,46 +69,13 @@ class Login extends Component {
         }
     }
 
+    handleRegister = (e) => {
+        this.props.history.push(URL_REG)
+    }
+
     render() {
         return (
-            <section className={style2.props}>
-                <div className="hero-body">
-                    <div className="container has-text-centered">
-                        <div className="column is-4 is-offset-4">
-                            <h3 className="title has-text-grey">Login</h3>
-                            <p className="subtitle has-text-grey">Please login to proceed.</p>
-                            <div className="box">
-                                <figure className="avatar">
-                                    <img src="https://placehold.it/128x128" />
-                                </figure>
-                                <form>
-                                    <div className="field">
-                                        <div className="control">
-                                            <input className="input is-large" type="email" placeholder="Your Email" autofocus="" />
-                                        </div>
-                                    </div>
-                                    <div className="field">
-                                        <div className="control">
-                                            <input className="input is-large" type="password" placeholder="Your Password" />
-                                        </div>
-                                    </div>
-                                    <div className="field">
-                                        <label className="checkbox">
-                                            <input type="checkbox" />
-                                            Remember me
-                                        </label>
-                                    </div>
-                                    <button className="button is-block is-info is-large is-fullwidth">Login</button>
-                                </form>
-                            </div>
-                            <p className="has-text-grey">
-                                <a href="">Sign Up</a>
-                                <a href="">Forgot Password</a>
-                                <a href="">Need Help</a>
-                            </p>
-                        </div>
-                    </div>
-                </div>
+            <div>
                 <div style={{ width: 20, height: 60, padding: '10px', margin: "0 auto" }}>
 
                 </div>
@@ -138,9 +107,10 @@ class Login extends Component {
                     <div className="field">
                         {/* type=submit default 값인데 자동 리로드가 된다 form 안에 있는 button 이라면  */}
                         <button className="button" type="button" onClick={this.handleLoginOnClick}>login</button>
+                        <button className="button" style={{float:"right"}} onClick={this.handleRegister}>새 등록</button>
                     </div>
                 </div>
-            </section>
+            </div>
         );
     }
 }

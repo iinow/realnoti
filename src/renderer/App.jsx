@@ -7,9 +7,9 @@ import {
     // BrowserRouter as Router2, 사용하지 않음 요즘엔
     HashRouter as Router
 } from 'react-router-dom'
-import { Login, Home } from '../pages/index'
+import { Login, Home, Register } from '../pages/index'
 import PropTypes from 'prop-types'
-import { URL_LOGIN, URL_HOME } from '../util/constant';
+import { URL_LOGIN, URL_HOME, URL_REG } from '../util/constant';
 
 const App = () => (
     <Router>
@@ -20,6 +20,7 @@ const App = () => (
         <Switch>
             <Route exact path={URL_LOGIN} component={Login} />
             <Route exact path={URL_HOME} component={Home} />
+            <Route exact path={URL_REG} component={Register} />
         </Switch>
     </Router>
 )
