@@ -20,11 +20,20 @@ class Register extends Component {
         message : ''
     }
 
-    componentWillMount = () => {
+    componentDidMount = () => {
         document.body.style.backgroundColor = BodyBackgroundColor
         document.body.style.height = '100vh'
         // document.body.style.width = '100vh'
         document.body.style.paddingTop ='60px'
+    }
+
+    componentWillUnmount = () => {
+        document.body.style.paddingTop ='0px'
+    }
+
+    //deprecated 된다함
+    componentWillMount = () => {
+        
     }
     
     handleOnClickCancel = (e) => {
@@ -69,41 +78,41 @@ class Register extends Component {
     render() {
         return (
             <div style={REG_STYLE}>
-                <div class="field">
-                    <label class="label">ID</label>
-                    <div class="control">
-                        <input class="input" type="text" placeholder="Text input" onChange={this.handleOnChangeID}/>
+                <div className="field">
+                    <label className="label">ID</label>
+                    <div className="control">
+                        <input className="input" type="text" placeholder="Text input" onChange={this.handleOnChangeID}/>
                     </div>
                 </div>
 
-                <div class="field">
-                    <label class="label">Password</label>
-                    <div class="control has-icons-left has-icons-right">
-                        <input class="input" type="text" placeholder="Text input" onChange={this.handleOnChangePw}/>
-                        {/**<input class="input is-success" type="text" placeholder="Text input" value="bulma"/> */}
-                        <span class="icon is-small is-left">
-                            <i class="fas fa-user"></i>
+                <div className="field">
+                    <label className="label">Password</label>
+                    <div className="control has-icons-left has-icons-right">
+                        <input className="input" type="text" placeholder="Text input" onChange={this.handleOnChangePw}/>
+                        {/**<input className="input is-success" type="text" placeholder="Text input" value="bulma"/> */}
+                        <span className="icon is-small is-left">
+                            <i className="fas fa-user"></i>
                         </span>
-                        <span class="icon is-small is-right">
-                            <i class="fas fa-check"></i>
+                        <span className="icon is-small is-right">
+                            <i className="fas fa-check"></i>
                         </span>
                     </div>
                     {/* <p class="help is-success">This username is available</p> */}
                 </div>
 
-                <div class="field">
-                    <label class="label">Email</label>
-                    <div class="control has-icons-left has-icons-right">
-                        <input class="input" type="email" placeholder="Email input" onChange={this.handleOnChangeEmail}/>
-                        {/**<input class="input is-danger" type="email" placeholder="Email input"/> */}
-                        <span class="icon is-small is-left">
-                            <i class="fas fa-envelope"></i>
+                <div className="field">
+                    <label className="label">Email</label>
+                    <div className="control has-icons-left has-icons-right">
+                        <input className="input" type="email" placeholder="Email input" onChange={this.handleOnChangeEmail}/>
+                        {/**<input className="input is-danger" type="email" placeholder="Email input"/> */}
+                        <span className="icon is-small is-left">
+                            <i className="fas fa-envelope"></i>
                         </span>
-                        <span class="icon is-small is-right">
-                            <i class="fas fa-exclamation-triangle"></i>
+                        <span className="icon is-small is-right">
+                            <i className="fas fa-exclamation-triangle"></i>
                         </span>
                     </div>
-                    {/* <p class="help is-danger">This email is invalid</p> */}
+                    {/* <p className="help is-danger">This email is invalid</p> */}
                 </div>
 
                 {/* <div class="field">
@@ -118,16 +127,16 @@ class Register extends Component {
                     </div>
                 </div> */}
 
-                <div class="field">
-                    <label class="label">Message</label>
-                    <div class="control">
-                        <textarea class="textarea" placeholder="Textarea" onChange={this.handleOnChangeMsg}></textarea>
+                <div className="field">
+                    <label className="label">Message</label>
+                    <div className="control">
+                        <textarea className="textarea" placeholder="Textarea" onChange={this.handleOnChangeMsg}></textarea>
                     </div>
                 </div>
 
-                <div class="field">
-                    <div class="control">
-                        <label class="checkbox">
+                <div className="field">
+                    <div className="control">
+                        <label className="checkbox">
                             <input type="checkbox" />
                             I agree to the <a href="#">terms and conditions</a>
                         </label>
@@ -147,12 +156,12 @@ class Register extends Component {
                     </div>
                 </div> */}
 
-                <div class="field is-grouped">
-                    <div class="control">
-                        <button class="button is-link" onClick={this.handleOnClickReg}>Submit</button>
+                <div className="field is-grouped">
+                    <div className="control">
+                        <button className="button is-link" onClick={this.handleOnClickReg}>Submit</button>
                     </div>
-                    <div class="control" onClick={this.handleOnClickCancel}>
-                        <button class="button is-text">Cancel</button>
+                    <div className="control" onClick={this.handleOnClickCancel}>
+                        <button className="button is-text">Cancel</button>
                     </div>
                 </div>
             </div>

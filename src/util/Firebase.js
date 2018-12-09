@@ -11,11 +11,14 @@ let config = {
     messagingSenderId: "101374968258"
 }
 
+const settings = {timestampsInSnapshots : true}
+
 export const fire = {
     init : () => {
         if (!firebase.apps.length){
             firebaseApp = firebase.initializeApp(config)
             db = firebaseApp.firestore()
+            db.settings(settings)
         }
         // db = firebase.database()
     },

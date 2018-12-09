@@ -40,11 +40,15 @@ class Login extends Component {
         pw: ''
     }
 
-    componentWillMount = () => {
+    componentDidMount = () => {
         document.body.style.backgroundColor = BodyBackgroundColor
         document.body.style.height = '100vh'
         document.body.style.paddingTop ='60px'
         // document.body.style.width = '100vh'
+    }
+
+    componentWillUnmount = () => {
+        document.body.style.paddingTop ='0px'
     }
 
     handleIdChange = (e) => {
