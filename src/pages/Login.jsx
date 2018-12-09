@@ -11,7 +11,7 @@ const FORM_STYLE = {
     width: 300,
     border: "1px solid #D7DDE1",
     borderRadius: "7px",
-    backgroundColor: "white"
+    backgroundColor: "#FFFFFF"
     // marginLeft: "auto",
     // marginRight: "auto",
     // marginTop: "auto",
@@ -43,6 +43,7 @@ class Login extends Component {
     componentWillMount = () => {
         document.body.style.backgroundColor = BodyBackgroundColor
         document.body.style.height = '100vh'
+        document.body.style.paddingTop ='60px'
         // document.body.style.width = '100vh'
     }
 
@@ -63,13 +64,13 @@ class Login extends Component {
             // this.etxId.focus()
             alert(`id, pw 입력 바람`)
         } else {
-            if(await fire.login(id, pw)){
+            if (await fire.login(id, pw)) {
                 this.setState({
                     id: '',
                     pw: ''
                 })
                 this.props.history.push(URL_HOME)
-            }else{
+            } else {
                 console.log(`로그인 실패`)
             }
         }
@@ -81,40 +82,35 @@ class Login extends Component {
 
     render() {
         return (
-            <div>
-                <div style={{ width: 20, height: 60, padding: '10px', margin: "0 auto" }}>
-
+            <div style={FORM_STYLE}>
+                <div className="field">
+                    <label className="label">아이디</label>
+                    <div className="control">
+                        <input className="input" type="text" placeholder=""
+                            value={this.state.id}
+                            onChange={this.handleIdChange}
+                            ref={(ref) => this.etxId = ref} />
+                    </div>
                 </div>
-                <div style={FORM_STYLE}>
-                    <div className="field">
-                        <label className="label">아이디</label>
-                        <div className="control">
-                            <input className="input" type="text" placeholder=""
-                                value={this.state.id}
-                                onChange={this.handleIdChange}
-                                ref={(ref) => this.etxId = ref} />
-                        </div>
-                    </div>
 
-                    <div className="field">
-                        <label className="label">비밀번호</label>
-                        <div className="control">
-                            <input className="input" type="text" placeholder=""
-                                value={this.state.pw}
-                                onChange={this.handlePwChange}
-                                onKeyPress={(e) => {
-                                    if (e.key == 'Enter') {
-                                        this.handleLoginOnClick()
-                                    }
-                                }} />
-                        </div>
+                <div className="field">
+                    <label className="label">비밀번호</label>
+                    <div className="control">
+                        <input className="input" type="text" placeholder=""
+                            value={this.state.pw}
+                            onChange={this.handlePwChange}
+                            onKeyPress={(e) => {
+                                if (e.key == 'Enter') {
+                                    this.handleLoginOnClick()
+                                }
+                            }} />
                     </div>
+                </div>
 
-                    <div className="field">
-                        {/* type=submit default 값인데 자동 리로드가 된다 form 안에 있는 button 이라면  */}
-                        <button className="button" type="button" onClick={this.handleLoginOnClick}>login</button>
-                        <button className="button" style={{float:"right"}} onClick={this.handleRegister}>새 등록</button>
-                    </div>
+                <div className="field">
+                    {/* type=submit default 값인데 자동 리로드가 된다 form 안에 있는 button 이라면  */}
+                    <button className="button" type="button" onClick={this.handleLoginOnClick}>login</button>
+                    <button className="button" style={{ float: "right" }} onClick={this.handleRegister}>새 등록</button>
                 </div>
             </div>
         );
