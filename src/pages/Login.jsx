@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Link, HashRouter } from 'react-router-dom'
 import { URL_HOME, URL_REG } from '../util/constant'
+import { Fire, fire } from '../util/Firebase'
 
 const BodyBackgroundColor = '#F9F9F9'
 const FORM_STYLE = {
@@ -55,17 +56,22 @@ class Login extends Component {
         this.setState({ pw: v })
     }
 
-    handleLoginOnClick = (e) => {
+    handleLoginOnClick = async (e) => {
         const { id, pw } = this.state
         if (id === '' || pw === '') {
-            this.setState({
-                id: '',
-                pw: ''
-            })
-            alert('클릭22' + this.state.id + ', ' + this.state.pw)
-            this.etxId.focus()
+            // alert('클릭22' + this.state.id + ', ' + this.state.pw)
+            // this.etxId.focus()
+            alert(`id, pw 입력 바람`)
         } else {
-            this.props.history.push(URL_HOME)
+            if(await fire.login(id, pw)){
+                this.setState({
+                    id: '',
+                    pw: ''
+                })
+                this.props.history.push(URL_HOME)
+            }else{
+                console.log(`로그인 실패`)
+            }
         }
     }
 
