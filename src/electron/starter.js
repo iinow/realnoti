@@ -6,7 +6,14 @@ let win
 
 function createWindow () {
   // Create the browser window.
-  win = new BrowserWindow({width: 800, height: 600})
+  win = new BrowserWindow({
+    width: 1024, 
+    height: 728,
+    minWidth: 600,
+    minHeight: 300,
+    frame: false,
+    titleBarStyle: 'hidden' || 'customButtonsOnHover',
+  })
 
   // and load the index.html of the app.
 //   win.loadFile('index.html')

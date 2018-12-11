@@ -5,6 +5,7 @@
   "main": "src/electron/starter.js",
   "dependencies": {
     "axois": "^1.0.0",
+    "electron-titlebar": "0.0.3",
     "firebase": "^5.7.0",
     "react": "^16.6.3",
     "react-dom": "^16.6.3",

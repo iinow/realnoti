@@ -45,6 +45,16 @@ class Login extends Component {
         document.body.style.height = '100vh'
         document.body.style.paddingTop ='60px'
         // document.body.style.width = '100vh'
+
+        const id = localStorage.getItem("id")
+        const pw = localStorage.getItem("pw")
+
+        if( id && pw ){
+            this.setState({
+                'id': id,
+                'pw': pw
+            })
+        }
     }
 
     componentWillUnmount = () => {
@@ -69,6 +79,8 @@ class Login extends Component {
             alert(`id, pw 입력 바람`)
         } else {
             if (await fire.login(id, pw)) {
+                localStorage.setItem("id", id)
+                localStorage.setItem("pw", pw)
                 this.setState({
                     id: '',
                     pw: ''
@@ -100,7 +112,7 @@ class Login extends Component {
                 <div className="field">
                     <label className="label">비밀번호</label>
                     <div className="control">
-                        <input className="input" type="text" placeholder=""
+                        <input className="input" type="password" placeholder=""
                             value={this.state.pw}
                             onChange={this.handlePwChange}
                             onKeyPress={(e) => {
