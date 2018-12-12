@@ -5,3 +5,8 @@
 ```node
 npm i
 ```
+
+2018-12-12 
+create-react-app 으로 electron 같이 개발하는게 넘나 오래걸린다....
+프로세스 2개 돌려서 좀 느리다 많이..
+electron  브랜치로 다시 시작한다.
