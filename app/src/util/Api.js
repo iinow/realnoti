@@ -1,5 +1,4 @@
 import axios from 'axios'
-import { clone } from '../util/Utils'
 
 const Api = {
     // get: (url) => {

@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Link, HashRouter } from 'react-router-dom'
-import { URL_HOME } from '../util/constant'
+import { URL_HOME, URL_REG } from '../util/constant'
+import { Fire, fire } from '../util/Firebase'
 
 const BodyBackgroundColor = '#F9F9F9'
 const FORM_STYLE = {
@@ -10,7 +11,7 @@ const FORM_STYLE = {
     width: 300,
     border: "1px solid #D7DDE1",
     borderRadius: "7px",
-    backgroundColor: "white"
+    backgroundColor: "#FFFFFF"
     // marginLeft: "auto",
     // marginRight: "auto",
     // marginTop: "auto",
@@ -19,6 +20,10 @@ const FORM_STYLE = {
     // margin-right:auto;
     // backgroundColor: "red"
 }
+
+const style2 = <style>
+    hero is-success is-fullheight{{ backgroundColor: '#000000' }}
+</style>
 
 const SIGNUP_LINK_STYLE = {
     display: "inline-block",
@@ -35,8 +40,25 @@ class Login extends Component {
         pw: ''
     }
 
-    componentWillMount = () => {
+    componentDidMount = () => {
         document.body.style.backgroundColor = BodyBackgroundColor
+        document.body.style.height = '100vh'
+        document.body.style.paddingTop ='60px'
+        // document.body.style.width = '100vh'
+
+        const id = localStorage.getItem("id")
+        const pw = localStorage.getItem("pw")
+
+        if( id && pw ){
+            this.setState({
+                'id': id,
+                'pw': pw
+            })
+        }
+    }
+
+    componentWillUnmount = () => {
+        document.body.style.paddingTop ='0px'
     }
 
     handleIdChange = (e) => {
@@ -49,57 +71,64 @@ class Login extends Component {
         this.setState({ pw: v })
     }
 
-    handleLoginOnClick = (e) => {
+    handleLoginOnClick = async (e) => {
         const { id, pw } = this.state
         if (id === '' || pw === '') {
-            this.setState({
-                id: '',
-                pw: ''
-            })
-            alert('클릭22' + this.state.id + ', ' + this.state.pw)
-            this.etxId.focus()
+            // alert('클릭22' + this.state.id + ', ' + this.state.pw)
+            // this.etxId.focus()
+            alert(`id, pw 입력 바람`)
         } else {
-            this.props.history.push(URL_HOME)
+            if (await fire.login(id, pw)) {
+                localStorage.setItem("id", id)
+                localStorage.setItem("pw", pw)
+                this.setState({
+                    id: '',
+                    pw: ''
+                })
+                this.props.history.push(URL_HOME)
+            } else {
+                console.log(`로그인 실패`)
+            }
         }
+    }
+
+    handleRegister = (e) => {
+        this.props.history.push(URL_REG)
     }
 
     render() {
         return (
-            <form>
-                <div style={{ width: 20, height: 60, padding: '10px', margin: "0 auto" }}>
-
-                </div>
-                <div style={FORM_STYLE}>
-                    <div className="field">
-                        <label className="label">아이디</label>
-                        <div className="control">
-                            <input className="input" type="text" placeholder=""
-                                value={this.state.id}
-                                onChange={this.handleIdChange}
-                                ref={(ref) => this.etxId = ref} />
-                        </div>
-                    </div>
-
-                    <div className="field">
-                        <label className="label">비밀번호</label>
-                        <div className="control">
-                            <input className="input" type="text" placeholder=""
-                                value={this.state.pw}
-                                onChange={this.handlePwChange}
-                                onKeyPress={(e) => {
-                                    if (e.key == 'Enter') {
-                                        this.handleLoginOnClick()
-                                    }
-                                }} />
-                        </div>
-                    </div>
-
-                    <div className="field">
-                        {/* type=submit default 값인데 자동 리로드가 된다 form 안에 있는 button 이라면  */}
-                        <button className="button" type="button" onClick={this.handleLoginOnClick}>login</button>
+            <div style={FORM_STYLE}>
+                <div className="field">
+                    <label className="label">아이디</label>
+                    <div className="control">
+                        <input className="input" type="text" placeholder=""
+                            value={this.state.id}
+                            onChange={this.handleIdChange}
+                            ref={(ref) => this.etxId = ref} />
                     </div>
                 </div>
-            </form>
+
+                <div className="field">
+                    <label className="label">비밀번호</label>
+                    <div className="control">
+                        <input className="input" type="password" placeholder=""
+                            value={this.state.pw}
+                            onChange={this.handlePwChange}
+                            onKeyPress={(e) => {
+                                if (e.key == 'Enter') {
+                                    this.handleLoginOnClick()
+                                }
+                            }} />
+                    </div>
+                </div>
+
+                <div className="field">
+                    {/* type=submit default 값인데 자동 리로드가 된다 form 안에 있는 button 이라면  */}
+                    <button className="button" type="button" onClick={this.handleLoginOnClick}>login</button>
+                    <button className="button" style={{ float: "right" }} onClick={this.handleRegister}>새 등록</button>
+                </div>
+            </div>
         );
     }
 }

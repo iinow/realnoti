@@ -1,6 +1,6 @@
 // Basic init
 const electron = require('electron')
-const { app, BrowserWindow } = electron
+const { app, BrowserWindow } = require('electron')
 
 // Let electron reloads by itself when webpack watches changes in ./app/
 //require('electron-reload')(__dirname)
@@ -12,11 +12,11 @@ let mainWindow
 
 function createWindow() {
     // Create the browser window.
-    win = new BrowserWindow({ width: 800, height: 600 })
-
+    win = new BrowserWindow({ width: 1024, height: 768 })
+    
     // and load the index.html of the app.
-    win.loadURL(`file://${__dirname}/app/index.html`)
-
+    win.loadURL('file://'+__dirname+'/app/index.html')
+    
     // Open the DevTools.
     win.webContents.openDevTools()
 

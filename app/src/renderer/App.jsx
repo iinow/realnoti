@@ -7,21 +7,32 @@ import {
     // BrowserRouter as Router2, 사용하지 않음 요즘엔
     HashRouter as Router
 } from 'react-router-dom'
-import { Login, Home } from '../pages/index'
+import { Login, Home, Register } from '../pages/index'
 import PropTypes from 'prop-types'
-import { URL_LOGIN, URL_HOME } from '../util/constant';
+import { URL_LOGIN, URL_HOME, URL_REG } from '../util/constant'
+// import TitleBar from 'electron-titlebar'
+//import menu from './AppMenu'
+// import {slackTemplate} from './title'
 
 const App = () => (
-    <Router>
+    <div>
+        {/* <TitleBar
+            icon={`${__dirname}/../../../public/favicon.ico`}
+            app='Electron'
+            menu={defaultTemplate}
+        /> */}
+        <Router>
             {/* <div>
                 Hello Main
                 <Link to="/">login고고</Link>
             </div> */}
-        <Switch>
-            <Route exact path={URL_LOGIN} component={Login} />
-            <Route exact path={URL_HOME} component={Home} />
-        </Switch>
-    </Router>
+            <Switch>
+                <Route exact path={URL_LOGIN} component={Login} />
+                <Route exact path={URL_HOME} component={Home} />
+                <Route exact path={URL_REG} component={Register} />
+            </Switch>
+        </Router>
+    </div>
 )
 
 // if(!location.hash.length){
