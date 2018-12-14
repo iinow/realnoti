@@ -3,7 +3,8 @@ import PropTypes from 'prop-types';
 import { Link, HashRouter } from 'react-router-dom'
 import { URL_HOME, URL_REG } from '../util/constant'
 import { Fire, fire } from '../util/Firebase'
-
+var SSH = require('simple-ssh');
+ 
 const BodyBackgroundColor = '#F9F9F9'
 const FORM_STYLE = {
     margin: "0 auto",
@@ -11,7 +12,8 @@ const FORM_STYLE = {
     width: 300,
     border: "1px solid #D7DDE1",
     borderRadius: "7px",
-    backgroundColor: "#FFFFFF"
+    backgroundColor: "#FFFFFF",
+    marginTop: "60px"
     // marginLeft: "auto",
     // marginRight: "auto",
     // marginTop: "auto",
@@ -43,7 +45,7 @@ class Login extends Component {
     componentDidMount = () => {
         document.body.style.backgroundColor = BodyBackgroundColor
         document.body.style.height = '100vh'
-        document.body.style.paddingTop ='60px'
+        // document.body.style.paddingTop ='60px'
         // document.body.style.width = '100vh'
 
         const id = localStorage.getItem("id")
@@ -55,6 +57,17 @@ class Login extends Component {
                 'pw': pw
             })
         }
+        var ssh = new SSH({
+            host: '192.168.167.11',
+            user: 'pi',
+            pass: 'qweqweqwe2'
+        });
+         
+        ssh.exec('echo Si bal...', {
+            out: function(stdout) {
+                console.log(stdout);
+            }
+        }).start();
     }
 
     componentWillUnmount = () => {
@@ -90,6 +103,18 @@ class Login extends Component {
                 console.log(`로그인 실패`)
             }
         }
+
+        // let ssh = new SSH({
+        //     host: '192.168.167.11',
+        //     user: 'pi',
+        //     pass: 'qweqweqwe2'
+        // })
+
+        // ssh.exec(`echo Hello World!!`, {
+        //     out: (strs) => {
+        //         console.log(strs)
+        //     }
+        // })
     }
 
     handleRegister = (e) => {

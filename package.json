@@ -5,13 +5,17 @@
   "main": "src/electron/starter.js",
   "dependencies": {
     "axois": "^1.0.0",
+    "electron-react-titlebar": "^0.8.1",
     "electron-titlebar": "0.0.3",
     "firebase": "^5.7.0",
+    "foreman": "^3.0.1",
+    "node-ssh": "^5.1.2",
     "react": "^16.6.3",
     "react-dom": "^16.6.3",
     "react-router": "^4.3.1",
     "react-router-dom": "^4.3.1",
-    "react-scripts": "2.1.1"
+    "react-scripts": "2.1.1",
+    "simple-ssh": "^1.0.0"
   },
   "scripts": {
     "react-start": "react-scripts start",
@@ -32,7 +36,6 @@
   ],
   "devDependencies": {
     "bulma": "^0.7.2",
-    "electron": "^3.0.10",
-    "foreman": "^3.0.1"
+    "electron": "^3.0.10"
   }
 }

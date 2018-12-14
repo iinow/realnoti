@@ -10,9 +10,11 @@ import {
 import { Login, Home, Register } from '../pages/index'
 import PropTypes from 'prop-types'
 import { URL_LOGIN, URL_HOME, URL_REG } from '../util/constant'
-import TitleBar from 'electron-titlebar'
+import ActionBar from '../component/ActionBar';
+import '../css/App.css'
+// import TitleBar from 'electron-titlebar'
 //import menu from './AppMenu'
-import {slackTemplate} from './title'
+// import {slackTemplate} from './title'
 
 const App = () => (
     <div>
@@ -21,6 +23,12 @@ const App = () => (
             app='Electron'
             menu={defaultTemplate}
         /> */}
+        <ActionBar>
+
+        </ActionBar>        
+        <div>
+            이준서 시발놈
+        </div>
         <Router>
             {/* <div>
                 Hello Main
