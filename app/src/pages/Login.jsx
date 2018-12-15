@@ -3,6 +3,9 @@ import PropTypes from 'prop-types';
 import { Link, HashRouter } from 'react-router-dom'
 import { URL_HOME, URL_REG } from '../util/constant'
 import { Fire, fire } from '../util/Firebase'
+const SSH = window.require('simple-ssh')
+// import { remote } from 'electron'
+// const SSH = remote.require('simple-ssh')
 
 const BodyBackgroundColor = '#F9F9F9'
 const FORM_STYLE = {
