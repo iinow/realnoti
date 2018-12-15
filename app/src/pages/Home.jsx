@@ -2,12 +2,9 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 // import { default as styles } from 'bulma/css/bulma.css'
 import Api from '../util/Api'
-const SSH = window.require('simple-ssh')
-// let arr = ['Settings', 'Sign out']
-// let ham = arr.map(v=>{
-//         return <span>${v}</span>
-//     })
-let ssh
+import { LeftMenu } from '../component';
+import { URL_HOME } from '../util/constant';
+
 class Home extends Component {
     state = {
         url: '',
@@ -16,6 +13,10 @@ class Home extends Component {
         click: false,
         cmd: '',
         res: ''
+    }
+
+    componentDidMount = () => {
+        document.body.czShortcutListen=true
     }
 
     handleURLChange = (e) => {
@@ -48,45 +49,33 @@ class Home extends Component {
     }
 
     handleCmdOnClick = async () => {
-        if(!ssh){
-            ssh = await new SSH({
-                host: '192.168.167.11',
-                user: 'pi',
-                pass: 'qweqweqwe2'
-            })
-        }
-        await ssh.exec(this.state.cmd, {
-            out: (str) => {
-                this.setState({
-                    res: str
-                })
-                console.log(str)
-            }
-        })
-        // .start().reset()
+        
     }
 
     render() {
         return (
-            <div>
-                <input onChange={this.handleCmdOnChange} type="text" onKeyPress={(e)=>{
+            <div className="columns">
+                {/* <input onChange={this.handleCmdOnChange} type="text" onKeyPress={(e)=>{
                     if(e=='Enter'){
                         this.handleCmdOnClick
                     }}
                 }></input>
                 <button onClick={this.handleCmdOnClick}>전송!!</button>
-                <div>{this.state.res}</div>
+                <div>{this.state.res}</div> */}
+                <LeftMenu 
+                    item={[
+                        {name : "Home", link : ()=> {this.props.history.push(URL_HOME)}}, 
+                        {name : "둘번", link : ()=> {this.props.history.push(URL_HOME)}}
+                    ]} 
+                    title="시작이당">
+                </LeftMenu>
             </div>
         );
     }
 }
 
 Home.propTypes = {
-    url: '',
-    param: '',
-    res: '',
-    click: false,
-    cmd: ''
+    
 };
 
 export default Home;
