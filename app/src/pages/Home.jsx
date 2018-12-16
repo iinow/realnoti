@@ -3,9 +3,11 @@ import PropTypes from 'prop-types';
 // import { default as styles } from 'bulma/css/bulma.css'
 import Api from '../util/Api'
 import { LeftMenu, UploadButton } from '../component';
-import { URL_HOME } from '../util/constant';
-import { dirname } from 'path';
+import * as URL from '../util/constant';
+import * as PAGE from './index'
 import { List } from '.';
+import { Route, Switch, HashRouter as Router } from 'react-router-dom'
+
 const { remote } = window.require('electron')
 
 class Home extends Component {
@@ -68,13 +70,31 @@ class Home extends Component {
                 <div>{this.state.res}</div> */}
                 <LeftMenu
                     item={[
-                        { name: "Rest API", link: () => { alert('Rest API 버튼 클릭') } },
-                        { name: "둘번", link: () => { alert(`둘번 클릭 ${remote.app.getAppPath()}`) } }
+                        {
+                            name: "Rest API", link: () => {
+                                alert('Rest API 버튼 클릭')
+                                this.props.history.push(URL.URL_HOME_RESTAPI)
+                                console.log(this.props.history.location.pathname)
+                            }
+                        },
+                        {
+                            name: "둘번", link: () => {
+                                alert(`둘번 클릭 ${remote.app.getAppPath()}`)
+                                this.props.history.push(URL.URL_HOME_AVVIEW)
+                                console.log(this.props.history.location.pathname)
+                            }
+                        }
                     ]}
                     title="시작이당"
-                    imgPath={'file://'+remote.app.getAppPath()+'/app/resource/moe.PNG'}/>
-                <div style={{ margin: '30px' }}>
-                    {/* Hello ???
+                    imgPath={'file://' + remote.app.getAppPath() + '/app/resource/moe.PNG'} />
+                <Router>
+                    <Switch>
+                        <Route exact path={URL.URL_HOME_RESTAPI} component={PAGE.RestApi} />
+                        <Route exact path={URL.URL_HOME_AVVIEW} component={PAGE.AVView} />
+                    </Switch>
+                </Router>
+                {/* <div style={{ margin: '30px' }}>
+                    Hello ???
                     <UploadButton select={(e)=>{
                         this.setState({
                             file: Array.from(e.target.files).map((file)=>{
@@ -84,13 +104,13 @@ class Home extends Component {
                         // this.props.onSubmit()
                     }}/>
                     <br/>
-                    {(this.state.file)} */}
-                    <List name="Rest API 테스트 간다!dfdfdfdfdfdfdfd" 
-                    item={[
-                        {subject: "1번째 제목", content: "내용 간드아아", addr: "http://www.naver.com"},
-                        {subject: "2번째 제목", content: "후ㅡ", addr: "http://www.naver.com"}
-                    ]}/>
-                </div>
+                    {(this.state.file)}
+                    <List name="Rest API 테스트 간다!dfdfdfdfdfdfdfd"
+                        item={[
+                            { subject: "1번째 제목", content: "내용 간드아아", addr: "http://www.naver.com" },
+                            { subject: "2번째 제목", content: "후ㅡ", addr: "http://www.naver.com" }
+                        ]} />
+                    </div>*/}
             </div>
         );
     }

@@ -279,6 +279,38 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./app/src/pages/AVView.jsx":
+/*!**********************************!*\
+  !*** ./app/src/pages/AVView.jsx ***!
+  \**********************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_1__);
+
+
+
+class AVView extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
+  render() {
+    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      style: {
+        margin: '30px'
+      }
+    }, "Hello");
+  }
+
+}
+
+AVView.propTypes = {};
+/* harmony default export */ __webpack_exports__["default"] = (AVView);
+
+/***/ }),
+
 /***/ "./app/src/pages/Home.jsx":
 /*!********************************!*\
   !*** ./app/src/pages/Home.jsx ***!
@@ -295,13 +327,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _util_Api__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../util/Api */ "./app/src/util/Api.js");
 /* harmony import */ var _component__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../component */ "./app/src/component/index.js");
 /* harmony import */ var _util_constant__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../util/constant */ "./app/src/util/constant.js");
-/* harmony import */ var path__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! path */ "path");
-/* harmony import */ var path__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(path__WEBPACK_IMPORTED_MODULE_5__);
-/* harmony import */ var ___WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! . */ "./app/src/pages/index.js");
+/* harmony import */ var _index__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./index */ "./app/src/pages/index.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/es/index.js");
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 
  // import { default as styles } from 'bulma/css/bulma.css'
+
 
 
 
@@ -371,31 +403,28 @@ class Home extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
         name: "Rest API",
         link: () => {
           alert('Rest API 버튼 클릭');
+          this.props.history.push(_util_constant__WEBPACK_IMPORTED_MODULE_4__["URL_HOME_RESTAPI"]);
+          console.log(this.props.history.location.pathname);
         }
       }, {
         name: "둘번",
         link: () => {
           alert(`둘번 클릭 ${remote.app.getAppPath()}`);
+          this.props.history.push(_util_constant__WEBPACK_IMPORTED_MODULE_4__["URL_HOME_AVVIEW"]);
+          console.log(this.props.history.location.pathname);
         }
       }],
       title: "\uC2DC\uC791\uC774\uB2F9",
       imgPath: 'file://' + remote.app.getAppPath() + '/app/resource/moe.PNG'
-    }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-      style: {
-        margin: '30px'
-      }
-    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(___WEBPACK_IMPORTED_MODULE_6__["List"], {
-      name: "Rest API \uD14C\uC2A4\uD2B8 \uAC04\uB2E4!dfdfdfdfdfdfdfd",
-      item: [{
-        subject: "1번째 제목",
-        content: "내용 간드아아",
-        addr: "http://www.naver.com"
-      }, {
-        subject: "2번째 제목",
-        content: "후ㅡ",
-        addr: "http://www.naver.com"
-      }]
-    })));
+    }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_6__["HashRouter"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_6__["Switch"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_6__["Route"], {
+      exact: true,
+      path: _util_constant__WEBPACK_IMPORTED_MODULE_4__["URL_HOME_RESTAPI"],
+      component: _index__WEBPACK_IMPORTED_MODULE_5__["RestApi"]
+    }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_6__["Route"], {
+      exact: true,
+      path: _util_constant__WEBPACK_IMPORTED_MODULE_4__["URL_HOME_AVVIEW"],
+      component: _index__WEBPACK_IMPORTED_MODULE_5__["AVView"]
+    }))));
   }
 
 }
@@ -835,11 +864,64 @@ Register.propTypes = {};
 
 /***/ }),
 
+/***/ "./app/src/pages/RestApi.jsx":
+/*!***********************************!*\
+  !*** ./app/src/pages/RestApi.jsx ***!
+  \***********************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_1__);
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+
+
+
+class RestApi extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
+  constructor(...args) {
+    super(...args);
+
+    _defineProperty(this, "componentDidMount", () => {
+      console.log(this.props.history.location.pathname);
+    });
+  }
+
+  render() {
+    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      style: {
+        margin: '30px'
+      }
+    }, "Sibal.....", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(List, {
+      name: "Rest API \uD14C\uC2A4\uD2B8 \uAC04\uB2E4!dfdfdfdfdfdfdfd",
+      item: [{
+        subject: "1번째 제목",
+        content: "내용 간드아아",
+        addr: "http://www.naver.com"
+      }, {
+        subject: "2번째 제목",
+        content: "후ㅡ",
+        addr: "http://www.naver.com"
+      }]
+    }));
+  }
+
+}
+
+RestApi.propTypes = {};
+/* harmony default export */ __webpack_exports__["default"] = (RestApi);
+
+/***/ }),
+
 /***/ "./app/src/pages/index.js":
 /*!********************************!*\
   !*** ./app/src/pages/index.js ***!
   \********************************/
-/*! exports provided: Login, Home, Register, List */
+/*! exports provided: Login, Home, Register, List, RestApi, AVView */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -855,6 +937,14 @@ __webpack_require__.r(__webpack_exports__);
 
 /* harmony import */ var _List__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./List */ "./app/src/pages/List.jsx");
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "List", function() { return _List__WEBPACK_IMPORTED_MODULE_3__["default"]; });
+
+/* harmony import */ var _RestApi__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./RestApi */ "./app/src/pages/RestApi.jsx");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "RestApi", function() { return _RestApi__WEBPACK_IMPORTED_MODULE_4__["default"]; });
+
+/* harmony import */ var _AVView__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./AVView */ "./app/src/pages/AVView.jsx");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "AVView", function() { return _AVView__WEBPACK_IMPORTED_MODULE_5__["default"]; });
+
+
 
 
 
@@ -1039,7 +1129,7 @@ const fire = {
 /*!**********************************!*\
   !*** ./app/src/util/constant.js ***!
   \**********************************/
-/*! exports provided: URL_REG, URL_HOME, URL_LOGIN */
+/*! exports provided: URL_REG, URL_HOME, URL_LOGIN, URL_HOME_RESTAPI, URL_HOME_AVVIEW */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1047,11 +1137,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "URL_REG", function() { return URL_REG; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "URL_HOME", function() { return URL_HOME; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "URL_LOGIN", function() { return URL_LOGIN; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "URL_HOME_RESTAPI", function() { return URL_HOME_RESTAPI; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "URL_HOME_AVVIEW", function() { return URL_HOME_AVVIEW; });
 /* harmony import */ var _renderer_Test__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../renderer/Test */ "./app/src/renderer/Test.jsx");
 
 const URL_REG = '/register';
 const URL_HOME = '/home';
 const URL_LOGIN = '/';
+const URL_HOME_RESTAPI = '/home/restapi';
+const URL_HOME_AVVIEW = '/home/avview';
 
 /***/ }),
 
@@ -51463,17 +51557,6 @@ module.exports = warning;
 
 module.exports = __webpack_require__(/*! E:\DEV\vcode\v2_oneProcess\realnoti\app\index.js */"./app/index.js");
 
-
-/***/ }),
-
-/***/ "path":
-/*!***********************!*\
-  !*** external "path" ***!
-  \***********************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = require("path");
 
 /***/ })
 
