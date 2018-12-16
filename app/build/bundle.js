@@ -131,7 +131,8 @@ const LeftMenu = ({
     name,
     link
   }],
-  title = ""
+  title = "",
+  imgPath = ""
 }) => react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("aside", {
   className: "column is-2 aside hero is-fullheight"
 }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -140,7 +141,11 @@ const LeftMenu = ({
   className: "button is-danger is-block is-bold"
 }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
   className: "compose"
-}, title))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+}, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+  src: imgPath,
+  width: "50px",
+  height: "50px"
+})))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
   className: "main"
 }, item.map(({
   name,
@@ -165,17 +170,110 @@ const LeftMenu = ({
 
 /***/ }),
 
+/***/ "./app/src/component/ListItem.jsx":
+/*!****************************************!*\
+  !*** ./app/src/component/ListItem.jsx ***!
+  \****************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_1__);
+
+
+
+const ListItem = ({
+  subject,
+  content,
+  addr
+}) => react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  className: "box"
+}, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", {
+  className: "title is-3"
+}, subject), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("article", {
+  className: "message is-primary"
+}, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+  className: "icon has-text-primary"
+}, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+  className: "fab fa-js"
+})), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  className: "message-body"
+}, content)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("pre", {
+  className: "language-javascript"
+}, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("code", {
+  className: "language-javascript"
+}, addr)));
+
+/* harmony default export */ __webpack_exports__["default"] = (ListItem);
+
+/***/ }),
+
+/***/ "./app/src/component/UploadButton.jsx":
+/*!********************************************!*\
+  !*** ./app/src/component/UploadButton.jsx ***!
+  \********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_1__);
+
+
+
+const UploadButton = ({
+  select
+}) => react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  className: "file"
+}, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+  className: "file-label"
+}, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+  className: "file-input",
+  type: "file",
+  name: "resume",
+  onChange: select,
+  multiple: true
+}), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+  className: "file-cta"
+}, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+  className: "file-icon"
+}, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+  className: "fas fa-upload"
+})), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+  className: "file-label"
+}, "Choose a file\u2026")))));
+
+UploadButton.propTypes = {};
+/* harmony default export */ __webpack_exports__["default"] = (UploadButton);
+
+/***/ }),
+
 /***/ "./app/src/component/index.js":
 /*!************************************!*\
   !*** ./app/src/component/index.js ***!
   \************************************/
-/*! exports provided: LeftMenu */
+/*! exports provided: LeftMenu, UploadButton, ListItem */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _LeftMenu__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./LeftMenu */ "./app/src/component/LeftMenu.jsx");
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "LeftMenu", function() { return _LeftMenu__WEBPACK_IMPORTED_MODULE_0__["default"]; });
+
+/* harmony import */ var _UploadButton__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./UploadButton */ "./app/src/component/UploadButton.jsx");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "UploadButton", function() { return _UploadButton__WEBPACK_IMPORTED_MODULE_1__["default"]; });
+
+/* harmony import */ var _ListItem__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./ListItem */ "./app/src/component/ListItem.jsx");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "ListItem", function() { return _ListItem__WEBPACK_IMPORTED_MODULE_2__["default"]; });
+
+
 
 
 
@@ -197,6 +295,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _util_Api__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../util/Api */ "./app/src/util/Api.js");
 /* harmony import */ var _component__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../component */ "./app/src/component/index.js");
 /* harmony import */ var _util_constant__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../util/constant */ "./app/src/util/constant.js");
+/* harmony import */ var path__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! path */ "path");
+/* harmony import */ var path__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(path__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var ___WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! . */ "./app/src/pages/index.js");
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 
@@ -205,6 +306,12 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 
+
+
+
+const {
+  remote
+} = window.require('electron');
 
 class Home extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
   constructor(...args) {
@@ -216,7 +323,8 @@ class Home extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
       res: '',
       click: false,
       cmd: '',
-      res: ''
+      res: '',
+      file: ''
     });
 
     _defineProperty(this, "componentDidMount", () => {
@@ -260,24 +368,97 @@ class Home extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
       className: "columns"
     }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_component__WEBPACK_IMPORTED_MODULE_3__["LeftMenu"], {
       item: [{
-        name: "Home",
+        name: "Rest API",
         link: () => {
-          this.props.history.push(_util_constant__WEBPACK_IMPORTED_MODULE_4__["URL_HOME"]);
+          alert('Rest API 버튼 클릭');
         }
       }, {
         name: "둘번",
         link: () => {
-          this.props.history.push(_util_constant__WEBPACK_IMPORTED_MODULE_4__["URL_HOME"]);
+          alert(`둘번 클릭 ${remote.app.getAppPath()}`);
         }
       }],
-      title: "\uC2DC\uC791\uC774\uB2F9"
-    }));
+      title: "\uC2DC\uC791\uC774\uB2F9",
+      imgPath: 'file://' + remote.app.getAppPath() + '/app/resource/moe.PNG'
+    }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      style: {
+        margin: '30px'
+      }
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(___WEBPACK_IMPORTED_MODULE_6__["List"], {
+      name: "Rest API \uD14C\uC2A4\uD2B8 \uAC04\uB2E4!dfdfdfdfdfdfdfd",
+      item: [{
+        subject: "1번째 제목",
+        content: "내용 간드아아",
+        addr: "http://www.naver.com"
+      }, {
+        subject: "2번째 제목",
+        content: "후ㅡ",
+        addr: "http://www.naver.com"
+      }]
+    })));
   }
 
 }
 
 Home.propTypes = {};
 /* harmony default export */ __webpack_exports__["default"] = (Home);
+
+/***/ }),
+
+/***/ "./app/src/pages/List.jsx":
+/*!********************************!*\
+  !*** ./app/src/pages/List.jsx ***!
+  \********************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _component__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../component */ "./app/src/component/index.js");
+
+
+
+
+class List extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
+  constructor(props) {
+    super(props);
+  } // state = {
+  // }
+
+
+  render() {
+    return (// <div style={{width:"80%"}}>
+      react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "content is-medium"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", {
+        className: "title is-3"
+      }, this.props.name), this.props.item.map((item = {
+        subject,
+        content,
+        addr
+      }, idx) => {
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_component__WEBPACK_IMPORTED_MODULE_2__["ListItem"], {
+          subject: item.subject,
+          content: item.content,
+          addr: item.addr,
+          key: idx
+        });
+      })) // </div>
+
+    );
+  }
+
+} // List.propTypes = {
+//     name: '',
+//     item: [{subject, content, addr}]
+// };
+
+
+/* harmony default export */ __webpack_exports__["default"] = (List);
 
 /***/ }),
 
@@ -303,9 +484,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 
+ // const SSH = window.require('simple-ssh')
 
-
-const SSH = window.require('simple-ssh'); // import { remote } from 'electron'
+let sqlite3 = window.require('sqlite3').verbose(); // import { remote } from 'electron'
 // const SSH = remote.require('simple-ssh')
 
 
@@ -355,11 +536,21 @@ class Login extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
           'id': id,
           'pw': pw
         });
-      }
+      } // const sqlite3 = require('sqlite3').verbose()
+
+
+      const db = new sqlite3.Database('./database.sqlite3');
+      db.serialize(() => {
+        db.each("SELECT rowid AS id, info FROM lorem", (err, row) => {
+          console.log(`${row.id} : ${row.info}`);
+        });
+      });
+      db.close();
     });
 
     _defineProperty(this, "componentWillUnmount", () => {
       document.body.style.paddingTop = '0px';
+      document.body.style.backgroundColor = '#FFFFFF';
     });
 
     _defineProperty(this, "handleIdChange", e => {
@@ -648,7 +839,7 @@ Register.propTypes = {};
 /*!********************************!*\
   !*** ./app/src/pages/index.js ***!
   \********************************/
-/*! exports provided: Login, Home, Register */
+/*! exports provided: Login, Home, Register, List */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -661,6 +852,10 @@ __webpack_require__.r(__webpack_exports__);
 
 /* harmony import */ var _Register__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Register */ "./app/src/pages/Register.jsx");
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Register", function() { return _Register__WEBPACK_IMPORTED_MODULE_2__["default"]; });
+
+/* harmony import */ var _List__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./List */ "./app/src/pages/List.jsx");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "List", function() { return _List__WEBPACK_IMPORTED_MODULE_3__["default"]; });
+
 
 
 
@@ -770,27 +965,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
 
 const Api = {
-  // get: (url) => {
-  //     axios.get(url)
-  //         .then(
-  //             res => {
-  //                 console.log(res)
-  //             },
-  //             err => {
-  //                 console.log(err)
-  //             },
-  //             () => {
-  //                 console.log('요청 완료')
-  //             }
-  //         )
-  // }
   get: (url, param) => {
     return axios__WEBPACK_IMPORTED_MODULE_0___default.a.get(url, param);
   },
   post: (url, param) => {
     return axios__WEBPACK_IMPORTED_MODULE_0___default.a.post(url, param);
-  } // export default clone(Api)
-
+  }
 };
 /* harmony default export */ __webpack_exports__["default"] = (Api);
 
@@ -51283,6 +51463,17 @@ module.exports = warning;
 
 module.exports = __webpack_require__(/*! E:\DEV\vcode\v2_oneProcess\realnoti\app\index.js */"./app/index.js");
 
+
+/***/ }),
+
+/***/ "path":
+/*!***********************!*\
+  !*** external "path" ***!
+  \***********************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = require("path");
 
 /***/ })
 

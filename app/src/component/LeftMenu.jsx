@@ -1,12 +1,15 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
-const LeftMenu = ({ item = [{ name, link }], title = "" }) => (
+const LeftMenu = ({ item = [{ name, link }], title = "", imgPath = "" }) => (
     <aside className="column is-2 aside hero is-fullheight">
         <div>
             <div className="compose has-text-centered">
                 <a className="button is-danger is-block is-bold">
-                    <span className="compose">{title}</span>
+                    <span className="compose">
+                        {/* <div>{title}</div> */}
+                        <img src={imgPath} width="50px" height="50px"/>
+                    </span>
                 </a>
             </div>
             <div className="main">

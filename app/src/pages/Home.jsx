@@ -2,8 +2,11 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 // import { default as styles } from 'bulma/css/bulma.css'
 import Api from '../util/Api'
-import { LeftMenu } from '../component';
+import { LeftMenu, UploadButton } from '../component';
 import { URL_HOME } from '../util/constant';
+import { dirname } from 'path';
+import { List } from '.';
+const { remote } = window.require('electron')
 
 class Home extends Component {
     state = {
@@ -12,11 +15,12 @@ class Home extends Component {
         res: '',
         click: false,
         cmd: '',
-        res: ''
+        res: '',
+        file: ''
     }
 
     componentDidMount = () => {
-        document.body.czShortcutListen=true
+        document.body.czShortcutListen = true
     }
 
     handleURLChange = (e) => {
@@ -44,12 +48,12 @@ class Home extends Component {
 
     handleCmdOnChange = (e) => {
         this.setState({
-            cmd : e.target.value
+            cmd: e.target.value
         })
     }
 
     handleCmdOnClick = async () => {
-        
+
     }
 
     render() {
@@ -62,20 +66,38 @@ class Home extends Component {
                 }></input>
                 <button onClick={this.handleCmdOnClick}>전송!!</button>
                 <div>{this.state.res}</div> */}
-                <LeftMenu 
+                <LeftMenu
                     item={[
-                        {name : "Home", link : ()=> {this.props.history.push(URL_HOME)}}, 
-                        {name : "둘번", link : ()=> {this.props.history.push(URL_HOME)}}
-                    ]} 
-                    title="시작이당">
-                </LeftMenu>
+                        { name: "Rest API", link: () => { alert('Rest API 버튼 클릭') } },
+                        { name: "둘번", link: () => { alert(`둘번 클릭 ${remote.app.getAppPath()}`) } }
+                    ]}
+                    title="시작이당"
+                    imgPath={'file://'+remote.app.getAppPath()+'/app/resource/moe.PNG'}/>
+                <div style={{ margin: '30px' }}>
+                    {/* Hello ???
+                    <UploadButton select={(e)=>{
+                        this.setState({
+                            file: Array.from(e.target.files).map((file)=>{
+                                return `${file.name}`
+                            })
+                        }) 
+                        // this.props.onSubmit()
+                    }}/>
+                    <br/>
+                    {(this.state.file)} */}
+                    <List name="Rest API 테스트 간다!dfdfdfdfdfdfdfd" 
+                    item={[
+                        {subject: "1번째 제목", content: "내용 간드아아", addr: "http://www.naver.com"},
+                        {subject: "2번째 제목", content: "후ㅡ", addr: "http://www.naver.com"}
+                    ]}/>
+                </div>
             </div>
         );
     }
 }
 
 Home.propTypes = {
-    
+
 };
 
 export default Home;

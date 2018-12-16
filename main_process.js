@@ -16,6 +16,7 @@ function createWindow() {
     
     // and load the index.html of the app.
     win.loadURL('file://'+__dirname+'/app/index.html')
+    console.log('file://'+__dirname+'/app/index.html')
     
     // Open the DevTools.
     win.webContents.openDevTools()
@@ -28,6 +29,7 @@ function createWindow() {
         win = null
     })
 
+    let server = require('./app/src/server/server.js')
     console.log('electron create')
 }
 

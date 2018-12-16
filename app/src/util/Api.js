@@ -1,20 +1,6 @@
 import axios from 'axios'
 
 const Api = {
-    // get: (url) => {
-    //     axios.get(url)
-    //         .then(
-    //             res => {
-    //                 console.log(res)
-    //             },
-    //             err => {
-    //                 console.log(err)
-    //             },
-    //             () => {
-    //                 console.log('요청 완료')
-    //             }
-    //         )
-    // }
     get: (url, param) => {
         return axios.get(url, param)
     },
@@ -24,5 +10,4 @@ const Api = {
     }
 }
 
-// export default clone(Api)
 export default Api

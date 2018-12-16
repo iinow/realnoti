@@ -3,7 +3,8 @@ import PropTypes from 'prop-types';
 import { Link, HashRouter } from 'react-router-dom'
 import { URL_HOME, URL_REG } from '../util/constant'
 import { Fire, fire } from '../util/Firebase'
-const SSH = window.require('simple-ssh')
+// const SSH = window.require('simple-ssh')
+let sqlite3 = window.require('sqlite3').verbose()
 // import { remote } from 'electron'
 // const SSH = remote.require('simple-ssh')
 
@@ -46,22 +47,32 @@ class Login extends Component {
     componentDidMount = () => {
         document.body.style.backgroundColor = BodyBackgroundColor
         document.body.style.height = '100vh'
-        document.body.style.paddingTop ='60px'
+        document.body.style.paddingTop = '60px'
         // document.body.style.width = '100vh'
 
         const id = localStorage.getItem("id")
         const pw = localStorage.getItem("pw")
 
-        if( id && pw ){
+        if (id && pw) {
             this.setState({
                 'id': id,
                 'pw': pw
             })
         }
+        
+        // const sqlite3 = require('sqlite3').verbose()
+        const db = new sqlite3.Database('./database.sqlite3')
+        db.serialize(()=>{
+            db.each("SELECT rowid AS id, info FROM lorem", (err, row)=>{
+                console.log(`${row.id} : ${row.info}`)
+            })
+        })
+        db.close()
     }
 
     componentWillUnmount = () => {
-        document.body.style.paddingTop ='0px'
+        document.body.style.paddingTop = '0px'
+        document.body.style.backgroundColor = '#FFFFFF'
     }
 
     handleIdChange = (e) => {
