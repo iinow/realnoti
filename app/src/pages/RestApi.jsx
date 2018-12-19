@@ -10,7 +10,7 @@ class RestApi extends Component {
 
     render() {
         return (
-            <div style={{ margin: '30px' }}>
+            <div className="column is-9" style={{ margin: '30px', maxWidth: '100%', height: 'auto !important'}}>
                 {/* Hello ???
                     <UploadButton select={(e)=>{
                         this.setState({

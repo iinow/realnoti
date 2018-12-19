@@ -908,8 +908,11 @@ class RestApi extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
 
   render() {
     return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "column is-9",
       style: {
-        margin: '30px'
+        margin: '30px',
+        maxWidth: '100%',
+        height: 'auto !important'
       }
     }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_component__WEBPACK_IMPORTED_MODULE_3__["List"], {
       listname: "Rest API \uD14C\uC2A4\uD2B8 \uAC04\uB2E4!dfdfdfdfdfdfdfd",
