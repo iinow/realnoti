@@ -23,6 +23,7 @@ class Home extends Component {
 
     componentDidMount = () => {
         document.body.czShortcutListen = true
+        console.log(this.props.history.location.pathname)
     }
 
     handleURLChange = (e) => {
@@ -71,28 +72,26 @@ class Home extends Component {
                 <LeftMenu
                     item={[
                         {
-                            name: "Rest API", link: () => {
+                            menuname: "Rest API", link: () => {
                                 alert('Rest API 버튼 클릭')
-                                this.props.history.push(URL.URL_HOME_RESTAPI)
-                                console.log(this.props.history.location.pathname)
-                            }
+                                this.props.history.push(`${this.props.match.url}${URL.URL_HOME_RESTAPI}`)
+                                // console.log(this.props.history.location.pathname)
+                            },
+                            path: `${this.props.match.url}${URL.URL_HOME_RESTAPI}`
                         },
                         {
-                            name: "둘번", link: () => {
+                            menuname: "둘번", link: () => {
                                 alert(`둘번 클릭 ${remote.app.getAppPath()}`)
-                                this.props.history.push(URL.URL_HOME_AVVIEW)
-                                console.log(this.props.history.location.pathname)
-                            }
+                                this.props.history.push(`${this.props.match.url}${URL.URL_HOME_AVVIEW}`)
+                                // console.log(this.props.history.location.pathname)
+                            },
+                            path: `${this.props.match.url}${URL.URL_HOME_AVVIEW}`
                         }
                     ]}
                     title="시작이당"
                     imgPath={'file://' + remote.app.getAppPath() + '/app/resource/moe.PNG'} />
-                <Router>
-                    <Switch>
-                        <Route exact path={URL.URL_HOME_RESTAPI} component={PAGE.RestApi} />
-                        <Route exact path={URL.URL_HOME_AVVIEW} component={PAGE.AVView} />
-                    </Switch>
-                </Router>
+                    <Route exact path={`${this.props.match.url}${URL.URL_HOME_RESTAPI}`} component={PAGE.RestApi} />
+                    <Route exact path={`${this.props.match.url}${URL.URL_HOME_AVVIEW}`} component={PAGE.AVView} />
                 {/* <div style={{ margin: '30px' }}>
                     Hello ???
                     <UploadButton select={(e)=>{

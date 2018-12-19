@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { withRouter } from 'react-router-dom';
 
 class AVView extends Component {
     render() {
@@ -15,4 +16,4 @@ AVView.propTypes = {
 
 };
 
-export default AVView;
+export default withRouter(AVView)

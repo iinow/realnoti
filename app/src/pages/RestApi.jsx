@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { withRouter } from 'react-router-dom';
+import { List } from '../component';
 
 class RestApi extends Component {
     componentDidMount = () => {
@@ -9,7 +11,6 @@ class RestApi extends Component {
     render() {
         return (
             <div style={{ margin: '30px' }}>
-                Sibal.....
                 {/* Hello ???
                     <UploadButton select={(e)=>{
                         this.setState({
@@ -21,7 +22,7 @@ class RestApi extends Component {
                     }}/>
                     <br/>
                     {(this.state.file)} */}
-                <List name="Rest API 테스트 간다!dfdfdfdfdfdfdfd"
+                <List listname="Rest API 테스트 간다!dfdfdfdfdfdfdfd"
                     item={[
                         { subject: "1번째 제목", content: "내용 간드아아", addr: "http://www.naver.com" },
                         { subject: "2번째 제목", content: "후ㅡ", addr: "http://www.naver.com" }
@@ -35,4 +36,4 @@ RestApi.propTypes = {
 
 };
 
-export default RestApi;
+export default withRouter(RestApi)

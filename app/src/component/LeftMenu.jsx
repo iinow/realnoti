@@ -1,7 +1,9 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import { Link } from 'react-router-dom'
+import { URL_HOME_RESTAPI } from '../util/constant';
 
-const LeftMenu = ({ item = [{ name, link }], title = "", imgPath = "" }) => (
+const LeftMenu = ({ item = [{ menuname, link, path }], title = "", imgPath = "", history }) => (
     <aside className="column is-2 aside hero is-fullheight">
         <div>
             <div className="compose has-text-centered">
@@ -14,14 +16,17 @@ const LeftMenu = ({ item = [{ name, link }], title = "", imgPath = "" }) => (
             </div>
             <div className="main">
                 {
-                    item.map(({name, link}, idx) => {
+                    item.map(({menuname, link, path}, idx) => {
                         return (
-                            <a className="item" onClick={link} key={idx}>
+                            <a className="item" key={idx} onClick={()=>{
+                                // console.log(history.location.pathname)
+                                link()
+                            }}>
                                 <span className="icon">
                                     <i className="fa fa-inbox"></i>
                                 </span>
                                 <span className="name">
-                                    {name}
+                                    {menuname}
                                 </span>
                             </a>
                         )

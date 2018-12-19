@@ -1,8 +1,8 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import App from './src/renderer/App';
+import Root from './src/renderer/Root';
 import { fire } from './src/util/Firebase'
 
 fire.init()
 
-ReactDOM.render(<App/>, document.getElementById('root'))
+ReactDOM.render(<Root/>, document.getElementById('root'))

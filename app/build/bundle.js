@@ -99,14 +99,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
 /* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_dom__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _src_renderer_App__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./src/renderer/App */ "./app/src/renderer/App.jsx");
+/* harmony import */ var _src_renderer_Root__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./src/renderer/Root */ "./app/src/renderer/Root.jsx");
 /* harmony import */ var _src_util_Firebase__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./src/util/Firebase */ "./app/src/util/Firebase.js");
 
 
 
 
 _src_util_Firebase__WEBPACK_IMPORTED_MODULE_3__["fire"].init();
-react_dom__WEBPACK_IMPORTED_MODULE_1___default.a.render(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_src_renderer_App__WEBPACK_IMPORTED_MODULE_2__["default"], null), document.getElementById('root'));
+react_dom__WEBPACK_IMPORTED_MODULE_1___default.a.render(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_src_renderer_Root__WEBPACK_IMPORTED_MODULE_2__["default"], null), document.getElementById('root'));
 
 /***/ }),
 
@@ -123,16 +123,22 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
 /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/es/index.js");
+/* harmony import */ var _util_constant__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../util/constant */ "./app/src/util/constant.js");
+
+
 
 
 
 const LeftMenu = ({
   item = [{
-    name,
-    link
+    menuname,
+    link,
+    path
   }],
   title = "",
-  imgPath = ""
+  imgPath = "",
+  history
 }) => react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("aside", {
   className: "column is-2 aside hero is-fullheight"
 }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -148,25 +154,79 @@ const LeftMenu = ({
 })))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
   className: "main"
 }, item.map(({
-  name,
-  link
+  menuname,
+  link,
+  path
 }, idx) => {
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
     className: "item",
-    onClick: link,
-    key: idx
+    key: idx,
+    onClick: () => {
+      // console.log(history.location.pathname)
+      link();
+    }
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
     className: "icon"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
     className: "fa fa-inbox"
   })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
     className: "name"
-  }, name));
+  }, menuname));
 })))); // LeftMenu.propTypes = {   href={link} 
 // }
 
 
 /* harmony default export */ __webpack_exports__["default"] = (LeftMenu);
+
+/***/ }),
+
+/***/ "./app/src/component/List.jsx":
+/*!************************************!*\
+  !*** ./app/src/component/List.jsx ***!
+  \************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var ___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! . */ "./app/src/component/index.js");
+
+
+
+
+const List = ({
+  item = [{
+    subject,
+    content,
+    addr
+  }],
+  listname
+}) => {
+  return (// <div style={{width:"80%"}}>
+    react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "content is-medium"
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", {
+      className: "title is-3"
+    }, listname), item.map((item = {
+      subject,
+      content,
+      addr
+    }, idx) => {
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(___WEBPACK_IMPORTED_MODULE_2__["ListItem"], {
+        subject: item.subject,
+        content: item.content,
+        addr: item.addr,
+        key: idx
+      });
+    }))
+  );
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (List);
 
 /***/ }),
 
@@ -259,7 +319,7 @@ UploadButton.propTypes = {};
 /*!************************************!*\
   !*** ./app/src/component/index.js ***!
   \************************************/
-/*! exports provided: LeftMenu, UploadButton, ListItem */
+/*! exports provided: LeftMenu, UploadButton, ListItem, List */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -272,6 +332,10 @@ __webpack_require__.r(__webpack_exports__);
 
 /* harmony import */ var _ListItem__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./ListItem */ "./app/src/component/ListItem.jsx");
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "ListItem", function() { return _ListItem__WEBPACK_IMPORTED_MODULE_2__["default"]; });
+
+/* harmony import */ var _List__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./List */ "./app/src/component/List.jsx");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "List", function() { return _List__WEBPACK_IMPORTED_MODULE_3__["default"]; });
+
 
 
 
@@ -292,6 +356,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
 /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/es/index.js");
+
 
 
 
@@ -307,7 +373,7 @@ class AVView extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
 }
 
 AVView.propTypes = {};
-/* harmony default export */ __webpack_exports__["default"] = (AVView);
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["withRouter"])(AVView));
 
 /***/ }),
 
@@ -361,6 +427,7 @@ class Home extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
 
     _defineProperty(this, "componentDidMount", () => {
       document.body.czShortcutListen = true;
+      console.log(this.props.history.location.pathname);
     });
 
     _defineProperty(this, "handleURLChange", e => {
@@ -400,94 +467,37 @@ class Home extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
       className: "columns"
     }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_component__WEBPACK_IMPORTED_MODULE_3__["LeftMenu"], {
       item: [{
-        name: "Rest API",
+        menuname: "Rest API",
         link: () => {
           alert('Rest API 버튼 클릭');
-          this.props.history.push(_util_constant__WEBPACK_IMPORTED_MODULE_4__["URL_HOME_RESTAPI"]);
-          console.log(this.props.history.location.pathname);
-        }
+          this.props.history.push(`${this.props.match.url}${_util_constant__WEBPACK_IMPORTED_MODULE_4__["URL_HOME_RESTAPI"]}`); // console.log(this.props.history.location.pathname)
+        },
+        path: `${this.props.match.url}${_util_constant__WEBPACK_IMPORTED_MODULE_4__["URL_HOME_RESTAPI"]}`
       }, {
-        name: "둘번",
+        menuname: "둘번",
         link: () => {
           alert(`둘번 클릭 ${remote.app.getAppPath()}`);
-          this.props.history.push(_util_constant__WEBPACK_IMPORTED_MODULE_4__["URL_HOME_AVVIEW"]);
-          console.log(this.props.history.location.pathname);
-        }
+          this.props.history.push(`${this.props.match.url}${_util_constant__WEBPACK_IMPORTED_MODULE_4__["URL_HOME_AVVIEW"]}`); // console.log(this.props.history.location.pathname)
+        },
+        path: `${this.props.match.url}${_util_constant__WEBPACK_IMPORTED_MODULE_4__["URL_HOME_AVVIEW"]}`
       }],
       title: "\uC2DC\uC791\uC774\uB2F9",
       imgPath: 'file://' + remote.app.getAppPath() + '/app/resource/moe.PNG'
-    }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_6__["HashRouter"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_6__["Switch"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_6__["Route"], {
+    }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_6__["Route"], {
       exact: true,
-      path: _util_constant__WEBPACK_IMPORTED_MODULE_4__["URL_HOME_RESTAPI"],
+      path: `${this.props.match.url}${_util_constant__WEBPACK_IMPORTED_MODULE_4__["URL_HOME_RESTAPI"]}`,
       component: _index__WEBPACK_IMPORTED_MODULE_5__["RestApi"]
     }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_6__["Route"], {
       exact: true,
-      path: _util_constant__WEBPACK_IMPORTED_MODULE_4__["URL_HOME_AVVIEW"],
+      path: `${this.props.match.url}${_util_constant__WEBPACK_IMPORTED_MODULE_4__["URL_HOME_AVVIEW"]}`,
       component: _index__WEBPACK_IMPORTED_MODULE_5__["AVView"]
-    }))));
+    }));
   }
 
 }
 
 Home.propTypes = {};
 /* harmony default export */ __webpack_exports__["default"] = (Home);
-
-/***/ }),
-
-/***/ "./app/src/pages/List.jsx":
-/*!********************************!*\
-  !*** ./app/src/pages/List.jsx ***!
-  \********************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
-/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _component__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../component */ "./app/src/component/index.js");
-
-
-
-
-class List extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
-  constructor(props) {
-    super(props);
-  } // state = {
-  // }
-
-
-  render() {
-    return (// <div style={{width:"80%"}}>
-      react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "content is-medium"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", {
-        className: "title is-3"
-      }, this.props.name), this.props.item.map((item = {
-        subject,
-        content,
-        addr
-      }, idx) => {
-        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_component__WEBPACK_IMPORTED_MODULE_2__["ListItem"], {
-          subject: item.subject,
-          content: item.content,
-          addr: item.addr,
-          key: idx
-        });
-      })) // </div>
-
-    );
-  }
-
-} // List.propTypes = {
-//     name: '',
-//     item: [{subject, content, addr}]
-// };
-
-
-/* harmony default export */ __webpack_exports__["default"] = (List);
 
 /***/ }),
 
@@ -575,6 +585,7 @@ class Login extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
         });
       });
       db.close();
+      console.log(this.props.history.location.pathname);
     });
 
     _defineProperty(this, "componentWillUnmount", () => {
@@ -877,7 +888,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
 /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/es/index.js");
+/* harmony import */ var _component__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../component */ "./app/src/component/index.js");
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+
 
 
 
@@ -896,8 +911,8 @@ class RestApi extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
       style: {
         margin: '30px'
       }
-    }, "Sibal.....", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(List, {
-      name: "Rest API \uD14C\uC2A4\uD2B8 \uAC04\uB2E4!dfdfdfdfdfdfdfd",
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_component__WEBPACK_IMPORTED_MODULE_3__["List"], {
+      listname: "Rest API \uD14C\uC2A4\uD2B8 \uAC04\uB2E4!dfdfdfdfdfdfdfd",
       item: [{
         subject: "1번째 제목",
         content: "내용 간드아아",
@@ -913,7 +928,7 @@ class RestApi extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
 }
 
 RestApi.propTypes = {};
-/* harmony default export */ __webpack_exports__["default"] = (RestApi);
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["withRouter"])(RestApi));
 
 /***/ }),
 
@@ -921,7 +936,7 @@ RestApi.propTypes = {};
 /*!********************************!*\
   !*** ./app/src/pages/index.js ***!
   \********************************/
-/*! exports provided: Login, Home, Register, List, RestApi, AVView */
+/*! exports provided: Login, Home, Register, RestApi, AVView */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -935,15 +950,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Register__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Register */ "./app/src/pages/Register.jsx");
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Register", function() { return _Register__WEBPACK_IMPORTED_MODULE_2__["default"]; });
 
-/* harmony import */ var _List__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./List */ "./app/src/pages/List.jsx");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "List", function() { return _List__WEBPACK_IMPORTED_MODULE_3__["default"]; });
+/* harmony import */ var _RestApi__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./RestApi */ "./app/src/pages/RestApi.jsx");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "RestApi", function() { return _RestApi__WEBPACK_IMPORTED_MODULE_3__["default"]; });
 
-/* harmony import */ var _RestApi__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./RestApi */ "./app/src/pages/RestApi.jsx");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "RestApi", function() { return _RestApi__WEBPACK_IMPORTED_MODULE_4__["default"]; });
-
-/* harmony import */ var _AVView__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./AVView */ "./app/src/pages/AVView.jsx");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "AVView", function() { return _AVView__WEBPACK_IMPORTED_MODULE_5__["default"]; });
-
+/* harmony import */ var _AVView__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./AVView */ "./app/src/pages/AVView.jsx");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "AVView", function() { return _AVView__WEBPACK_IMPORTED_MODULE_4__["default"]; });
 
 
 
@@ -977,25 +988,52 @@ __webpack_require__.r(__webpack_exports__);
 //import menu from './AppMenu'
 // import {slackTemplate} from './title'
 
-const App = () => react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["HashRouter"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Switch"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
+const App = () => react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
   exact: true,
   path: _util_constant__WEBPACK_IMPORTED_MODULE_4__["URL_LOGIN"],
   component: _pages_index__WEBPACK_IMPORTED_MODULE_2__["Login"]
 }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
-  exact: true,
   path: _util_constant__WEBPACK_IMPORTED_MODULE_4__["URL_HOME"],
   component: _pages_index__WEBPACK_IMPORTED_MODULE_2__["Home"]
 }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
   exact: true,
   path: _util_constant__WEBPACK_IMPORTED_MODULE_4__["URL_REG"],
   component: _pages_index__WEBPACK_IMPORTED_MODULE_2__["Register"]
-})))); // if(!location.hash.length){
+})); // if(!location.hash.length){
 //     location.hash = '/'
 // }
 
 
 App.propTypes = {};
 /* harmony default export */ __webpack_exports__["default"] = (App);
+
+/***/ }),
+
+/***/ "./app/src/renderer/Root.jsx":
+/*!***********************************!*\
+  !*** ./app/src/renderer/Root.jsx ***!
+  \***********************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/es/index.js");
+/* harmony import */ var _App__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./App */ "./app/src/renderer/App.jsx");
+
+
+
+
+
+const Root = () => {
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["HashRouter"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_App__WEBPACK_IMPORTED_MODULE_3__["default"], null));
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (Root);
 
 /***/ }),
 
@@ -1144,8 +1182,8 @@ __webpack_require__.r(__webpack_exports__);
 const URL_REG = '/register';
 const URL_HOME = '/home';
 const URL_LOGIN = '/';
-const URL_HOME_RESTAPI = '/home/restapi';
-const URL_HOME_AVVIEW = '/home/avview';
+const URL_HOME_RESTAPI = '/restapi';
+const URL_HOME_AVVIEW = '/avview';
 
 /***/ }),
 

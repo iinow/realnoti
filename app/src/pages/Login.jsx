@@ -68,6 +68,7 @@ class Login extends Component {
             })
         })
         db.close()
+        console.log(this.props.history.location.pathname)
     }
 
     componentWillUnmount = () => {

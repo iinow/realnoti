@@ -4,7 +4,7 @@ import {
     Link,
     Switch,
     Redirect,
-    // BrowserRouter as Router2, 사용하지 않음 요즘엔
+    BrowserRouter as Router2, //사용하지 않음 요즘엔
     HashRouter as Router
 } from 'react-router-dom'
 import * as PAGE from '../pages/index'
@@ -21,17 +21,15 @@ const App = () => (
             app='Electron'
             menu={defaultTemplate}
         /> */}
-        <Router>
             {/* <div>
                 Hello Main
                 <Link to="/">login고고</Link>
             </div> */}
-            <Switch>
+            {/* <Switch> */}
                 <Route exact path={URL.URL_LOGIN} component={PAGE.Login} />
-                <Route exact path={URL.URL_HOME} component={PAGE.Home} />
+                <Route path={URL.URL_HOME} component={PAGE.Home} />
                 <Route exact path={URL.URL_REG} component={PAGE.Register} />
-            </Switch>
-        </Router>
+            {/* </Switch> */}
     </div>
 )
 
