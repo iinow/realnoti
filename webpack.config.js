@@ -22,9 +22,31 @@ module.exports = env => {
                     test: /\.jsx?$/,
                     loader: 'babel-loader',
                     options: {
-                        presets: ['@babel/preset-react'],
+                        presets: ['@babel/preset-react', '@babel/preset-typescript'],
                         plugins : ['@babel/plugin-proposal-class-properties']
                     }
+                },
+                {
+                    // Target the .ts and .tsx files
+                    test: /\.tsx?$/,
+                    // Exclude the node modules folder
+                    exclude: /node_modules/,
+                    // Define the compiler to use
+                    use: [
+                        {
+                            // Compile the JSX code to javascript
+                            loader: "babel-loader",
+                            // Options
+                            options: {
+                                // Ensure the javascript works in legacy browsers
+                                presets: ["@babel/preset-react"]
+                            }
+                        },
+                        {
+                            // Compile the typescript code to JSX
+                            loader: "ts-loader"
+                        }
+                    ]
                 },
                 {
                     test: /\.css$/,
@@ -54,7 +76,7 @@ module.exports = env => {
         ],
 
         resolve: {
-            extensions: ['.js', '.json', '.jsx']
+            extensions: ['.js', '.json', '.jsx', '.ts', '.tsx']
         },
         devtool: 'source-map'
     }

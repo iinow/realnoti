@@ -100,7 +100,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
 /* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_dom__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _src_renderer_Root__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./src/renderer/Root */ "./app/src/renderer/Root.jsx");
-/* harmony import */ var _src_util_Firebase__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./src/util/Firebase */ "./app/src/util/Firebase.js");
+/* harmony import */ var _src_util_Firebase__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./src/util/Firebase */ "./app/src/util/Firebase.ts");
+/* harmony import */ var _src_util_Firebase__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_src_util_Firebase__WEBPACK_IMPORTED_MODULE_3__);
 
 
 
@@ -651,7 +652,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/es/index.js");
 /* harmony import */ var _util_constant__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../util/constant */ "./app/src/util/constant.js");
-/* harmony import */ var _util_Firebase__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../util/Firebase */ "./app/src/util/Firebase.js");
+/* harmony import */ var _util_Firebase__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../util/Firebase */ "./app/src/util/Firebase.ts");
+/* harmony import */ var _util_Firebase__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_util_Firebase__WEBPACK_IMPORTED_MODULE_4__);
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 
@@ -841,7 +843,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
 /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _util_constant__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../util/constant */ "./app/src/util/constant.js");
-/* harmony import */ var _util_Firebase__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../util/Firebase */ "./app/src/util/Firebase.js");
+/* harmony import */ var _util_Firebase__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../util/Firebase */ "./app/src/util/Firebase.ts");
+/* harmony import */ var _util_Firebase__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_util_Firebase__WEBPACK_IMPORTED_MODULE_3__);
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 
@@ -1242,22 +1245,164 @@ const Api = {
 
 /***/ }),
 
-/***/ "./app/src/util/Firebase.js":
+/***/ "./app/src/util/Firebase.ts":
 /*!**********************************!*\
-  !*** ./app/src/util/Firebase.js ***!
+  !*** ./app/src/util/Firebase.ts ***!
   \**********************************/
-/*! exports provided: fire */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fire", function() { return fire; });
-/* harmony import */ var firebase__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! firebase */ "./node_modules/firebase/dist/index.cjs.js");
-/* harmony import */ var firebase__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(firebase__WEBPACK_IMPORTED_MODULE_0__);
 
-let firebaseApp;
-let db;
-let config = {
+
+var __awaiter = this && this.__awaiter || function (thisArg, _arguments, P, generator) {
+  return new (P || (P = Promise))(function (resolve, reject) {
+    function fulfilled(value) {
+      try {
+        step(generator.next(value));
+      } catch (e) {
+        reject(e);
+      }
+    }
+
+    function rejected(value) {
+      try {
+        step(generator["throw"](value));
+      } catch (e) {
+        reject(e);
+      }
+    }
+
+    function step(result) {
+      result.done ? resolve(result.value) : new P(function (resolve) {
+        resolve(result.value);
+      }).then(fulfilled, rejected);
+    }
+
+    step((generator = generator.apply(thisArg, _arguments || [])).next());
+  });
+};
+
+var __generator = this && this.__generator || function (thisArg, body) {
+  var _ = {
+    label: 0,
+    sent: function () {
+      if (t[0] & 1) throw t[1];
+      return t[1];
+    },
+    trys: [],
+    ops: []
+  },
+      f,
+      y,
+      t,
+      g;
+  return g = {
+    next: verb(0),
+    "throw": verb(1),
+    "return": verb(2)
+  }, typeof Symbol === "function" && (g[Symbol.iterator] = function () {
+    return this;
+  }), g;
+
+  function verb(n) {
+    return function (v) {
+      return step([n, v]);
+    };
+  }
+
+  function step(op) {
+    if (f) throw new TypeError("Generator is already executing.");
+
+    while (_) try {
+      if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
+      if (y = 0, t) op = [op[0] & 2, t.value];
+
+      switch (op[0]) {
+        case 0:
+        case 1:
+          t = op;
+          break;
+
+        case 4:
+          _.label++;
+          return {
+            value: op[1],
+            done: false
+          };
+
+        case 5:
+          _.label++;
+          y = op[1];
+          op = [0];
+          continue;
+
+        case 7:
+          op = _.ops.pop();
+
+          _.trys.pop();
+
+          continue;
+
+        default:
+          if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) {
+            _ = 0;
+            continue;
+          }
+
+          if (op[0] === 3 && (!t || op[1] > t[0] && op[1] < t[3])) {
+            _.label = op[1];
+            break;
+          }
+
+          if (op[0] === 6 && _.label < t[1]) {
+            _.label = t[1];
+            t = op;
+            break;
+          }
+
+          if (t && _.label < t[2]) {
+            _.label = t[2];
+
+            _.ops.push(op);
+
+            break;
+          }
+
+          if (t[2]) _.ops.pop();
+
+          _.trys.pop();
+
+          continue;
+      }
+
+      op = body.call(thisArg, _);
+    } catch (e) {
+      op = [6, e];
+      y = 0;
+    } finally {
+      f = t = 0;
+    }
+
+    if (op[0] & 5) throw op[1];
+    return {
+      value: op[0] ? op[1] : void 0,
+      done: true
+    };
+  }
+};
+
+var _this = this;
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var firebase = __webpack_require__(/*! firebase */ "./node_modules/firebase/dist/index.cjs.js");
+
+var firebaseApp;
+var db;
+var config = {
   apiKey: "AIzaSyBTYlRqiEizHgZYYtp533Exzc_W9CNNRSU",
   authDomain: "realnoti-2be36.firebaseapp.com",
   databaseURL: "https://realnoti-2be36.firebaseio.com",
@@ -1265,21 +1410,22 @@ let config = {
   storageBucket: "realnoti-2be36.appspot.com",
   messagingSenderId: "101374968258"
 };
-const settings = {
+var settings = {
   timestampsInSnapshots: true
 };
-const fire = {
-  init: () => {
-    const dd = 1;
+var User = undefined;
+exports.fire = {
+  init: function () {
+    var dd = 1;
 
-    if (!firebase__WEBPACK_IMPORTED_MODULE_0___default.a.apps.length) {
-      firebaseApp = firebase__WEBPACK_IMPORTED_MODULE_0___default.a.initializeApp(config);
+    if (!firebase.apps.length) {
+      firebaseApp = firebase.initializeApp(config);
       db = firebaseApp.firestore();
       db.settings(settings);
     } // db = firebase.database()
 
   },
-  reg: (id, pw, email, message) => {
+  reg: function (id, pw, email, message) {
     db.collection('users').doc(id).set({
       'id': id,
       'password': pw,
@@ -1287,18 +1433,47 @@ const fire = {
       'message': message
     });
   },
-  login: async (id, pw) => {
-    const user = await db.collection('users').doc(id).get();
+  login: function (id, pw) {
+    return __awaiter(_this, void 0, void 0, function () {
+      var user;
+      return __generator(this, function (_a) {
+        switch (_a.label) {
+          case 0:
+            return [4
+            /*yield*/
+            , db.collection('users').doc(id).get()];
 
-    if (user && user.data().password == pw) {
-      console.log(user.data());
-      return true;
-    } else {
-      console.log(`데이터 없음`);
-      return false;
-    } // if(user == null && user.data())
+          case 1:
+            user = _a.sent();
 
-  }
+            if (user && user.data().password == pw) {
+              console.log(user.data());
+              User = user;
+              return [2
+              /*return*/
+              , true];
+            } else {
+              console.log("\uB370\uC774\uD130 \uC5C6\uC74C");
+              return [2
+              /*return*/
+              , false];
+            }
+
+            return [2
+            /*return*/
+            ];
+        }
+      });
+    });
+  } // ,
+  // insert_RestApi_Item : async (title, content, addr) => {
+  //     await User?db.collection('restapi').doc(User.id).set({
+  //         'title': title,
+  //         'content': content,
+  //         'addr': addr
+  //     }):alert("로그인 안했")
+  // }
+
 };
 
 /***/ }),
