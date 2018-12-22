@@ -73,7 +73,7 @@ class Home extends Component {
                     item={[
                         {
                             menuname: "Rest API", link: () => {
-                                alert('Rest API 버튼 클릭')
+                                // alert('Rest API 버튼 클릭')
                                 this.props.history.push(`${this.props.match.url}${URL.URL_HOME_RESTAPI}`)
                                 // console.log(this.props.history.location.pathname)
                             },
@@ -81,7 +81,7 @@ class Home extends Component {
                         },
                         {
                             menuname: "둘번", link: () => {
-                                alert(`둘번 클릭 ${remote.app.getAppPath()}`)
+                                // alert(`둘번 클릭 ${remote.app.getAppPath()}`)
                                 this.props.history.push(`${this.props.match.url}${URL.URL_HOME_AVVIEW}`)
                                 // console.log(this.props.history.location.pathname)
                             },
@@ -90,8 +90,9 @@ class Home extends Component {
                     ]}
                     title="시작이당"
                     imgPath={'file://' + remote.app.getAppPath() + '/app/resource/moe.PNG'} />
-                    <Route exact path={`${this.props.match.url}${URL.URL_HOME_RESTAPI}`} component={PAGE.RestApi} />
-                    <Route exact path={`${this.props.match.url}${URL.URL_HOME_AVVIEW}`} component={PAGE.AVView} />
+                {/* <button style={{right:"auto"}}>(+)</button> */}
+                <Route exact path={`${this.props.match.url}${URL.URL_HOME_RESTAPI}`} component={PAGE.RestApi} />
+                <Route exact path={`${this.props.match.url}${URL.URL_HOME_AVVIEW}`} component={PAGE.AVView} />
                 {/* <div style={{ margin: '30px' }}>
                     Hello ???
                     <UploadButton select={(e)=>{

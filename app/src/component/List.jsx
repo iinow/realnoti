@@ -2,9 +2,9 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { ListItem } from '.';
 
-const List = ({ item = [{ subject, content, addr }], listname}) => {
+const List = ({ item = [{ subject, content, addr }], listname }) => {
     return (
-        // <div style={{width:"80%"}}>
+        <div style={{ width: "80%" }}>
             <div className="content is-medium">
                 <h3 className="title is-3">{listname}</h3>
                 {
@@ -15,6 +15,7 @@ const List = ({ item = [{ subject, content, addr }], listname}) => {
                     })
                 }
             </div>
+        </div>
     )
 }
 

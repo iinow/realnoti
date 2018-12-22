@@ -15,6 +15,7 @@ const settings = {timestampsInSnapshots : true}
 
 export const fire = {
     init : () => {
+        const dd = 1;
         if (!firebase.apps.length){
             firebaseApp = firebase.initializeApp(config)
             db = firebaseApp.firestore()

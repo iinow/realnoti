@@ -1,6 +1,6 @@
 // Basic init
 const electron = require('electron')
-const { app, BrowserWindow } = require('electron')
+const { app, BrowserWindow, Notification } = require('electron')
 
 // Let electron reloads by itself when webpack watches changes in ./app/
 //require('electron-reload')(__dirname)
@@ -31,6 +31,16 @@ function createWindow() {
 
     let server = require('./app/src/server/server.js')
     console.log('electron create')
+
+    let myNotification = new Notification('Title', {
+        body: 'Lorem Ipsum Dolor Sit Amet'
+    })
+      
+    myNotification.onclick = () => {
+    console.log('Notification clicked')
+    }
+
+    myNotification.show()
 }
 
 app.on('ready', createWindow)
