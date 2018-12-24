@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { Link, HashRouter } from 'react-router-dom'
 import { URL_HOME, URL_REG } from '../util/constant'
 import { Fire, fire } from '../util/Firebase'
+
 // const SSH = window.require('simple-ssh')
 let sqlite3 = window.require('sqlite3').verbose()
 // import { remote } from 'electron'
@@ -71,7 +72,7 @@ class Login extends Component {
         console.log(this.props.history.location.pathname)
     }
 
-    componentWillUnmount = () => {
+    componentWillUnmount = async () => {
         document.body.style.paddingTop = '0px'
         document.body.style.backgroundColor = '#FFFFFF'
     }

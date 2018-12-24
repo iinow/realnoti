@@ -1,1 +1,2 @@
-// export { default as UserModel } from './UserModel'
+export { UserModel } from './UserModel'
+export { ApiItemModel } from './ApiItemModel'

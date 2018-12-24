@@ -43,6 +43,7 @@
     "electron-debug": "^2.0.0",
     "electron-reload": "^1.4.0",
     "firebase": "^5.7.0",
+    "json2typescript": "^1.0.6",
     "node-gyp": "^3.8.0",
     "react": "^16.5.2",
     "react-dom": "^16.5.2",

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
 import ReactModal from 'react-modal'
 
-import { Sample } from '../modal/index';
+import { Sample, Loading } from '../modal/index';
 
 class AVView extends Component {
     handleNewItemClick = () => {
@@ -13,7 +13,7 @@ class AVView extends Component {
     render() {
         return (
             <div style={{ margin: '30px' }}>
-                <Sample ref={ref=>this.mo = ref}/>
+                <Loading ref={ref=>this.mo = ref}/>
                 <button className="button" onClick={this.handleNewItemClick}> 모달 UP </button>
             </div>
         );

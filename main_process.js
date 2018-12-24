@@ -1,11 +1,11 @@
 // Basic init
 const electron = require('electron')
-const { app, BrowserWindow, Notification } = require('electron')
+const { app, BrowserWindow, Notification, globalShortcut } = require('electron')
 
 // Let electron reloads by itself when webpack watches changes in ./app/
 //require('electron-reload')(__dirname)
 require('electron-reload')
-require('electron-debug')()
+// require('electron-debug')()
 
 // To avoid being garbage collected
 let mainWindow
@@ -19,7 +19,7 @@ function createWindow() {
     console.log('file://'+__dirname+'/app/index.html')
     
     // Open the DevTools.
-    win.webContents.openDevTools()
+    // win.webContents.openDevTools()
 
     // Emitted when the window is closed.
     win.on('closed', () => {
@@ -41,6 +41,10 @@ function createWindow() {
     }
 
     myNotification.show()
+
+    globalShortcut.register('CommandOrControl+X', ()=>{
+        win.webContents.openDevTools()
+    })
 }
 
 app.on('ready', createWindow)
@@ -68,4 +72,9 @@ app.on('activate', () => {
         createWindow()
     }
     console.log('electron activate')
+})
+
+app.on('will-quit', () => {
+    // globalShortcut.unregister('CommandOrControl+X')
+    globalShortcut.unregisterAll()
 })

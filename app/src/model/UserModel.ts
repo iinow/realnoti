@@ -1,16 +1,25 @@
 import { BaseModel } from './BaseModel'
+import { JsonObject, JsonProperty } from "json2typescript"
 
-export class UserModel extends BaseModel{
-    id: string
-    pw: string
+@JsonObject("UserModel")
+export class UserModel extends BaseModel {
+    @JsonProperty("id", String)
+    id: string = undefined
 
-    constructor(id, pw){
+    @JsonProperty("pw", String)
+    pw: string = undefined
+
+    @JsonProperty("email", String)
+    email: string = undefined
+
+    @JsonProperty("message", String)
+    message: string = undefined
+
+    constructor() {
         super()
-        this.id = id
-        this.pw = pw
     }
 
     toString() {
-        return "My id is "+this.id+", pw is "+this.pw
+        return `My id is ${this.id}, pw is ${this.pw}`
     }
 }

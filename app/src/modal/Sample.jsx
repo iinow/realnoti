@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import ReactModal from 'react-modal'
+import { fire } from '../util/Firebase'
 
 // ReactModal.setAppElement('#root')
 
@@ -39,7 +40,10 @@ class Sample extends Component {
     }
 
     state = {
-        showModal: false
+        showModal: false,
+        title: '',
+        content: '',
+        addr: ''
     }
 
     handleOpenModal = () => {
@@ -58,6 +62,42 @@ class Sample extends Component {
         return document.querySelector('#root')
     }
 
+    handleTitleOnChange = (e) => {
+        this.setState({
+            'title': e.target.value
+        })
+    }
+
+    handleContentOnChange = (e) => {
+        this.setState({
+            'content': e.target.value
+        })
+    }
+
+    handleAddrOnChange = (e) => {
+        this.setState({
+            'addr': e.target.value
+        })
+    }
+
+    handleAddItemClick = () => {
+        let res = fire.insert_RestApi_Item(
+            this.state.title,
+            this.state.content,
+            this.state.addr)
+        console.log(`성공 여부 : ${res}`)
+        console.log(res)
+        this.handleCloseModal()
+    }
+
+    handleGetItemOnClick = async () => {
+        let res =  await fire.get_ApiItemModel()
+        // res.docs.forEach((data, index)=>{
+        //     console.log(`${index}번재 ${data.data()}`)
+        // })
+        console.log(res)
+    }
+
     render() {
         return (
             <ReactModal
@@ -66,8 +106,22 @@ class Sample extends Component {
                 isOpen={this.state.showModal}
                 contentLabel="onRequestClose Example"
                 onRequestClose={this.handleCloseModal}>
-                <p>Modal text!</p>
-                <button onClick={this.handleCloseModal}>Close Modal!!</button>
+                <div>
+                    <span>
+                        <label>title: </label><input className='input' type='text' onChange={this.handleTitleOnChange}></input>
+                    </span>
+                    <span>
+                        <label>content: </label><input className='input' type='text' onChange={this.handleContentOnChange}></input>
+                    </span>
+                    <span>
+                        <label>addr: </label><input className='input' type='text' onChange={this.handleAddrOnChange}></input>
+                    </span>
+                    <span>
+                        <button className='button' onClick={this.handleAddItemClick}>아이템 추가!!</button>
+                        <button className='button' onClick={this.handleCloseModal}>Close Modal!!</button>
+                        <button className='button' onClick={this.handleGetItemOnClick}>데이터 가져오기</button>
+                    </span>
+                </div>
             </ReactModal>
         );
     }

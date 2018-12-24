@@ -346,6 +346,136 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./app/src/modal/BaseModal.jsx":
+/*!*************************************!*\
+  !*** ./app/src/modal/BaseModal.jsx ***!
+  \*************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var react_modal__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-modal */ "./node_modules/react-modal/lib/index.js");
+/* harmony import */ var react_modal__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react_modal__WEBPACK_IMPORTED_MODULE_2__);
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+
+
+
+react_modal__WEBPACK_IMPORTED_MODULE_2___default.a.setAppElement('#root');
+
+class BaseModal extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
+  constructor(...args) {
+    super(...args);
+
+    _defineProperty(this, "state", {
+      showModal: false
+    });
+
+    _defineProperty(this, "handleOpenModal", () => {
+      this.setState({
+        showModal: true
+      });
+    });
+
+    _defineProperty(this, "handleCloseModal", () => {
+      this.setState({
+        showModal: false
+      });
+    });
+  }
+
+  render() {
+    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null);
+  }
+
+}
+
+BaseModal.propTypes = {};
+/* harmony default export */ __webpack_exports__["default"] = (BaseModal);
+
+/***/ }),
+
+/***/ "./app/src/modal/Loading.jsx":
+/*!***********************************!*\
+  !*** ./app/src/modal/Loading.jsx ***!
+  \***********************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var react_modal__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-modal */ "./node_modules/react-modal/lib/index.js");
+/* harmony import */ var react_modal__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react_modal__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _BaseModal__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./BaseModal */ "./app/src/modal/BaseModal.jsx");
+
+
+
+
+
+const {
+  remote
+} = window.require('electron');
+
+const STYLE = {
+  overlay: {
+    position: 'fixed',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    backgroundColor: 'rgba(0, 0, 0, 0.75)'
+  },
+  content: {
+    border: '0',
+    borderRadius: '4px',
+    bottom: 'auto',
+    height: 'auto',
+    // set height
+    left: '50%',
+    padding: '2rem',
+    position: 'fixed',
+    //border: '1px solid #ccc',
+    background: '#00000000',
+    right: 'auto',
+    top: '35%',
+    // start from center
+    transform: 'translate(-50%,-' + '100px' + ')',
+    // adjust top "up" based on height
+    width: 'auto',
+    maxWidth: '40rem'
+  }
+};
+
+class Loading extends _BaseModal__WEBPACK_IMPORTED_MODULE_3__["default"] {
+  render() {
+    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_modal__WEBPACK_IMPORTED_MODULE_2___default.a, {
+      style: STYLE,
+      isOpen: this.state.showModal,
+      onRequestClose: this.handleCloseModal
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+      src: 'file://' + remote.app.getAppPath() + '/app/resource/moe.PNG',
+      width: "50px",
+      height: "50px",
+      className: "App-logo"
+    }));
+  }
+
+}
+
+Loading.propTypes = {};
+/* harmony default export */ __webpack_exports__["default"] = (Loading);
+
+/***/ }),
+
 /***/ "./app/src/modal/Sample.jsx":
 /*!**********************************!*\
   !*** ./app/src/modal/Sample.jsx ***!
@@ -361,7 +491,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var react_modal__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-modal */ "./node_modules/react-modal/lib/index.js");
 /* harmony import */ var react_modal__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react_modal__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _util_Firebase__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../util/Firebase */ "./app/src/util/Firebase.ts");
+/* harmony import */ var _util_Firebase__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_util_Firebase__WEBPACK_IMPORTED_MODULE_3__);
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 
 
 
@@ -403,7 +536,10 @@ class Sample extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
     super(props);
 
     _defineProperty(this, "state", {
-      showModal: false
+      showModal: false,
+      title: '',
+      content: '',
+      addr: ''
     });
 
     _defineProperty(this, "handleOpenModal", () => {
@@ -421,6 +557,39 @@ class Sample extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
     _defineProperty(this, "getParent", () => {
       return document.querySelector('#root');
     });
+
+    _defineProperty(this, "handleTitleOnChange", e => {
+      this.setState({
+        'title': e.target.value
+      });
+    });
+
+    _defineProperty(this, "handleContentOnChange", e => {
+      this.setState({
+        'content': e.target.value
+      });
+    });
+
+    _defineProperty(this, "handleAddrOnChange", e => {
+      this.setState({
+        'addr': e.target.value
+      });
+    });
+
+    _defineProperty(this, "handleAddItemClick", () => {
+      let res = _util_Firebase__WEBPACK_IMPORTED_MODULE_3__["fire"].insert_RestApi_Item(this.state.title, this.state.content, this.state.addr);
+      console.log(`성공 여부 : ${res}`);
+      console.log(res);
+      this.handleCloseModal();
+    });
+
+    _defineProperty(this, "handleGetItemOnClick", async () => {
+      let res = await _util_Firebase__WEBPACK_IMPORTED_MODULE_3__["fire"].get_ApiItemModel(); // res.docs.forEach((data, index)=>{
+      //     console.log(`${index}번재 ${data.data()}`)
+      // })
+
+      console.log(res);
+    });
   }
 
   render() {
@@ -430,9 +599,28 @@ class Sample extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
       isOpen: this.state.showModal,
       contentLabel: "onRequestClose Example",
       onRequestClose: this.handleCloseModal
-    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Modal text!"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "title: "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+      className: "input",
+      type: "text",
+      onChange: this.handleTitleOnChange
+    })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "content: "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+      className: "input",
+      type: "text",
+      onChange: this.handleContentOnChange
+    })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "addr: "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+      className: "input",
+      type: "text",
+      onChange: this.handleAddrOnChange
+    })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+      className: "button",
+      onClick: this.handleAddItemClick
+    }, "\uC544\uC774\uD15C \uCD94\uAC00!!"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+      className: "button",
       onClick: this.handleCloseModal
-    }, "Close Modal!!"));
+    }, "Close Modal!!"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+      className: "button",
+      onClick: this.handleGetItemOnClick
+    }, "\uB370\uC774\uD130 \uAC00\uC838\uC624\uAE30"))));
   }
 
 }
@@ -447,7 +635,7 @@ Sample.propTypes = {// onRef: PropTypes.any.isRequired
 /*!********************************!*\
   !*** ./app/src/modal/index.js ***!
   \********************************/
-/*! exports provided: Sample */
+/*! exports provided: Sample, Loading */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -455,7 +643,232 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Sample__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Sample */ "./app/src/modal/Sample.jsx");
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Sample", function() { return _Sample__WEBPACK_IMPORTED_MODULE_0__["default"]; });
 
+/* harmony import */ var _Loading__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Loading */ "./app/src/modal/Loading.jsx");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Loading", function() { return _Loading__WEBPACK_IMPORTED_MODULE_1__["default"]; });
 
+
+
+
+/***/ }),
+
+/***/ "./app/src/model/ApiItemModel.ts":
+/*!***************************************!*\
+  !*** ./app/src/model/ApiItemModel.ts ***!
+  \***************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var __extends = this && this.__extends || function () {
+  var extendStatics = function (d, b) {
+    extendStatics = Object.setPrototypeOf || {
+      __proto__: []
+    } instanceof Array && function (d, b) {
+      d.__proto__ = b;
+    } || function (d, b) {
+      for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+    };
+
+    return extendStatics(d, b);
+  };
+
+  return function (d, b) {
+    extendStatics(d, b);
+
+    function __() {
+      this.constructor = d;
+    }
+
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+  };
+}();
+
+var __decorate = this && this.__decorate || function (decorators, target, key, desc) {
+  var c = arguments.length,
+      r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc,
+      d;
+  if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+  return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+
+var __metadata = this && this.__metadata || function (k, v) {
+  if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var BaseModel_1 = __webpack_require__(/*! ./BaseModel */ "./app/src/model/BaseModel.ts");
+
+var json2typescript_1 = __webpack_require__(/*! json2typescript */ "./node_modules/json2typescript/index.js");
+
+var ApiItemModel =
+/** @class */
+function (_super) {
+  __extends(ApiItemModel, _super);
+
+  function ApiItemModel() {
+    var _this = _super !== null && _super.apply(this, arguments) || this;
+
+    _this.title = undefined;
+    _this.content = undefined;
+    _this.addr = undefined;
+    return _this;
+  }
+
+  __decorate([json2typescript_1.JsonProperty("title", String), __metadata("design:type", String)], ApiItemModel.prototype, "title", void 0);
+
+  __decorate([json2typescript_1.JsonProperty("content", String), __metadata("design:type", String)], ApiItemModel.prototype, "content", void 0);
+
+  __decorate([json2typescript_1.JsonProperty("addr", String), __metadata("design:type", String)], ApiItemModel.prototype, "addr", void 0);
+
+  ApiItemModel = __decorate([json2typescript_1.JsonObject("ApiItemModel")], ApiItemModel);
+  return ApiItemModel;
+}(BaseModel_1.BaseModel);
+
+exports.ApiItemModel = ApiItemModel;
+
+/***/ }),
+
+/***/ "./app/src/model/BaseModel.ts":
+/*!************************************!*\
+  !*** ./app/src/model/BaseModel.ts ***!
+  \************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var BaseModel =
+/** @class */
+function () {
+  function BaseModel() {}
+
+  return BaseModel;
+}();
+
+exports.BaseModel = BaseModel;
+
+/***/ }),
+
+/***/ "./app/src/model/UserModel.ts":
+/*!************************************!*\
+  !*** ./app/src/model/UserModel.ts ***!
+  \************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var __extends = this && this.__extends || function () {
+  var extendStatics = function (d, b) {
+    extendStatics = Object.setPrototypeOf || {
+      __proto__: []
+    } instanceof Array && function (d, b) {
+      d.__proto__ = b;
+    } || function (d, b) {
+      for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+    };
+
+    return extendStatics(d, b);
+  };
+
+  return function (d, b) {
+    extendStatics(d, b);
+
+    function __() {
+      this.constructor = d;
+    }
+
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+  };
+}();
+
+var __decorate = this && this.__decorate || function (decorators, target, key, desc) {
+  var c = arguments.length,
+      r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc,
+      d;
+  if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+  return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+
+var __metadata = this && this.__metadata || function (k, v) {
+  if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var BaseModel_1 = __webpack_require__(/*! ./BaseModel */ "./app/src/model/BaseModel.ts");
+
+var json2typescript_1 = __webpack_require__(/*! json2typescript */ "./node_modules/json2typescript/index.js");
+
+var UserModel =
+/** @class */
+function (_super) {
+  __extends(UserModel, _super);
+
+  function UserModel() {
+    var _this = _super.call(this) || this;
+
+    _this.id = undefined;
+    _this.pw = undefined;
+    _this.email = undefined;
+    _this.message = undefined;
+    return _this;
+  }
+
+  UserModel.prototype.toString = function () {
+    return "My id is " + this.id + ", pw is " + this.pw;
+  };
+
+  __decorate([json2typescript_1.JsonProperty("id", String), __metadata("design:type", String)], UserModel.prototype, "id", void 0);
+
+  __decorate([json2typescript_1.JsonProperty("pw", String), __metadata("design:type", String)], UserModel.prototype, "pw", void 0);
+
+  __decorate([json2typescript_1.JsonProperty("email", String), __metadata("design:type", String)], UserModel.prototype, "email", void 0);
+
+  __decorate([json2typescript_1.JsonProperty("message", String), __metadata("design:type", String)], UserModel.prototype, "message", void 0);
+
+  UserModel = __decorate([json2typescript_1.JsonObject("UserModel"), __metadata("design:paramtypes", [])], UserModel);
+  return UserModel;
+}(BaseModel_1.BaseModel);
+
+exports.UserModel = UserModel;
+
+/***/ }),
+
+/***/ "./app/src/model/index.ts":
+/*!********************************!*\
+  !*** ./app/src/model/index.ts ***!
+  \********************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var UserModel_1 = __webpack_require__(/*! ./UserModel */ "./app/src/model/UserModel.ts");
+
+exports.UserModel = UserModel_1.UserModel;
+
+var ApiItemModel_1 = __webpack_require__(/*! ./ApiItemModel */ "./app/src/model/ApiItemModel.ts");
+
+exports.ApiItemModel = ApiItemModel_1.ApiItemModel;
 
 /***/ }),
 
@@ -498,7 +911,7 @@ class AVView extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
       style: {
         margin: '30px'
       }
-    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_modal_index__WEBPACK_IMPORTED_MODULE_4__["Sample"], {
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_modal_index__WEBPACK_IMPORTED_MODULE_4__["Loading"], {
       ref: ref => this.mo = ref
     }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
       className: "button",
@@ -725,7 +1138,7 @@ class Login extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
       console.log(this.props.history.location.pathname);
     });
 
-    _defineProperty(this, "componentWillUnmount", () => {
+    _defineProperty(this, "componentWillUnmount", async () => {
       document.body.style.paddingTop = '0px';
       document.body.style.backgroundColor = '#FFFFFF';
     });
@@ -845,7 +1258,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _util_constant__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../util/constant */ "./app/src/util/constant.js");
 /* harmony import */ var _util_Firebase__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../util/Firebase */ "./app/src/util/Firebase.ts");
 /* harmony import */ var _util_Firebase__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_util_Firebase__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _model_index__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../model/index */ "./app/src/model/index.ts");
+/* harmony import */ var _model_index__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_model_index__WEBPACK_IMPORTED_MODULE_4__);
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 
 
 
@@ -889,7 +1305,12 @@ class Register extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
     });
 
     _defineProperty(this, "handleOnClickReg", () => {
-      _util_Firebase__WEBPACK_IMPORTED_MODULE_3__["fire"].reg(this.state.id, this.state.pw, this.state.email, this.state.message);
+      let user = new _model_index__WEBPACK_IMPORTED_MODULE_4__["UserModel"]();
+      user.id = this.state.id;
+      user.pw = this.state.pw;
+      user.email = this.state.email;
+      user.message = this.state.email;
+      _util_Firebase__WEBPACK_IMPORTED_MODULE_3__["fire"].reg(user);
       this.props.history.push(_util_constant__WEBPACK_IMPORTED_MODULE_2__["URL_LOGIN"]);
       alert(`가입성공`);
     });
@@ -1028,7 +1449,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/es/index.js");
 /* harmony import */ var _component__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../component */ "./app/src/component/index.js");
+/* harmony import */ var _modal_index__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../modal/index */ "./app/src/modal/index.js");
+/* harmony import */ var _util_Firebase__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../util/Firebase */ "./app/src/util/Firebase.ts");
+/* harmony import */ var _util_Firebase__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_util_Firebase__WEBPACK_IMPORTED_MODULE_5__);
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+
 
 
 
@@ -1040,7 +1466,12 @@ class RestApi extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
     super(...args);
 
     _defineProperty(this, "componentDidMount", () => {
-      console.log(this.props.history.location.pathname);
+      console.log(this.props.history.location.pathname); // let list = fire.get_ApiItemModel()
+      // console.log(list)
+    });
+
+    _defineProperty(this, "handleNewItemClick", () => {
+      this.mo.handleOpenModal();
     });
   }
 
@@ -1052,18 +1483,12 @@ class RestApi extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
         maxWidth: '100%',
         height: 'auto !important'
       }
-    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_component__WEBPACK_IMPORTED_MODULE_3__["List"], {
-      listname: "Rest API \uD14C\uC2A4\uD2B8 \uAC04\uB2E4!dfdfdfdfdfdfdfd",
-      item: [{
-        subject: "1번째 제목",
-        content: "내용 간드아아",
-        addr: "http://www.naver.com"
-      }, {
-        subject: "2번째 제목",
-        content: "후ㅡ",
-        addr: "http://www.naver.com"
-      }]
-    }));
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_modal_index__WEBPACK_IMPORTED_MODULE_4__["Sample"], {
+      ref: ref => this.mo = ref
+    }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+      className: "button",
+      onClick: this.handleNewItemClick
+    }, " \uC544\uC774\uD15C \uCD94\uAC00 "));
   }
 
 }
@@ -1400,6 +1825,10 @@ Object.defineProperty(exports, "__esModule", {
 
 var firebase = __webpack_require__(/*! firebase */ "./node_modules/firebase/dist/index.cjs.js");
 
+var Model = __webpack_require__(/*! ../model/index */ "./app/src/model/index.ts");
+
+var json2typescript_1 = __webpack_require__(/*! json2typescript */ "./node_modules/json2typescript/index.js");
+
 var firebaseApp;
 var db;
 var config = {
@@ -1413,11 +1842,10 @@ var config = {
 var settings = {
   timestampsInSnapshots: true
 };
+var jsonConvert = new json2typescript_1.JsonConvert();
 var User = undefined;
 exports.fire = {
   init: function () {
-    var dd = 1;
-
     if (!firebase.apps.length) {
       firebaseApp = firebase.initializeApp(config);
       db = firebaseApp.firestore();
@@ -1425,13 +1853,8 @@ exports.fire = {
     } // db = firebase.database()
 
   },
-  reg: function (id, pw, email, message) {
-    db.collection('users').doc(id).set({
-      'id': id,
-      'password': pw,
-      'email': email,
-      'message': message
-    });
+  reg: function (user) {
+    db.collection('users').doc(user.id).set(user);
   },
   login: function (id, pw) {
     return __awaiter(_this, void 0, void 0, function () {
@@ -1448,7 +1871,7 @@ exports.fire = {
 
             if (user && user.data().password == pw) {
               console.log(user.data());
-              User = user;
+              User = jsonConvert.deserializeObject(user.data(), Model.UserModel);
               return [2
               /*return*/
               , true];
@@ -1465,16 +1888,112 @@ exports.fire = {
         }
       });
     });
-  } // ,
-  // insert_RestApi_Item : async (title, content, addr) => {
-  //     await User?db.collection('restapi').doc(User.id).set({
-  //         'title': title,
-  //         'content': content,
-  //         'addr': addr
-  //     }):alert("로그인 안했")
-  // }
+  },
+  //title: string, content: string, addr: string
+  insert_RestApi_Item: function (user) {
+    return __awaiter(_this, void 0, void 0, function () {
+      return __generator(this, function (_a) {
+        switch (_a.label) {
+          case 0:
+            if (!User) return [3
+            /*break*/
+            , 2];
+            return [4
+            /*yield*/
+            , db.collection('restapi').doc(User.id).collection(User.id).doc().set(user)];
 
+          case 1:
+            _a.sent();
+
+            return [2
+            /*return*/
+            , true];
+
+          case 2:
+            return [2
+            /*return*/
+            , false];
+        }
+      });
+    });
+  },
+  get_ApiItemModel: function () {
+    return __awaiter(_this, void 0, void 0, function () {
+      var list, array_1;
+      return __generator(this, function (_a) {
+        switch (_a.label) {
+          case 0:
+            return [4
+            /*yield*/
+            , db.collection('restapi').doc(localStorage.getItem('id')).collection(localStorage.getItem('id')).get()];
+
+          case 1:
+            list = _a.sent();
+
+            if (list) {
+              array_1 = new Array();
+              list.docs.forEach(function (item) {
+                array_1.push(jsonConvert.deserializeObject(item.data(), Model.ApiItemModel));
+                console.log(item.data());
+              });
+              return [2
+              /*return*/
+              , array_1];
+            }
+
+            return [2
+            /*return*/
+            ];
+        }
+      });
+    });
+  }
 };
+
+var Fire =
+/** @class */
+function () {
+  function Fire() {}
+
+  Object.defineProperty(Fire, "Instance", {
+    get: function () {
+      return this.instance || (this.instance = new Fire());
+    },
+    enumerable: true,
+    configurable: true
+  });
+  Object.defineProperty(Fire.prototype, "hello", {
+    get: function () {
+      return "hello world";
+    },
+    enumerable: true,
+    configurable: true
+  });
+
+  Fire.prototype.reg = function (id, pw, email, message) {
+    db.collection('users').doc(id).set({
+      'id': id,
+      'password': pw,
+      'email': email,
+      'message': message
+    });
+    return true;
+  };
+
+  Fire.prototype.login = function (id, pw) {
+    return true;
+  };
+
+  Fire.prototype.insert_RestApi_Item = function (title, content, addr) {
+    return true;
+  };
+
+  Fire.prototype.get_ApiItemModel = function () {
+    return null;
+  };
+
+  return Fire;
+}();
 
 /***/ }),
 
@@ -42302,6 +42821,1074 @@ function isSlowBuffer(obj) {
 module.exports = Array.isArray || function (arr) {
   return Object.prototype.toString.call(arr) == '[object Array]';
 };
+
+/***/ }),
+
+/***/ "./node_modules/json2typescript/index.js":
+/*!***********************************************!*\
+  !*** ./node_modules/json2typescript/index.js ***!
+  \***********************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var json_convert_1 = __webpack_require__(/*! ./src/json2typescript/json-convert */ "./node_modules/json2typescript/src/json2typescript/json-convert.js");
+
+exports.JsonConvert = json_convert_1.JsonConvert;
+
+var json_convert_enums_1 = __webpack_require__(/*! ./src/json2typescript/json-convert-enums */ "./node_modules/json2typescript/src/json2typescript/json-convert-enums.js");
+
+exports.ValueCheckingMode = json_convert_enums_1.ValueCheckingMode;
+exports.OperationMode = json_convert_enums_1.OperationMode;
+
+var json_convert_decorators_1 = __webpack_require__(/*! ./src/json2typescript/json-convert-decorators */ "./node_modules/json2typescript/src/json2typescript/json-convert-decorators.js");
+
+exports.JsonObject = json_convert_decorators_1.JsonObject;
+exports.JsonProperty = json_convert_decorators_1.JsonProperty;
+exports.JsonConverter = json_convert_decorators_1.JsonConverter;
+
+var any_1 = __webpack_require__(/*! ./src/json2typescript/any */ "./node_modules/json2typescript/src/json2typescript/any.js");
+
+exports.Any = any_1.Any;
+
+/***/ }),
+
+/***/ "./node_modules/json2typescript/src/json2typescript/any.js":
+/*!*****************************************************************!*\
+  !*** ./node_modules/json2typescript/src/json2typescript/any.js ***!
+  \*****************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+/**
+ * Virtual any type for the property decorator.
+ */
+
+var Any =
+/** @class */
+function () {
+  function Any() {}
+
+  return Any;
+}();
+
+exports.Any = Any;
+
+/***/ }),
+
+/***/ "./node_modules/json2typescript/src/json2typescript/json-convert-decorators.js":
+/*!*************************************************************************************!*\
+  !*** ./node_modules/json2typescript/src/json2typescript/json-convert-decorators.js ***!
+  \*************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var json_convert_options_1 = __webpack_require__(/*! ./json-convert-options */ "./node_modules/json2typescript/src/json2typescript/json-convert-options.js");
+
+var any_1 = __webpack_require__(/*! ./any */ "./node_modules/json2typescript/src/json2typescript/any.js");
+/**
+ * Decorator of a class that is a custom converter.
+ *
+ * @param target the class
+ */
+
+
+function JsonConverter(target) {
+  target[json_convert_options_1.Settings.MAPPER_PROPERTY] = "";
+}
+
+exports.JsonConverter = JsonConverter;
+/**
+ * Decorator of a class that comes from a JSON object.
+ *
+ * @param target the class identifier or the class
+ *
+ * @returns {any}
+ *
+ * @throws Error
+ */
+
+function JsonObject(target) {
+  // target is the constructor or the custom class name
+  var classIdentifier = "";
+
+  var decorator = function (target) {
+    target.prototype[json_convert_options_1.Settings.CLASS_IDENTIFIER] = classIdentifier.length > 0 ? classIdentifier : target.name;
+    var mapping = target.prototype[json_convert_options_1.Settings.MAPPING_PROPERTY];
+    var newMapping = []; // Make sure we replace the mapping names of all properties of this class
+
+    if (!mapping) return;
+
+    for (var _i = 0, _a = Object.keys(mapping); _i < _a.length; _i++) {
+      var key = _a[_i];
+      var newKey = key.replace(json_convert_options_1.Settings.CLASS_IDENTIFIER + ".", target.prototype[json_convert_options_1.Settings.CLASS_IDENTIFIER] + ".");
+      newMapping[newKey] = mapping[key];
+    }
+
+    target.prototype[json_convert_options_1.Settings.MAPPING_PROPERTY] = newMapping;
+  };
+
+  var type = typeof target;
+
+  switch (type) {
+    // Decorator was @JsonObject(classId)
+    case "string":
+      classIdentifier = target;
+      return decorator;
+    // Decorator was @JsonObject
+
+    case "function":
+      decorator(target);
+      return;
+    // Decorator was @JsonObject()
+
+    case "undefined":
+      return decorator;
+    // Decorator was @JsonObject(123)
+
+    default:
+      throw new Error("Fatal error in JsonConvert. " + "It's mandatory to pass a string as parameter in the @JsonObject decorator.\n\n" + "Use either @JsonObject or @JsonObject(classId) where classId is a string.\n\n");
+  }
+}
+
+exports.JsonObject = JsonObject;
+/**
+ * Decorator of a class property that comes from a JSON object.
+ *
+ * The second param can be either a type or a class of a custom converter.
+ *
+ * Use the following notation for the type:
+ * - Primitive type: String|Number|Boolean
+ * - Custom type: YourClassName
+ * - Array type: [String|Number|Boolean|YourClassName]
+ *
+ * If you decide to use a custom converter, make sure this class implements the interface JsonCustomConvert from this package.
+ *
+ * @param jsonPropertyName optional param (default: classPropertyName) the property name in the expected JSON object
+ * @param conversionOption optional param (default: Any), should be either the expected type (String|Boolean|Number|etc) or a custom converter class implementing JsonCustomConvert
+ * @param isOptional optional param (default: false), if true, the json property does not have to be present in the object
+ *
+ * @returns {(target:any, classPropertyName:string)=>void}
+ *
+ * @throws Error
+ */
+
+function JsonProperty() {
+  var params = [];
+
+  for (var _i = 0; _i < arguments.length; _i++) {
+    params[_i] = arguments[_i];
+  }
+
+  return function (target, classPropertyName) {
+    // target is the class
+    var jsonPropertyName = classPropertyName;
+    var conversionOption = any_1.Any;
+    var isOptional = false;
+
+    switch (params.length) {
+      case 1:
+        if (params[0] === undefined) throw new Error("Fatal error in JsonConvert. " + "It's not allowed to explicitly pass \"undefined\" as first parameter in the @JsonProperty decorator.\n\n" + "\tClass property: \n" + "\t\t" + classPropertyName + "\n\n" + "Leave the decorator parameters empty if you do not wish to pass the first parameter.\n\n");
+        jsonPropertyName = params[0];
+        break;
+
+      case 2:
+        if (params[0] === undefined) throw new Error("Fatal error in JsonConvert. " + "It's not allowed to explicitly pass \"undefined\" as first parameter in the @JsonProperty decorator.\n\n" + "\tClass property: \n" + "\t\t" + classPropertyName + "\n\n" + "Leave the decorator parameters empty if you do not wish to pass the first parameter.\n\n");
+        if (params[1] === undefined) throw new Error("Fatal error in JsonConvert. " + "It's not allowed to explicitly pass \"undefined\" as second parameter in the @JsonProperty decorator.\n\n" + "\tClass property: \n" + "\t\t" + classPropertyName + "\n\n" + "Use \"Any\" to allow any type. You can import this class from \"json2typescript\".\n\n");
+        jsonPropertyName = params[0];
+        conversionOption = params[1];
+        break;
+
+      case 3:
+        if (params[0] === undefined) throw new Error("Fatal error in JsonConvert. " + "It's not allowed to explicitly pass \"undefined\" as first parameter in the @JsonProperty decorator.\n\n" + "\tClass property: \n" + "\t\t" + classPropertyName + "\n\n" + "Leave the decorator parameters empty if you do not wish to pass the first parameter.\n\n");
+        if (params[1] === undefined) throw new Error("Fatal error in JsonConvert. " + "It's not allowed to explicitly pass \"undefined\" as second parameter in the @JsonProperty decorator.\n\n" + "\tClass property: \n" + "\t\t" + classPropertyName + "\n\n" + "Use \"Any\" to allow any type. You can import this class from \"json2typescript\".\n\n");
+        jsonPropertyName = params[0];
+        conversionOption = params[1];
+        isOptional = params[2];
+        break;
+
+      default:
+        break;
+    }
+
+    if (typeof target[json_convert_options_1.Settings.MAPPING_PROPERTY] === "undefined") {
+      target[json_convert_options_1.Settings.MAPPING_PROPERTY] = [];
+    }
+
+    var jsonPropertyMappingOptions = new json_convert_options_1.MappingOptions();
+    jsonPropertyMappingOptions.classPropertyName = classPropertyName;
+    jsonPropertyMappingOptions.jsonPropertyName = jsonPropertyName;
+    jsonPropertyMappingOptions.isOptional = isOptional ? isOptional : false; // Check if conversionOption is a type or a custom converter.
+
+    if (typeof conversionOption !== "undefined" && conversionOption !== null && typeof conversionOption[json_convert_options_1.Settings.MAPPER_PROPERTY] !== "undefined") {
+      jsonPropertyMappingOptions.customConverter = new conversionOption();
+    } else {
+      jsonPropertyMappingOptions.expectedJsonType = conversionOption;
+    } // Save the mapping info
+
+
+    target[json_convert_options_1.Settings.MAPPING_PROPERTY][json_convert_options_1.Settings.CLASS_IDENTIFIER + "." + classPropertyName] = jsonPropertyMappingOptions;
+  };
+}
+
+exports.JsonProperty = JsonProperty;
+
+/***/ }),
+
+/***/ "./node_modules/json2typescript/src/json2typescript/json-convert-enums.js":
+/*!********************************************************************************!*\
+  !*** ./node_modules/json2typescript/src/json2typescript/json-convert-enums.js ***!
+  \********************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+/**
+ * Enum for the operation mode of a JsonConvert instance.
+ *
+ * The values should be used as follows:
+ * - DISABLE: json2typescript will be disabled, no type checking or mapping is done
+ * - ENABLE: json2typescript is enabled, but only errors are logged
+ * - LOGGING: json2typescript is enabled and detailed information is logged
+ *
+ * @author Andreas Aeschlimann, DHlab, University of Basel, Switzerland
+ * @see https://www.npmjs.com/package/json2typescript full documentation
+ */
+
+var OperationMode;
+
+(function (OperationMode) {
+  OperationMode[OperationMode["DISABLE"] = 0] = "DISABLE";
+  OperationMode[OperationMode["ENABLE"] = 1] = "ENABLE";
+  OperationMode[OperationMode["LOGGING"] = 2] = "LOGGING";
+})(OperationMode = exports.OperationMode || (exports.OperationMode = {}));
+
+;
+/**
+ * Enum for the value checking mode of a JsonConvert instance.
+ *
+ * The values should be used as follows:
+ * - ALLOW_NULL: all given values in the JSON are allowed to be null
+ * - ALLOW_OBJECT_NULL: objects in the JSON are allowed to be null, primitive types are not allowed to be null
+ * - DISALLOW_NULL: no null values are tolerated in the JSON
+ *
+ * @author Andreas Aeschlimann, DHlab, University of Basel, Switzerland
+ * @see https://www.npmjs.com/package/json2typescript full documentation
+ */
+
+var ValueCheckingMode;
+
+(function (ValueCheckingMode) {
+  ValueCheckingMode[ValueCheckingMode["ALLOW_NULL"] = 1] = "ALLOW_NULL";
+  ValueCheckingMode[ValueCheckingMode["ALLOW_OBJECT_NULL"] = 2] = "ALLOW_OBJECT_NULL";
+  ValueCheckingMode[ValueCheckingMode["DISALLOW_NULL"] = 3] = "DISALLOW_NULL";
+})(ValueCheckingMode = exports.ValueCheckingMode || (exports.ValueCheckingMode = {}));
+
+;
+
+/***/ }),
+
+/***/ "./node_modules/json2typescript/src/json2typescript/json-convert-options.js":
+/*!**********************************************************************************!*\
+  !*** ./node_modules/json2typescript/src/json2typescript/json-convert-options.js ***!
+  \**********************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+/**
+ * Internal constants.
+ */
+
+var Settings =
+/** @class */
+function () {
+  function Settings() {}
+
+  Settings.MAPPING_PROPERTY = "__jsonconvert__mapping__";
+  Settings.MAPPER_PROPERTY = "__jsonconvert__mapper__";
+  Settings.CLASS_IDENTIFIER = "__jsonconvert__class_identifier__";
+  return Settings;
+}();
+
+exports.Settings = Settings;
+;
+/**
+ * Internal mapping options for a property.
+ */
+
+var MappingOptions =
+/** @class */
+function () {
+  function MappingOptions() {
+    this.classPropertyName = "";
+    this.jsonPropertyName = "";
+    this.expectedJsonType = undefined;
+    this.isOptional = false;
+    this.customConverter = null;
+  }
+
+  return MappingOptions;
+}();
+
+exports.MappingOptions = MappingOptions;
+
+/***/ }),
+
+/***/ "./node_modules/json2typescript/src/json2typescript/json-convert.js":
+/*!**************************************************************************!*\
+  !*** ./node_modules/json2typescript/src/json2typescript/json-convert.js ***!
+  \**************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var json_convert_enums_1 = __webpack_require__(/*! ./json-convert-enums */ "./node_modules/json2typescript/src/json2typescript/json-convert-enums.js");
+
+var json_convert_options_1 = __webpack_require__(/*! ./json-convert-options */ "./node_modules/json2typescript/src/json2typescript/json-convert-options.js");
+
+var any_1 = __webpack_require__(/*! ./any */ "./node_modules/json2typescript/src/json2typescript/any.js");
+/**
+ * Offers a simple API for mapping JSON objects to TypeScript/JavaScript classes and vice versa.
+ *
+ * @author Andreas Aeschlimann, DHlab, University of Basel, Switzerland
+ * @see https://www.npmjs.com/package/json2typescript full documentation on NPM
+ */
+
+
+var JsonConvert =
+/** @class */
+function () {
+  /////////////////
+  // CONSTRUCTOR //
+  /////////////////
+
+  /**
+   * Constructor.
+   *
+   * To learn more about the params, check the documentation of the equally named class properties.
+   *
+   * @param operationMode optional param (default: OperationMode.ENABLE)
+   * @param valueCheckingMode optional param (default: ValueCheckingMode.ALLOW_OBJECT_NULL)
+   * @param ignorePrimitiveChecks optional param (default: false)
+   */
+  function JsonConvert(operationMode, valueCheckingMode, ignorePrimitiveChecks) {
+    ////////////////
+    // PROPERTIES //
+    ////////////////
+
+    /**
+     * Determines how the JsonConvert class instance should operate.
+     *
+     * You may assign three different values:
+     * - OperationMode.DISABLE: json2typescript will be disabled, no type checking or mapping is done
+     * - OperationMode.ENABLE: json2typescript is enabled, but only errors are logged
+     * - OperationMode.LOGGING: json2typescript is enabled and detailed information is logged
+     */
+    this._operationMode = json_convert_enums_1.OperationMode.ENABLE;
+    /**
+     * Determines which types are allowed to be null.
+     *
+     * You may assign three different values:
+     * - ValueCheckingMode.ALLOW_NULL: all given values in the JSON are allowed to be null
+     * - ValueCheckingMode.ALLOW_OBJECT_NULL: objects in the JSON are allowed to be null, primitive types are not allowed to be null
+     * - ValueCheckingMode.DISALLOW_NULL: no null values are tolerated in the JSON
+     */
+
+    this._valueCheckingMode = json_convert_enums_1.ValueCheckingMode.ALLOW_OBJECT_NULL;
+    /**
+     * Determines whether primitive types should be checked.
+     * If true, it will be allowed to assign primitive to other primitive types.
+     */
+
+    this._ignorePrimitiveChecks = false;
+    if (operationMode && operationMode in json_convert_enums_1.OperationMode) this.operationMode = operationMode;
+    if (valueCheckingMode && valueCheckingMode in json_convert_enums_1.ValueCheckingMode) this.valueCheckingMode = valueCheckingMode;
+    if (ignorePrimitiveChecks) this.ignorePrimitiveChecks = ignorePrimitiveChecks;
+  }
+
+  Object.defineProperty(JsonConvert.prototype, "operationMode", {
+    /**
+     * Determines how the JsonConvert class instance should operate.
+     *
+     * You may assign three different values:
+     * - OperationMode.DISABLE: json2typescript will be disabled, no type checking or mapping is done
+     * - OperationMode.ENABLE: json2typescript is enabled, but only errors are logged
+     * - OperationMode.LOGGING: json2typescript is enabled and detailed information is logged
+     * @returns {number}
+     */
+    get: function () {
+      return this._operationMode;
+    },
+
+    /**
+     * Determines how the JsonConvert class instance should operate.
+     *
+     * You may assign three different values:
+     * - OperationMode.DISABLE: json2typescript will be disabled, no type checking or mapping is done
+     * - OperationMode.ENABLE: json2typescript is enabled, but only errors are logged
+     * - OperationMode.LOGGING: json2typescript is enabled and detailed information is logged
+     * @param value
+     */
+    set: function (value) {
+      if (value in json_convert_enums_1.OperationMode) this._operationMode = value;
+    },
+    enumerable: true,
+    configurable: true
+  });
+  Object.defineProperty(JsonConvert.prototype, "valueCheckingMode", {
+    /**
+     * Determines which types are allowed to be null.
+     *
+     * You may assign three different values:
+     * - ValueCheckingMode.ALLOW_NULL: all given values in the JSON are allowed to be null
+     * - ValueCheckingMode.ALLOW_OBJECT_NULL: objects in the JSON are allowed to be null, primitive types are not allowed to be null
+     * - ValueCheckingMode.DISALLOW_NULL: no null values are tolerated in the JSON
+     *
+     * @returns {number}
+     */
+    get: function () {
+      return this._valueCheckingMode;
+    },
+
+    /**
+     * Determines which types are allowed to be null.
+     *
+     * You may assign three different values:
+     * - ValueCheckingMode.ALLOW_NULL: all given values in the JSON are allowed to be null
+     * - ValueCheckingMode.ALLOW_OBJECT_NULL: objects in the JSON are allowed to be null, primitive types are not allowed to be null
+     * - ValueCheckingMode.DISALLOW_NULL: no null values are tolerated in the JSON
+     *
+     * @param value
+     */
+    set: function (value) {
+      if (value in json_convert_enums_1.ValueCheckingMode) this._valueCheckingMode = value;
+    },
+    enumerable: true,
+    configurable: true
+  });
+  Object.defineProperty(JsonConvert.prototype, "ignorePrimitiveChecks", {
+    /**
+     * Determines whether primitive types should be checked.
+     * If true, it will be allowed to assign primitive to other primitive types.
+     *
+     * @returns {boolean}
+     */
+    get: function () {
+      return this._ignorePrimitiveChecks;
+    },
+
+    /**
+     * Determines whether primitive types should be checked.
+     * If true, it will be allowed to assign primitive to other primitive types.
+     *
+     * @param value
+     */
+    set: function (value) {
+      this._ignorePrimitiveChecks = value;
+    },
+    enumerable: true,
+    configurable: true
+  }); ////////////////////
+  // PUBLIC METHODS //
+  ////////////////////
+
+  /**
+   * Tries to serialize a TypeScript object or array of objects to JSON.
+   *
+   * @param data object or array of objects
+   *
+   * @returns {any} the JSON object
+   *
+   * @throws an exception in case of failure
+   *
+   * @author Andreas Aeschlimann, DHlab, University of Basel, Switzerland
+   * @see https://www.npmjs.com/package/json2typescript full documentation
+   */
+
+  JsonConvert.prototype.serialize = function (data) {
+    if (data === undefined) {
+      if (this.valueCheckingMode === json_convert_enums_1.ValueCheckingMode.DISALLOW_NULL) {
+        throw new Error("Fatal error in JsonConvert. " + "Passed parameter json in JsonConvert.serialize() is undefined. You have specified to disallow null values.");
+      } else {
+        return null;
+      }
+    } else if (data === null) {
+      if (this.valueCheckingMode === json_convert_enums_1.ValueCheckingMode.DISALLOW_NULL) {
+        throw new Error("Fatal error in JsonConvert. " + "Passed parameter json in JsonConvert.serialize() is undefined. You have specified to disallow null values.");
+      } else {
+        return null;
+      }
+    } else if (data) {
+      if (data.constructor === Array) return this.serializeArray(data);
+      if (typeof data === "object") return this.serializeObject(data); // must be last due to the fact that an array is an object in TypeScript!
+
+      throw new Error("Fatal error in JsonConvert. " + "Passed parameter json in JsonConvert.serialize() is not in valid format (object or array).");
+    }
+  };
+  /**
+   * Tries to serialize a TypeScript object to a JSON object.
+   *
+   * @param instance TypeScript instance
+   *
+   * @returns {any} the JSON object
+   *
+   * @throws an exception in case of failure
+   *
+   * @author Andreas Aeschlimann, DHlab, University of Basel, Switzerland
+   * @see https://www.npmjs.com/package/json2typescript full documentation
+   */
+
+
+  JsonConvert.prototype.serializeObject = function (instance) {
+    if (typeof instance !== "object" || instance instanceof Array) {
+      throw new Error("Fatal error in JsonConvert. " + "Passed parameter jsonArray in JsonConvert.serializeObject() is not of type object.");
+    }
+
+    if (this.operationMode === json_convert_enums_1.OperationMode.DISABLE) {
+      return instance;
+    }
+
+    if (this.operationMode === json_convert_enums_1.OperationMode.LOGGING) {
+      console.log("----------");
+      console.log("Receiving JavaScript instance:");
+      console.log(instance);
+    }
+
+    var jsonObject = {}; // Loop through all initialized class properties
+
+    for (var _i = 0, _a = Object.keys(instance); _i < _a.length; _i++) {
+      var propertyKey = _a[_i];
+      this.serializeObject_loopProperty(instance, propertyKey, jsonObject);
+    }
+
+    if (this.operationMode === json_convert_enums_1.OperationMode.LOGGING) {
+      console.log("Returning JSON object:");
+      console.log(jsonObject);
+      console.log("----------");
+    }
+
+    return jsonObject;
+  };
+  /**
+   * Tries to serialize a TypeScript array to a JSON array.
+   *
+   * @param instanceArray array of TypeScript instances
+   *
+   * @returns {any[]} the JSON array
+   *
+   * @throws an exception in case of failure
+   *
+   * @author Andreas Aeschlimann, DHlab, University of Basel, Switzerland
+   * @see https://www.npmjs.com/package/json2typescript full documentation
+   */
+
+
+  JsonConvert.prototype.serializeArray = function (instanceArray) {
+    if (typeof instanceArray !== "object" || instanceArray instanceof Array === false) {
+      throw new Error("Fatal error in JsonConvert. " + "Passed parameter jsonArray in JsonConvert.serializeArray() is not of type array.");
+    }
+
+    if (this.operationMode === json_convert_enums_1.OperationMode.DISABLE) {
+      return instanceArray;
+    }
+
+    if (this.operationMode === json_convert_enums_1.OperationMode.LOGGING) {
+      console.log("----------");
+      console.log("Receiving JavaScript array:");
+      console.log(instanceArray);
+    }
+
+    var jsonArray = []; // Loop through all array elements
+
+    for (var _i = 0, instanceArray_1 = instanceArray; _i < instanceArray_1.length; _i++) {
+      var classInstance = instanceArray_1[_i];
+      jsonArray.push(this.serializeObject(classInstance));
+    }
+
+    if (this.operationMode === json_convert_enums_1.OperationMode.LOGGING) {
+      console.log("Returning JSON array:");
+      console.log(jsonArray);
+      console.log("----------");
+    }
+
+    return jsonArray;
+  };
+  /**
+   * Tries to deserialize given JSON to a TypeScript object or array of objects.
+   *
+   * @param json the JSON as object or array
+   * @param classReference the class reference
+   *
+   * @returns {any} the deserialized data (TypeScript instance or array of TypeScript instances)
+   *
+   * @throws an exception in case of failure
+   *
+   * @author Andreas Aeschlimann, DHlab, University of Basel, Switzerland
+   * @see https://www.npmjs.com/package/json2typescript full documentation
+   */
+
+
+  JsonConvert.prototype.deserialize = function (json, classReference) {
+    if (json === undefined) {
+      throw new Error("Fatal error in JsonConvert. " + "Passed parameter json in JsonConvert.deserialize() is undefined. This is not a valid JSON format.");
+    } else if (json === null) {
+      if (this.valueCheckingMode === json_convert_enums_1.ValueCheckingMode.DISALLOW_NULL) {
+        throw new Error("Fatal error in JsonConvert. " + "Passed parameter json in JsonConvert.deserialize() is undefined. You have specified to disallow null values.");
+      } else {
+        return null;
+      }
+    } else if (json) {
+      if (json.constructor === Array) return this.deserializeArray(json, classReference);
+      if (typeof json === "object") return this.deserializeObject(json, classReference); // must be last due to the fact that an array is an object in TypeScript!
+
+      throw new Error("Fatal error in JsonConvert. " + "Passed parameter json in JsonConvert.deserialize() is not in valid JSON format (object or array).");
+    }
+  };
+
+  ;
+  /**
+   * Tries to deserialize a JSON object to a TypeScript object.
+   *
+   * @param jsonObject the JSON object
+   * @param classReference the class reference
+   *
+   * @returns {any} the deserialized TypeScript instance
+   *
+   * @throws an exception in case of failure
+   *
+   * @author Andreas Aeschlimann, DHlab, University of Basel, Switzerland
+   * @see https://www.npmjs.com/package/json2typescript full documentation
+   */
+
+  JsonConvert.prototype.deserializeObject = function (jsonObject, classReference) {
+    if (typeof jsonObject !== "object" || jsonObject instanceof Array) {
+      throw new Error("Fatal error in JsonConvert. " + "Passed parameter jsonObject in JsonConvert.deserializeObject() is not of type object.");
+    }
+
+    if (this.operationMode === json_convert_enums_1.OperationMode.DISABLE) {
+      return jsonObject;
+    }
+
+    if (this.operationMode === json_convert_enums_1.OperationMode.LOGGING) {
+      console.log("----------");
+      console.log("Receiving JSON object:");
+      console.log(jsonObject);
+    }
+
+    var instance = new classReference(); // Loop through all initialized class properties
+
+    for (var _i = 0, _a = Object.keys(instance); _i < _a.length; _i++) {
+      var propertyKey = _a[_i];
+      this.deserializeObject_loopProperty(instance, propertyKey, jsonObject);
+    }
+
+    if (this.operationMode === json_convert_enums_1.OperationMode.LOGGING) {
+      console.log("Returning CLASS instance:");
+      console.log(instance);
+      console.log("----------");
+    }
+
+    return instance;
+  };
+  /**
+   * Tries to deserialize a JSON array to a TypeScript array.
+   *
+   * @param jsonArray the JSON array
+   * @param classReference the object class
+   *
+   * @returns {any[]} the deserialized array of TypeScript instances
+   *
+   * @throws an exception in case of failure
+   *
+   * @author Andreas Aeschlimann, DHlab, University of Basel, Switzerland
+   * @see https://www.npmjs.com/package/json2typescript full documentation
+   */
+
+
+  JsonConvert.prototype.deserializeArray = function (jsonArray, classReference) {
+    if (typeof jsonArray !== "object" || jsonArray instanceof Array === false) {
+      throw new Error("Fatal error in JsonConvert. " + "Passed parameter jsonArray in JsonConvert.deserializeArray() is not of type array.");
+    }
+
+    if (this.operationMode === json_convert_enums_1.OperationMode.DISABLE) {
+      return jsonArray;
+    }
+
+    if (this.operationMode === json_convert_enums_1.OperationMode.LOGGING) {
+      console.log("----------");
+      console.log("Receiving JSON array:");
+      console.log(jsonArray);
+    }
+
+    var array = []; // Loop through all array elements
+
+    for (var _i = 0, jsonArray_1 = jsonArray; _i < jsonArray_1.length; _i++) {
+      var jsonObject = jsonArray_1[_i];
+      array.push(this.deserializeObject(jsonObject, classReference));
+    }
+
+    if (this.operationMode === json_convert_enums_1.OperationMode.LOGGING) {
+      console.log("Returning array of CLASS instances:");
+      console.log(array);
+      console.log("----------");
+    }
+
+    return array;
+  }; /////////////////////
+  // PRIVATE METHODS //
+  /////////////////////
+
+  /**
+   * Tries to find the JSON mapping for a given class property and finally assign the value.
+   *
+   * @param instance the instance of the class
+   * @param classPropertyName the property name
+   * @param json the JSON object
+   *
+   * @throws throws an expection in case of failure
+   */
+
+
+  JsonConvert.prototype.serializeObject_loopProperty = function (instance, classPropertyName, json) {
+    // Check if a JSON-object mapping is possible for a property
+    var mappingOptions = this.getClassPropertyMappingOptions(instance, classPropertyName);
+
+    if (mappingOptions === null) {
+      return;
+    } // Get expected and real values
+
+
+    var jsonKey = mappingOptions.jsonPropertyName;
+    var expectedJsonType = mappingOptions.expectedJsonType;
+    var isOptional = mappingOptions.isOptional;
+    var customConverter = mappingOptions.customConverter;
+    var classInstancePropertyValue = instance[classPropertyName]; // Check if the json value exists
+
+    if (typeof classInstancePropertyValue === "undefined") {
+      if (isOptional) return;
+      throw new Error("Fatal error in JsonConvert. " + "Failed to map the JavaScript instance of class \"" + instance[json_convert_options_1.Settings.CLASS_IDENTIFIER] + "\" to JSON because the defined class property \"" + classPropertyName + "\" does not exist or is not defined:\n\n" + "\tClass property: \n\t\t" + classPropertyName + "\n\n" + "\tJSON property: \n\t\t" + jsonKey + "\n\n");
+    } // Map the property
+
+
+    try {
+      json[jsonKey] = customConverter !== null ? customConverter.serialize(classInstancePropertyValue) : this.verifyProperty(expectedJsonType, classInstancePropertyValue, true);
+    } catch (e) {
+      throw new Error("Fatal error in JsonConvert. " + "Failed to map the JavaScript instance of class \"" + instance[json_convert_options_1.Settings.CLASS_IDENTIFIER] + "\" to JSON because of a type error.\n\n" + "\tClass property: \n\t\t" + classPropertyName + "\n\n" + "\tClass property value: \n\t\t" + classInstancePropertyValue + "\n\n" + "\tExpected type: \n\t\t" + this.getExpectedType(expectedJsonType) + "\n\n" + "\tRuntime type: \n\t\t" + this.getTrueType(classInstancePropertyValue) + "\n\n" + "\tJSON property: \n\t\t" + jsonKey + "\n\n" + e.message + "\n");
+    }
+  };
+  /**
+   * Tries to find the JSON mapping for a given class property and finally assign the value.
+   *
+   * @param instance the instance of the class
+   * @param classPropertyName the property name
+   * @param json the JSON object
+   *
+   * @throws throws an expection in case of failure
+   */
+
+
+  JsonConvert.prototype.deserializeObject_loopProperty = function (instance, classPropertyName, json) {
+    var mappingOptions = this.getClassPropertyMappingOptions(instance, classPropertyName);
+
+    if (mappingOptions === null) {
+      return;
+    } // Get expected and real values
+
+
+    var jsonKey = mappingOptions.jsonPropertyName;
+    var expectedJsonType = mappingOptions.expectedJsonType;
+    var isOptional = mappingOptions.isOptional;
+    var customConverter = mappingOptions.customConverter;
+    var jsonValue = json[jsonKey]; // Check if the json value exists
+
+    if (typeof jsonValue === "undefined") {
+      if (isOptional) return;
+      throw new Error("Fatal error in JsonConvert. " + "Failed to map the JSON object to the class \"" + instance[json_convert_options_1.Settings.CLASS_IDENTIFIER] + "\" because the defined JSON property \"" + jsonKey + "\" does not exist:\n\n" + "\tClass property: \n\t\t" + classPropertyName + "\n\n" + "\tJSON property: \n\t\t" + jsonKey + "\n\n");
+    } // Map the property
+
+
+    try {
+      instance[classPropertyName] = customConverter !== null ? customConverter.deserialize(jsonValue) : this.verifyProperty(expectedJsonType, jsonValue);
+    } catch (e) {
+      throw new Error("Fatal error in JsonConvert. " + "Failed to map the JSON object to the JavaScript class \"" + instance[json_convert_options_1.Settings.CLASS_IDENTIFIER] + "\" because of a type error.\n\n" + "\tClass property: \n\t\t" + classPropertyName + "\n\n" + "\tExpected type: \n\t\t" + this.getExpectedType(expectedJsonType) + "\n\n" + "\tJSON property: \n\t\t" + jsonKey + "\n\n" + "\tJSON type: \n\t\t" + this.getJsonType(jsonValue) + "\n\n" + "\tJSON value: \n\t\t" + JSON.stringify(jsonValue) + "\n\n" + e.message + "\n\n");
+    }
+  }; ////////////////////
+  // HELPER METHODS //
+  ////////////////////
+
+  /**
+   * Gets the mapping options of a given class property.
+   *
+   * @param instance any class instance
+   * @param {string} propertyName any property name
+   *
+   * @returns {MappingOptions|null}
+   */
+
+
+  JsonConvert.prototype.getClassPropertyMappingOptions = function (instance, propertyName) {
+    var mappings = instance[json_convert_options_1.Settings.MAPPING_PROPERTY]; // Check if mapping is defined
+
+    if (typeof mappings === "undefined") return null; // Get direct mapping if possible
+
+    var directMappingName = instance[json_convert_options_1.Settings.CLASS_IDENTIFIER] + "." + propertyName;
+
+    if (typeof mappings[directMappingName] !== "undefined") {
+      return mappings[directMappingName];
+    } // No mapping was found, try to find some
+
+
+    var indirectMappingNames = Object.keys(mappings).filter(function (key) {
+      return key.match("\\." + propertyName + "$");
+    }); // use endsWidth in later versions
+
+    if (indirectMappingNames.length > 0) {
+      return mappings[indirectMappingNames[0]];
+    }
+
+    return null;
+  };
+  /**
+   * Compares the type of a given value with an internal expected json type.
+   * Either returns the resulting value or throws an exception.
+   *
+   * @param expectedJsonType the expected json type for the property
+   * @param value the property value to verify
+   * @param serialize optional param (default: false), if given, we are in serialization mode
+   *
+   * @returns returns the resulted mapped property
+   *
+   * @throws throws an expection in case of failure
+   */
+
+
+  JsonConvert.prototype.verifyProperty = function (expectedJsonType, value, serialize) {
+    // Map immediately if we don't care about the type
+    if (expectedJsonType === any_1.Any || expectedJsonType === null || expectedJsonType === Object) {
+      return value;
+    } // Check if attempt and expected was 1-d
+
+
+    if (expectedJsonType instanceof Array === false && value instanceof Array === false) {
+      // Check the type
+      if (typeof expectedJsonType !== "undefined" && expectedJsonType.prototype.hasOwnProperty(json_convert_options_1.Settings.CLASS_IDENTIFIER)) {
+        // Check if we have null value
+        if (value === null) {
+          if (this.valueCheckingMode !== json_convert_enums_1.ValueCheckingMode.DISALLOW_NULL) return null;else throw new Error("\tReason: Given value is null.");
+        }
+
+        if (serialize) return this.serializeObject(value);else return this.deserializeObject(value, expectedJsonType);
+      } else if (expectedJsonType === any_1.Any || expectedJsonType === null || expectedJsonType === Object) {
+        // Check if we have null value
+        if (value === null) {
+          if (this.valueCheckingMode !== json_convert_enums_1.ValueCheckingMode.DISALLOW_NULL) return null;else throw new Error("\tReason: Given value is null.");
+        }
+
+        return value;
+      } else if (expectedJsonType === String || expectedJsonType === Number || expectedJsonType === Boolean) {
+        // Check if we have null value
+        if (value === null) {
+          if (this.valueCheckingMode === json_convert_enums_1.ValueCheckingMode.ALLOW_NULL) return null;else throw new Error("\tReason: Given value is null.");
+        } // Check if the types match
+
+
+        if (expectedJsonType === String && typeof value === "string" || expectedJsonType === Number && typeof value === "number" || expectedJsonType === Boolean && typeof value === "boolean") {
+          return value;
+        } else {
+          if (this.ignorePrimitiveChecks) return value;
+          throw new Error("\tReason: Given object does not match the expected primitive type.");
+        }
+      } else {
+        throw new Error("\tReason: Expected type is unknown. There might be multiple reasons for this:\n" + "\t- You are missing the decorator @JsonObject (for object mapping)\n" + "\t- You are missing the decorator @JsonConverter (for custom mapping) before your class definition\n" + "\t- Your given class is undefined in the decorator because of circular dependencies");
+      }
+    } // Check if attempt and expected was n-d
+
+
+    if (expectedJsonType instanceof Array && value instanceof Array) {
+      var array = []; // No data given, so return empty value
+
+      if (value.length === 0) {
+        return array;
+      } // We obviously don't care about the type, so return the value as is
+
+
+      if (expectedJsonType.length === 0) {
+        return value;
+      } // Loop through the data. Both type and value are at least of length 1
+
+
+      var autofillType = expectedJsonType.length < value.length;
+
+      for (var i = 0; i < value.length; i++) {
+        if (autofillType && i >= expectedJsonType.length) expectedJsonType[i] = expectedJsonType[i - 1];
+        array[i] = this.verifyProperty(expectedJsonType[i], value[i], serialize);
+      }
+
+      return array;
+    } // Check if attempt was 1-d and expected was n-d
+
+
+    if (expectedJsonType instanceof Array && value instanceof Object) {
+      var array = []; // No data given, so return empty value
+
+      if (value.length === 0) {
+        return array;
+      } // We obviously don't care about the type, so return the json value as is
+
+
+      if (expectedJsonType.length === 0) {
+        return value;
+      } // Loop through the data. Both type and value are at least of length 1
+
+
+      var autofillType = expectedJsonType.length < Object.keys(value).length;
+      var i = 0;
+
+      for (var key in value) {
+        if (autofillType && i >= expectedJsonType.length) expectedJsonType[i] = expectedJsonType[i - 1];
+        array[key] = this.verifyProperty(expectedJsonType[i], value[key]);
+        i++;
+      }
+
+      return array;
+    } // Check if attempt was 1-d and expected was n-d
+
+
+    if (expectedJsonType instanceof Array) {
+      if (value === null) {
+        if (this.valueCheckingMode !== json_convert_enums_1.ValueCheckingMode.DISALLOW_NULL) return null;else throw new Error("\tReason: Given value is null.");
+      }
+
+      throw new Error("\tReason: Expected type is array, but given value is non-array.");
+    } // Check if attempt was n-d and expected as 1-d
+
+
+    if (value instanceof Array) {
+      throw new Error("\tReason: Given value is array, but expected a non-array type.");
+    } // All other attempts are fatal
+
+
+    throw new Error("\tReason: Mapping failed because of an unknown error.");
+  }; ///////////////////////////
+  // JSON2TYPESCRIPT TYPES //
+  ///////////////////////////
+
+  /**
+   * Returns a string representation of the expected json type.
+   *
+   * @param expectedJsonType the expected type given from the decorator
+   *
+   * @returns {string} the string representation
+   */
+
+
+  JsonConvert.prototype.getExpectedType = function (expectedJsonType) {
+    var type = "";
+
+    if (expectedJsonType instanceof Array) {
+      type = "[";
+
+      for (var i = 0; i < expectedJsonType.length; i++) {
+        if (i > 0) type += ",";
+        type += this.getExpectedType(expectedJsonType[i]);
+      }
+
+      type += "]";
+      return type;
+    } else {
+      if (expectedJsonType === any_1.Any || expectedJsonType === null || expectedJsonType === Object) {
+        return "any";
+      } else if (expectedJsonType === String || expectedJsonType === Boolean || expectedJsonType === Number) {
+        return new expectedJsonType().constructor.name.toLowerCase();
+      } else if (typeof expectedJsonType === 'function') {
+        return new expectedJsonType().constructor.name;
+      } else if (expectedJsonType === undefined) {
+        return "undefined";
+      } else {
+        return "?????";
+      }
+    }
+  };
+  /**
+   * Returns a string representation of the JSON value type.
+   *
+   * @param jsonValue the JSON value
+   *
+   * @returns {string} the string representation
+   */
+
+
+  JsonConvert.prototype.getJsonType = function (jsonValue) {
+    if (jsonValue === null) return "null";
+    var type = "";
+
+    if (jsonValue instanceof Array) {
+      type = "[";
+
+      for (var i = 0; i < jsonValue.length; i++) {
+        if (i > 0) type += ",";
+        type += this.getJsonType(jsonValue[i]);
+      }
+
+      type += "]";
+      return type;
+    } else {
+      return typeof jsonValue;
+    }
+  };
+  /**
+   * Returns a string representation of the true TypeScript type.
+   *
+   * @param trueValue the true value
+   *
+   * @returns {string} the string representation
+   */
+
+
+  JsonConvert.prototype.getTrueType = function (trueValue) {
+    return typeof trueValue;
+  };
+
+  return JsonConvert;
+}();
+
+exports.JsonConvert = JsonConvert;
 
 /***/ }),
 

@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { URL_LOGIN } from '../util/constant'
 import { fire } from '../util/Firebase'
+import * as Model from '../model/index'
 
 const REG_STYLE = {
     margin: "0px auto",
@@ -41,14 +42,15 @@ class Register extends Component {
     }
 
     handleOnClickReg = () => {
-        fire.reg(
-            this.state.id, 
-            this.state.pw, 
-            this.state.email, 
-            this.state.message)
+        let user = new Model.UserModel()
+        user.id = this.state.id
+        user.pw = this.state.pw
+        user.email = this.state.email
+        user.message = this.state.email
 
-            this.props.history.push(URL_LOGIN)
-            alert(`가입성공`)
+        fire.reg(user)
+        this.props.history.push(URL_LOGIN)
+        alert(`가입성공`)
     }
 
     handleOnChangeID = (e) => {
