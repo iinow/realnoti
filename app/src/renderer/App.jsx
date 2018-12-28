@@ -13,9 +13,9 @@ import * as URL from '../util/constant'
 // import TitleBar from 'electron-titlebar'
 //import menu from './AppMenu'
 // import {slackTemplate} from './title'
-
 const App = () => (
-    <div>
+//    document.body.style.overflow='hidden'
+    <div style={{overflow: 'hidden'}}>
         {/* <TitleBar
             icon={`${__dirname}/../../../public/favicon.ico`}
             app='Electron'

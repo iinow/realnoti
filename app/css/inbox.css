@@ -100,10 +100,10 @@ html,body {
   font-weight: 500;
 }
 .messages {
-  padding: 40px 20px;
+  /* padding: 40px 20px; */
 }
 .message {
-  padding: 40px 20px;
+  /* padding: 40px 20px; */
 }
 .messages .action-buttons {
   padding: 0;
@@ -211,4 +211,9 @@ html,body {
 }
 .card.active {
   background-color:#F5F5F5;
+}
+
+.test {
+  overflow: scroll !important;
+  margin: 30px;
 }

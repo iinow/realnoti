@@ -111,6 +111,54 @@ react_dom__WEBPACK_IMPORTED_MODULE_1___default.a.render(react__WEBPACK_IMPORTED_
 
 /***/ }),
 
+/***/ "./app/src/component/Avitem.jsx":
+/*!**************************************!*\
+  !*** ./app/src/component/Avitem.jsx ***!
+  \**************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_1__);
+
+
+
+class Avitem extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
+  render() {
+    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+      style: {
+        backgroundColor: '#88888888',
+        padding: '10px',
+        float: 'left'
+      }
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      style: {
+        padding: '10px'
+      }
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+      style: {
+        width: "200px",
+        height: "250px",
+        backgroundColor: "#FF0000"
+      }
+    })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+      style: {
+        textAlign: 'center'
+      }
+    }, "DVSD-392"));
+  }
+
+}
+
+Avitem.propTypes = {};
+/* harmony default export */ __webpack_exports__["default"] = (Avitem);
+
+/***/ }),
+
 /***/ "./app/src/component/LeftMenu.jsx":
 /*!****************************************!*\
   !*** ./app/src/component/LeftMenu.jsx ***!
@@ -140,40 +188,26 @@ const LeftMenu = ({
   title = "",
   imgPath = "",
   history
-}) => react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("aside", {
-  className: "column is-2 aside hero is-fullheight"
-}, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-  className: "compose has-text-centered"
-}, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-  className: "button is-danger is-block is-bold"
-}, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-  className: "compose"
-}, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
-  src: imgPath,
-  width: "50px",
-  height: "50px"
-})))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-  className: "main"
-}, item.map(({
+}) => react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  id: "sidebar-wrapper"
+}, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
+  className: "sidebar-nav"
+}, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
+  className: "sidebar-brand"
+}, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", null, "Start Viewer")), item.map(({
   menuname,
-  link,
-  path
+  link
 }, idx) => {
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-    className: "item",
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
+    className: "sidebar-item",
+    key: idx
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
     key: idx,
     onClick: () => {
-      // console.log(history.location.pathname)
       link();
     }
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-    className: "icon"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
-    className: "fa fa-inbox"
-  })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-    className: "name"
   }, menuname));
-})))); // LeftMenu.propTypes = {   href={link} 
+}))); // LeftMenu.propTypes = {   href={link} 
 // }
 
 
@@ -201,7 +235,7 @@ __webpack_require__.r(__webpack_exports__);
 
 const List = ({
   item = [{
-    subject,
+    title,
     content,
     addr
   }],
@@ -215,18 +249,18 @@ const List = ({
     className: "content is-medium"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", {
     className: "title is-3"
-  }, listname), item.map((item = {
-    subject,
+  }, listname), item ? item.map((item = {
+    title,
     content,
     addr
   }, idx) => {
     return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(___WEBPACK_IMPORTED_MODULE_2__["ListItem"], {
-      subject: item.subject,
+      subject: item.title,
       content: item.content,
       addr: item.addr,
       key: idx
     });
-  })));
+  }) : undefined));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (List);
@@ -259,11 +293,7 @@ const ListItem = ({
   className: "title is-3"
 }, subject), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("article", {
   className: "message is-primary"
-}, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-  className: "icon has-text-primary"
-}, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
-  className: "fab fa-js"
-})), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+}, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
   className: "message-body"
 }, content)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("pre", {
   className: "language-javascript"
@@ -322,22 +352,26 @@ UploadButton.propTypes = {};
 /*!************************************!*\
   !*** ./app/src/component/index.js ***!
   \************************************/
-/*! exports provided: LeftMenu, UploadButton, ListItem, List */
+/*! exports provided: Avitem, LeftMenu, UploadButton, ListItem, List */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _LeftMenu__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./LeftMenu */ "./app/src/component/LeftMenu.jsx");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "LeftMenu", function() { return _LeftMenu__WEBPACK_IMPORTED_MODULE_0__["default"]; });
+/* harmony import */ var _Avitem__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Avitem */ "./app/src/component/Avitem.jsx");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Avitem", function() { return _Avitem__WEBPACK_IMPORTED_MODULE_0__["default"]; });
 
-/* harmony import */ var _UploadButton__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./UploadButton */ "./app/src/component/UploadButton.jsx");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "UploadButton", function() { return _UploadButton__WEBPACK_IMPORTED_MODULE_1__["default"]; });
+/* harmony import */ var _LeftMenu__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./LeftMenu */ "./app/src/component/LeftMenu.jsx");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "LeftMenu", function() { return _LeftMenu__WEBPACK_IMPORTED_MODULE_1__["default"]; });
 
-/* harmony import */ var _ListItem__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./ListItem */ "./app/src/component/ListItem.jsx");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "ListItem", function() { return _ListItem__WEBPACK_IMPORTED_MODULE_2__["default"]; });
+/* harmony import */ var _UploadButton__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./UploadButton */ "./app/src/component/UploadButton.jsx");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "UploadButton", function() { return _UploadButton__WEBPACK_IMPORTED_MODULE_2__["default"]; });
 
-/* harmony import */ var _List__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./List */ "./app/src/component/List.jsx");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "List", function() { return _List__WEBPACK_IMPORTED_MODULE_3__["default"]; });
+/* harmony import */ var _ListItem__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./ListItem */ "./app/src/component/ListItem.jsx");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "ListItem", function() { return _ListItem__WEBPACK_IMPORTED_MODULE_3__["default"]; });
+
+/* harmony import */ var _List__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./List */ "./app/src/component/List.jsx");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "List", function() { return _List__WEBPACK_IMPORTED_MODULE_4__["default"]; });
+
 
 
 
@@ -493,7 +527,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_modal__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react_modal__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var _util_Firebase__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../util/Firebase */ "./app/src/util/Firebase.ts");
 /* harmony import */ var _util_Firebase__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_util_Firebase__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _model_index__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../model/index */ "./app/src/model/index.ts");
+/* harmony import */ var _model_index__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_model_index__WEBPACK_IMPORTED_MODULE_4__);
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 
 
 
@@ -577,7 +614,11 @@ class Sample extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
     });
 
     _defineProperty(this, "handleAddItemClick", () => {
-      let res = _util_Firebase__WEBPACK_IMPORTED_MODULE_3__["fire"].insert_RestApi_Item(this.state.title, this.state.content, this.state.addr);
+      let item = new _model_index__WEBPACK_IMPORTED_MODULE_4__["ApiItemModel"]();
+      item.addr = this.state.addr;
+      item.content = this.state.content;
+      item.title = this.state.title;
+      let res = _util_Firebase__WEBPACK_IMPORTED_MODULE_3__["fire"].insert_RestApi_Item(item);
       console.log(`성공 여부 : ${res}`);
       console.log(res);
       this.handleCloseModal();
@@ -834,7 +875,7 @@ function (_super) {
 
   __decorate([json2typescript_1.JsonProperty("id", String), __metadata("design:type", String)], UserModel.prototype, "id", void 0);
 
-  __decorate([json2typescript_1.JsonProperty("pw", String), __metadata("design:type", String)], UserModel.prototype, "pw", void 0);
+  __decorate([json2typescript_1.JsonProperty("password", String), __metadata("design:type", String)], UserModel.prototype, "pw", void 0);
 
   __decorate([json2typescript_1.JsonProperty("email", String), __metadata("design:type", String)], UserModel.prototype, "email", void 0);
 
@@ -889,12 +930,24 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_modal__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-modal */ "./node_modules/react-modal/lib/index.js");
 /* harmony import */ var react_modal__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(react_modal__WEBPACK_IMPORTED_MODULE_3__);
 /* harmony import */ var _modal_index__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../modal/index */ "./app/src/modal/index.js");
+/* harmony import */ var _component_index__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../component/index */ "./app/src/component/index.js");
+/* harmony import */ var _util_ApiService__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../util/ApiService */ "./app/src/util/ApiService.ts");
+/* harmony import */ var _util_ApiService__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(_util_ApiService__WEBPACK_IMPORTED_MODULE_6__);
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 
 
 
 
+
+
+
+
+const electron = __webpack_require__(/*! electron */ "electron");
+
+const remote = electron.remote; // import * as noti from 'node-notifier'
+
+let noti = window.require('node-notifier'); // const { BrowserWindow } = require('electron').remote
 
 
 class AVView extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
@@ -904,19 +957,30 @@ class AVView extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
     _defineProperty(this, "handleNewItemClick", () => {
       this.mo.handleOpenModal();
     });
+
+    _defineProperty(this, "handleTestOnClick", () => {
+      noti.notify({
+        title: "Title!!",
+        message: "Hello, There!!"
+      });
+    });
   }
 
   render() {
     return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-      style: {
-        margin: '30px'
-      }
+      className: "container-fluid"
     }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_modal_index__WEBPACK_IMPORTED_MODULE_4__["Loading"], {
       ref: ref => this.mo = ref
     }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
       className: "button",
-      onClick: this.handleNewItemClick
-    }, " \uBAA8\uB2EC UP "));
+      onClick: () => {
+        console.log(`사이즈 : ${remote.getCurrentWindow().webContents.getOwnerBrowserWindow().getBounds()}`);
+        console.log(remote.getCurrentWindow().webContents.getOwnerBrowserWindow().getBounds());
+      }
+    }, "\uD604\uC7AC \uC0AC\uC774\uC988"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+      className: "button",
+      onClick: this.handleTestOnClick
+    }, "\uB178\uD2F0"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_component_index__WEBPACK_IMPORTED_MODULE_5__["Avitem"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_component_index__WEBPACK_IMPORTED_MODULE_5__["Avitem"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_component_index__WEBPACK_IMPORTED_MODULE_5__["Avitem"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_component_index__WEBPACK_IMPORTED_MODULE_5__["Avitem"], null)));
   }
 
 }
@@ -939,15 +1003,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
 /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _util_Api__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../util/Api */ "./app/src/util/Api.js");
-/* harmony import */ var _component__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../component */ "./app/src/component/index.js");
-/* harmony import */ var _util_constant__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../util/constant */ "./app/src/util/constant.js");
-/* harmony import */ var _index__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./index */ "./app/src/pages/index.js");
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/es/index.js");
+/* harmony import */ var _component__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../component */ "./app/src/component/index.js");
+/* harmony import */ var _util_constant__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../util/constant */ "./app/src/util/constant.js");
+/* harmony import */ var _index__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./index */ "./app/src/pages/index.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/es/index.js");
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-
- // import { default as styles } from 'bulma/css/bulma.css'
 
 
 
@@ -970,8 +1031,8 @@ class Home extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
       res: '',
       click: false,
       cmd: '',
-      res: '',
-      file: ''
+      res: '' //file: ''
+
     });
 
     _defineProperty(this, "componentDidMount", () => {
@@ -986,14 +1047,7 @@ class Home extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
       });
     });
 
-    _defineProperty(this, "handlePostClick", async e => {// const v = await Api.post(this.state.url, {
-      //     "userid": "ems@wooam.com",
-      //     "password": "1111"
-      // })
-      // console.log(v.data)
-      // this.setState({ res: JSON.stringify(v.data) })
-      // alert(this.state.url)
-    });
+    _defineProperty(this, "handlePostClick", async e => {});
 
     _defineProperty(this, "handleTestOnClick", () => {
       this.setState({
@@ -1013,34 +1067,33 @@ class Home extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
 
   render() {
     return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-      className: "columns"
-    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_component__WEBPACK_IMPORTED_MODULE_3__["LeftMenu"], {
+      id: "wrapper",
+      className: "toggled"
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_component__WEBPACK_IMPORTED_MODULE_2__["LeftMenu"], {
       item: [{
         menuname: "Rest API",
         link: () => {
-          // alert('Rest API 버튼 클릭')
-          this.props.history.push(`${this.props.match.url}${_util_constant__WEBPACK_IMPORTED_MODULE_4__["URL_HOME_RESTAPI"]}`); // console.log(this.props.history.location.pathname)
-        },
-        path: `${this.props.match.url}${_util_constant__WEBPACK_IMPORTED_MODULE_4__["URL_HOME_RESTAPI"]}`
+          this.props.history.push(`${this.props.match.url}${_util_constant__WEBPACK_IMPORTED_MODULE_3__["URL_HOME_RESTAPI"]}`);
+        }
       }, {
         menuname: "둘번",
         link: () => {
-          // alert(`둘번 클릭 ${remote.app.getAppPath()}`)
-          this.props.history.push(`${this.props.match.url}${_util_constant__WEBPACK_IMPORTED_MODULE_4__["URL_HOME_AVVIEW"]}`); // console.log(this.props.history.location.pathname)
-        },
-        path: `${this.props.match.url}${_util_constant__WEBPACK_IMPORTED_MODULE_4__["URL_HOME_AVVIEW"]}`
+          this.props.history.push(`${this.props.match.url}${_util_constant__WEBPACK_IMPORTED_MODULE_3__["URL_HOME_AVVIEW"]}`);
+        }
       }],
       title: "\uC2DC\uC791\uC774\uB2F9",
       imgPath: 'file://' + remote.app.getAppPath() + '/app/resource/moe.PNG'
-    }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_6__["Route"], {
+    }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      id: "page-content-wrapper"
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_5__["Route"], {
       exact: true,
-      path: `${this.props.match.url}${_util_constant__WEBPACK_IMPORTED_MODULE_4__["URL_HOME_RESTAPI"]}`,
-      component: _index__WEBPACK_IMPORTED_MODULE_5__["RestApi"]
-    }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_6__["Route"], {
+      path: `${this.props.match.url}${_util_constant__WEBPACK_IMPORTED_MODULE_3__["URL_HOME_RESTAPI"]}`,
+      component: _index__WEBPACK_IMPORTED_MODULE_4__["RestApi"]
+    }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_5__["Route"], {
       exact: true,
-      path: `${this.props.match.url}${_util_constant__WEBPACK_IMPORTED_MODULE_4__["URL_HOME_AVVIEW"]}`,
-      component: _index__WEBPACK_IMPORTED_MODULE_5__["AVView"]
-    }));
+      path: `${this.props.match.url}${_util_constant__WEBPACK_IMPORTED_MODULE_3__["URL_HOME_AVVIEW"]}`,
+      component: _index__WEBPACK_IMPORTED_MODULE_4__["AVView"]
+    })));
   }
 
 }
@@ -1309,7 +1362,7 @@ class Register extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
       user.id = this.state.id;
       user.pw = this.state.pw;
       user.email = this.state.email;
-      user.message = this.state.email;
+      user.message = this.state.message;
       _util_Firebase__WEBPACK_IMPORTED_MODULE_3__["fire"].reg(user);
       this.props.history.push(_util_constant__WEBPACK_IMPORTED_MODULE_2__["URL_LOGIN"]);
       alert(`가입성공`);
@@ -1461,13 +1514,26 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 
+const electron = __webpack_require__(/*! electron */ "electron"); // electron.screen.getPrimaryDisplay()
+// electron.screen.getAllDisplays()
+
+
 class RestApi extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
   constructor(...args) {
     super(...args);
 
-    _defineProperty(this, "componentDidMount", () => {
-      console.log(this.props.history.location.pathname); // let list = fire.get_ApiItemModel()
-      // console.log(list)
+    _defineProperty(this, "state", {
+      item: null
+    });
+
+    _defineProperty(this, "componentDidMount", async () => {
+      console.log(this.props.history.location.pathname);
+      let list = await _util_Firebase__WEBPACK_IMPORTED_MODULE_5__["fire"].get_ApiItemModel();
+      this.setState({
+        item: list
+      });
+      console.log(list);
+      console.log(electron);
     });
 
     _defineProperty(this, "handleNewItemClick", () => {
@@ -1477,18 +1543,19 @@ class RestApi extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
 
   render() {
     return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-      className: "column is-9",
+      className: "container-fluid",
       style: {
-        margin: '30px',
-        maxWidth: '100%',
-        height: 'auto !important'
+        margin: '30px'
       }
-    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_modal_index__WEBPACK_IMPORTED_MODULE_4__["Sample"], {
-      ref: ref => this.mo = ref
-    }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
       className: "button",
       onClick: this.handleNewItemClick
-    }, " \uC544\uC774\uD15C \uCD94\uAC00 "));
+    }, " \uC544\uC774\uD15C \uCD94\uAC00 "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_component__WEBPACK_IMPORTED_MODULE_3__["List"], {
+      listname: "",
+      item: this.state.item
+    }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_modal_index__WEBPACK_IMPORTED_MODULE_4__["Sample"], {
+      ref: ref => this.mo = ref
+    }));
   }
 
 }
@@ -1554,7 +1621,12 @@ __webpack_require__.r(__webpack_exports__);
 //import menu from './AppMenu'
 // import {slackTemplate} from './title'
 
-const App = () => react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
+const App = () => //    document.body.style.overflow='hidden'
+react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  style: {
+    overflow: 'hidden'
+  }
+}, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
   exact: true,
   path: _util_constant__WEBPACK_IMPORTED_MODULE_4__["URL_LOGIN"],
   component: _pages_index__WEBPACK_IMPORTED_MODULE_2__["Login"]
@@ -1646,27 +1718,30 @@ const Person = {
 
 /***/ }),
 
-/***/ "./app/src/util/Api.js":
-/*!*****************************!*\
-  !*** ./app/src/util/Api.js ***!
-  \*****************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/***/ "./app/src/util/ApiService.ts":
+/*!************************************!*\
+  !*** ./app/src/util/ApiService.ts ***!
+  \************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
 
-const Api = {
-  get: (url, param) => {
-    return axios__WEBPACK_IMPORTED_MODULE_0___default.a.get(url, param);
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var axios = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+
+exports.Api = {
+  get: function (url, param) {
+    return axios.default.get(url, param);
   },
-  post: (url, param) => {
-    return axios__WEBPACK_IMPORTED_MODULE_0___default.a.post(url, param);
+  post: function (url, param) {
+    return axios.default.post(url, param);
   }
 };
-/* harmony default export */ __webpack_exports__["default"] = (Api);
 
 /***/ }),
 
@@ -1854,7 +1929,7 @@ exports.fire = {
 
   },
   reg: function (user) {
-    db.collection('users').doc(user.id).set(user);
+    db.collection('users').doc(user.id).set(jsonConvert.serializeObject(user));
   },
   login: function (id, pw) {
     return __awaiter(_this, void 0, void 0, function () {
@@ -1890,7 +1965,7 @@ exports.fire = {
     });
   },
   //title: string, content: string, addr: string
-  insert_RestApi_Item: function (user) {
+  insert_RestApi_Item: function (item) {
     return __awaiter(_this, void 0, void 0, function () {
       return __generator(this, function (_a) {
         switch (_a.label) {
@@ -1900,7 +1975,7 @@ exports.fire = {
             , 2];
             return [4
             /*yield*/
-            , db.collection('restapi').doc(User.id).collection(User.id).doc().set(user)];
+            , db.collection('restapi').doc(User.id).collection(User.id).doc().set(jsonConvert.serializeObject(item))];
 
           case 1:
             _a.sent();
@@ -1943,17 +2018,25 @@ exports.fire = {
 
             return [2
             /*return*/
-            ];
+            , null];
         }
       });
     });
   }
 };
 
+var test = function () {};
+
 var Fire =
 /** @class */
 function () {
-  function Fire() {}
+  function Fire() {
+    if (!firebase.apps.length) {
+      firebaseApp = firebase.initializeApp(config);
+      db = firebaseApp.firestore();
+      db.settings(settings);
+    }
+  }
 
   Object.defineProperty(Fire, "Instance", {
     get: function () {
@@ -1962,21 +2045,9 @@ function () {
     enumerable: true,
     configurable: true
   });
-  Object.defineProperty(Fire.prototype, "hello", {
-    get: function () {
-      return "hello world";
-    },
-    enumerable: true,
-    configurable: true
-  });
 
-  Fire.prototype.reg = function (id, pw, email, message) {
-    db.collection('users').doc(id).set({
-      'id': id,
-      'password': pw,
-      'email': email,
-      'message': message
-    });
+  Fire.prototype.reg = function (user) {
+    db.collection('users').doc(user.id).set(jsonConvert.serializeObject(user));
     return true;
   };
 
@@ -55125,6 +55196,17 @@ module.exports = warning;
 
 module.exports = __webpack_require__(/*! E:\DEV\vcode\v2_oneProcess\realnoti\app\index.js */"./app/index.js");
 
+
+/***/ }),
+
+/***/ "electron":
+/*!***************************!*\
+  !*** external "electron" ***!
+  \***************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = require("electron");
 
 /***/ })
 

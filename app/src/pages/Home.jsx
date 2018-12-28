@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-// import { default as styles } from 'bulma/css/bulma.css'
-import Api from '../util/Api'
 import { LeftMenu, UploadButton } from '../component';
 import * as URL from '../util/constant';
 import * as PAGE from './index'
@@ -17,8 +15,8 @@ class Home extends Component {
         res: '',
         click: false,
         cmd: '',
-        res: '',
-        file: ''
+        res: ''
+        //file: ''
     }
 
     componentDidMount = () => {
@@ -32,14 +30,6 @@ class Home extends Component {
     }
 
     handlePostClick = async (e) => {
-        // const v = await Api.post(this.state.url, {
-        //     "userid": "ems@wooam.com",
-        //     "password": "1111"
-        // })
-        // console.log(v.data)
-        // this.setState({ res: JSON.stringify(v.data) })
-
-        // alert(this.state.url)
     }
 
     handleTestOnClick = () => {
@@ -61,38 +51,27 @@ class Home extends Component {
 
     render() {
         return (
-            <div className="columns">
-                {/* <input onChange={this.handleCmdOnChange} type="text" onKeyPress={(e)=>{
-                    if(e=='Enter'){
-                        this.handleCmdOnClick
-                    }}
-                }></input>
-                <button onClick={this.handleCmdOnClick}>전송!!</button>
-                <div>{this.state.res}</div> */}
+            <div id="wrapper" className="toggled">
                 <LeftMenu
                     item={[
                         {
                             menuname: "Rest API", link: () => {
-                                // alert('Rest API 버튼 클릭')
                                 this.props.history.push(`${this.props.match.url}${URL.URL_HOME_RESTAPI}`)
-                                // console.log(this.props.history.location.pathname)
-                            },
-                            path: `${this.props.match.url}${URL.URL_HOME_RESTAPI}`
+                            }
                         },
                         {
                             menuname: "둘번", link: () => {
-                                // alert(`둘번 클릭 ${remote.app.getAppPath()}`)
                                 this.props.history.push(`${this.props.match.url}${URL.URL_HOME_AVVIEW}`)
-                                // console.log(this.props.history.location.pathname)
-                            },
-                            path: `${this.props.match.url}${URL.URL_HOME_AVVIEW}`
+                            }
                         }
                     ]}
                     title="시작이당"
                     imgPath={'file://' + remote.app.getAppPath() + '/app/resource/moe.PNG'} />
-                {/* <button style={{right:"auto"}}>(+)</button> */}
-                <Route exact path={`${this.props.match.url}${URL.URL_HOME_RESTAPI}`} component={PAGE.RestApi} />
-                <Route exact path={`${this.props.match.url}${URL.URL_HOME_AVVIEW}`} component={PAGE.AVView} />
+
+                <div id="page-content-wrapper">
+                    <Route exact path={`${this.props.match.url}${URL.URL_HOME_RESTAPI}`} component={PAGE.RestApi} />
+                    <Route exact path={`${this.props.match.url}${URL.URL_HOME_AVVIEW}`} component={PAGE.AVView} />
+                </div>
                 {/* <div style={{ margin: '30px' }}>
                     Hello ???
                     <UploadButton select={(e)=>{

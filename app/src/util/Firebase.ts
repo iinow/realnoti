@@ -28,7 +28,7 @@ export const fire = {
         // db = firebase.database()
     },
     reg: (user: Model.UserModel) => {
-        db.collection('users').doc(user.id).set(user)
+        db.collection('users').doc(user.id).set(jsonConvert.serializeObject(user))
     },
     login: async (id: string, pw: string) => {
         const user = await db.collection('users').doc(id).get()
@@ -44,9 +44,9 @@ export const fire = {
         // if(user == null && user.data())
     },
     //title: string, content: string, addr: string
-    insert_RestApi_Item: async (user: Model.UserModel) => {
+    insert_RestApi_Item: async (item: Model.ApiItemModel) => {
         if (User) {
-            await db.collection('restapi').doc(User.id).collection(User.id).doc().set(user)
+            await db.collection('restapi').doc(User.id).collection(User.id).doc().set(jsonConvert.serializeObject(item))
             return true
         } else {
             return false
@@ -62,35 +62,35 @@ export const fire = {
             })
             return array
         }
+        return null
     }
+}
+
+const test = () => {
+    
 }
 
 class Fire implements Api{
     private static instance: Fire
 
     private constructor() {
-
+        if (!firebase.apps.length) {
+            firebaseApp = firebase.initializeApp(config)
+            db = firebaseApp.firestore()
+            db.settings(settings)
+        }
     }
 
     public static get Instance(): Fire {
         return this.instance || (this.instance = new Fire())
     }
 
-    get hello() {
-        return "hello world"
-    }
-
-    reg(id: string, pw: string, email: string, message: string): boolean {
-        db.collection('users').doc(id).set({
-            'id': id,
-            'password': pw,
-            'email': email,
-            'message': message
-        })
+    reg(user: Model.UserModel): boolean {
+        db.collection('users').doc(user.id).set(jsonConvert.serializeObject(user))
         return true
     }
 
-    login(id: string, pw: string): boolean {
+    login(id: string, pw: string): boolean{
         return true
     }
 
@@ -104,7 +104,7 @@ class Fire implements Api{
 }
 
 interface Api {
-    reg(id: string, pw: string, email: string, message: string): boolean
+    reg(user: Model.UserModel): boolean
     login(id: string, pw: string): boolean
     insert_RestApi_Item(title: string, content: string, addr: string): boolean
     get_ApiItemModel(): Array<Model.ApiItemModel>

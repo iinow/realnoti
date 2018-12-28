@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import ReactModal from 'react-modal'
 import { fire } from '../util/Firebase'
-
+import * as Model from '../model/index'
 // ReactModal.setAppElement('#root')
 
 const STYLE = {
@@ -81,10 +81,12 @@ class Sample extends Component {
     }
 
     handleAddItemClick = () => {
-        let res = fire.insert_RestApi_Item(
-            this.state.title,
-            this.state.content,
-            this.state.addr)
+        let item = new Model.ApiItemModel()
+        item.addr = this.state.addr
+        item.content = this.state.content
+        item.title = this.state.title
+
+        let res = fire.insert_RestApi_Item(item)
         console.log(`성공 여부 : ${res}`)
         console.log(res)
         this.handleCloseModal()

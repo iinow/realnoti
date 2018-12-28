@@ -4,12 +4,24 @@ import { withRouter } from 'react-router-dom';
 import { List } from '../component';
 import { Sample } from '../modal/index'
 import { fire } from '../util/Firebase'
+const electron = require('electron')
+// electron.screen.getPrimaryDisplay()
+// electron.screen.getAllDisplays()
 
 class RestApi extends Component {
-    componentDidMount = () => {
+
+    state = {
+        item: null
+    }
+
+    componentDidMount = async () => {
         console.log(this.props.history.location.pathname)
-        // let list = fire.get_ApiItemModel()
-        // console.log(list)
+        let list = await fire.get_ApiItemModel()
+        this.setState({
+            item: list
+        })
+        console.log(list)
+        console.log(electron)
     }
 
     handleNewItemClick = () => {
@@ -18,7 +30,7 @@ class RestApi extends Component {
 
     render() {
         return (
-            <div className="column is-9" style={{ margin: '30px', maxWidth: '100%', height: 'auto !important' }}>
+            <div className="container-fluid" style={{ margin: '30px'}}>
                 {/* Hello ???
                     <UploadButton select={(e)=>{
                         this.setState({
@@ -35,8 +47,11 @@ class RestApi extends Component {
                         { subject: "1번째 제목", content: "내용 간드아아", addr: "http://www.naver.com" },
                         { subject: "2번째 제목", content: "후ㅡ", addr: "http://www.naver.com" }
                     ]} /> */}
-                <Sample ref={ref => this.mo = ref} />
                 <button className="button" onClick={this.handleNewItemClick}> 아이템 추가 </button>
+                <List
+                    listname=""
+                    item={this.state.item}/>
+                <Sample ref={ref => this.mo = ref} />
             </div>
         );
     }

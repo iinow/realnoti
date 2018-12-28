@@ -5,10 +5,10 @@ const ListItem = ({subject, content, addr}) => (
     <div className="box">
         <h4 className="title is-3">{subject}</h4>
         <article className="message is-primary">
-            <span className="icon has-text-primary">
+            {/* <span className="icon has-text-primary">
                 <i className="fab fa-js">
                 </i>
-            </span>
+            </span> */}
             <div className="message-body">
                 {content}
             </div>

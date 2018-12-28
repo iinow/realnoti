@@ -46,7 +46,7 @@ class Register extends Component {
         user.id = this.state.id
         user.pw = this.state.pw
         user.email = this.state.email
-        user.message = this.state.email
+        user.message = this.state.message
 
         fire.reg(user)
         this.props.history.push(URL_LOGIN)

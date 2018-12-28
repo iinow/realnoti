@@ -6,7 +6,7 @@ export class UserModel extends BaseModel {
     @JsonProperty("id", String)
     id: string = undefined
 
-    @JsonProperty("pw", String)
+    @JsonProperty("password", String)
     pw: string = undefined
 
     @JsonProperty("email", String)
