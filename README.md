@@ -2,17 +2,16 @@
 2018-11-10 : init commit
 노티 푸시
 // babel preset-stage 없어졌다
-
-**2018-12-04**
-- 기존 프로젝트 electron 을 create-react-app 으로 합쳐서 처리하도록 변경할 예정
-- 웹 프레임워크인 bulma 를 사용하고 있고 거기서 css-loader 를 사용하려고 했으나... webpack 설정이 힘들어서 개발하기 편하게 이원화 시킴
-- 대신 단점으로 프로세스가 2개로 돈다는 점
-
-실행방법
 ```node
 npm i
 ```
-```node
-npm start
-```
-하면 create-react-app 과 electron 이 실행된다.
+
+##2018-12-12 
+create-react-app 으로 electron 같이 개발하는게 넘나 오래걸린다....
+프로세스 2개 돌려서 좀 느리다 많이..
+electron  브랜치로 다시 시작한다.
+
+##2018-12-22
+typescript 를 추가했다
+webpack 설정 추가
+전체적으로 변경 예정
