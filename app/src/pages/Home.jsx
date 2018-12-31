@@ -5,9 +5,9 @@ import * as URL from '../util/constant';
 import * as PAGE from './index'
 import { List } from '.';
 import { Route, Switch, HashRouter as Router } from 'react-router-dom'
+import leftmenujson from '../data/MenuItem.json'
 
 const { remote } = window.require('electron')
-
 class Home extends Component {
     state = {
         url: '',
@@ -53,18 +53,10 @@ class Home extends Component {
         return (
             <div id="wrapper" className="toggled">
                 <LeftMenu
-                    item={[
-                        {
-                            menuname: "Rest API", link: () => {
-                                this.props.history.push(`${this.props.match.url}${URL.URL_HOME_RESTAPI}`)
-                            }
-                        },
-                        {
-                            menuname: "둘번", link: () => {
-                                this.props.history.push(`${this.props.match.url}${URL.URL_HOME_AVVIEW}`)
-                            }
-                        }
-                    ]}
+                    props={this.props}
+                    item={
+                        leftmenujson
+                    }
                     title="시작이당"
                     imgPath={'file://' + remote.app.getAppPath() + '/app/resource/moe.PNG'} />
 

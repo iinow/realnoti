@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
-import { URL_HOME_RESTAPI } from '../util/constant';
+import { URL_HOME_RESTAPI, URL } from '../util/constant'
 
-const LeftMenu = ({ item = [{ menuname, link, path }], title = "", imgPath = "", history }) => (
+const LeftMenu = ({ item = [{ menuname, link, path }], title = "", imgPath = "" , props}) => (
     <div id="sidebar-wrapper">
         <ul className="sidebar-nav">
             <li className="sidebar-brand">
@@ -16,7 +16,8 @@ const LeftMenu = ({ item = [{ menuname, link, path }], title = "", imgPath = "",
                     return (
                         <li className="sidebar-item" key={idx}>
                             <a key={idx} onClick={() => {
-                                link()
+                                // link()
+                                props.history.push(`${props.match.url}${URL.find(link)}`)
                             }}>
                                 {menuname}
                             </a>

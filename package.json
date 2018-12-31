@@ -47,6 +47,7 @@
     "json2typescript": "^1.0.6",
     "node-gyp": "^3.8.0",
     "node-notifier": "^5.3.0",
+    "parse5": "^5.1.0",
     "react": "^16.5.2",
     "react-dom": "^16.5.2",
     "react-modal": "^3.8.1",

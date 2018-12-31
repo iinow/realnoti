@@ -5,6 +5,8 @@ import ReactModal from 'react-modal'
 import { Sample, Loading } from '../modal/index';
 import { Avitem } from '../component/index';
 import { Api } from '../util/ApiService'
+import * as craw from '../crawler/AvCraw'
+
 const electron = require('electron')
 const remote = electron.remote
 // import * as noti from 'node-notifier'
@@ -32,6 +34,10 @@ class AVView extends Component {
                     console.log(remote.getCurrentWindow().webContents.getOwnerBrowserWindow().getBounds())
                 }}>현재 사이즈</button>
                 <button className="button" onClick={this.handleTestOnClick}>노티</button>
+                <button className="btn btn-secondary" id="menu-toggle" onClick={()=>{
+                    const c = craw.AvCraw.instance
+                    console.log(c.content())
+                }}>노티</button>
                 <div>
                     <Avitem />
                     <Avitem />

@@ -18,6 +18,7 @@
   
   #wrapper.toggled {
     padding-left: 250px;
+    /* overflow-y: hidden; */
   }
   
   #sidebar-wrapper {
