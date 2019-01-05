@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Link, HashRouter } from 'react-router-dom'
 import { URL_HOME, URL_REG } from '../util/constant'
-import { Fire, fire } from '../util/Firebase'
+import { Fire } from '../util/Firebase'
 
 // const SSH = window.require('simple-ssh')
 let sqlite3 = window.require('sqlite3').verbose()
@@ -48,7 +48,7 @@ class Login extends Component {
     componentDidMount = () => {
         document.body.style.backgroundColor = BodyBackgroundColor
         document.body.style.height = '100vh'
-        document.body.style.paddingTop = '60px'
+        // document.body.style.paddingTop = '60px'
         // document.body.style.width = '100vh'
 
         const id = localStorage.getItem("id")
@@ -94,7 +94,7 @@ class Login extends Component {
             // this.etxId.focus()
             alert(`id, pw 입력 바람`)
         } else {
-            if (await fire.login(id, pw)) {
+            if (await Fire.Instance.login(id, pw)) {
                 localStorage.setItem("id", id)
                 localStorage.setItem("pw", pw)
                 this.setState({

@@ -10,5 +10,9 @@
     {
         "menuname": "Chat",
         "link": 6
+    },
+    {
+        "menuname": "Setting",
+        "link": 7
     }
 ]

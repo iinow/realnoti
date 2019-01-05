@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
 import { List } from '../component';
 import { Sample } from '../modal/index'
-import { fire } from '../util/Firebase'
+import { Fire } from '../util/Firebase'
 const electron = require('electron')
 // electron.screen.getPrimaryDisplay()
 // electron.screen.getAllDisplays()
@@ -16,7 +16,7 @@ class RestApi extends Component {
 
     componentDidMount = async () => {
         console.log(this.props.history.location.pathname)
-        let list = await fire.get_ApiItemModel()
+        let list = await Fire.Instance.get_ApiItemModel()
         this.setState({
             item: list
         })

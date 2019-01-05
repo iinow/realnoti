@@ -7,3 +7,5 @@
         "emitDecoratorMetadata": true
     }
 }
+
+//"lib":["es2015"]

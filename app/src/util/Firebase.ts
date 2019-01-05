@@ -18,60 +18,8 @@ const settings = { timestampsInSnapshots: true }
 const jsonConvert: JsonConvert = new JsonConvert()
 let User: Model.UserModel = undefined
 
-export const fire = {
-    init: () => {
-        if (!firebase.apps.length) {
-            firebaseApp = firebase.initializeApp(config)
-            db = firebaseApp.firestore()
-            db.settings(settings)
-        }
-        // db = firebase.database()
-    },
-    reg: (user: Model.UserModel) => {
-        db.collection('users').doc(user.id).set(jsonConvert.serializeObject(user))
-    },
-    login: async (id: string, pw: string) => {
-        const user = await db.collection('users').doc(id).get()
-        if (user && user.data().password == pw) {
-            console.log(user.data())
-            User = jsonConvert.deserializeObject(user.data(), Model.UserModel)
-            return true
-        }
-        else {
-            console.log(`데이터 없음`)
-            return false
-        }
-        // if(user == null && user.data())
-    },
-    //title: string, content: string, addr: string
-    insert_RestApi_Item: async (item: Model.ApiItemModel) => {
-        if (User) {
-            await db.collection('restapi').doc(User.id).collection(User.id).doc().set(jsonConvert.serializeObject(item))
-            return true
-        } else {
-            return false
-        }
-    },
-    get_ApiItemModel: async () => {
-        let list = await db.collection('restapi').doc(localStorage.getItem('id')).collection(localStorage.getItem('id')).get()
-        if(list){
-            let array = new Array<Model.ApiItemModel>()
-            list.docs.forEach(item=>{
-                array.push(jsonConvert.deserializeObject(item.data(), Model.ApiItemModel))
-                console.log(item.data())
-            })
-            return array
-        }
-        return null
-    }
-}
-
-const test = () => {
-    
-}
-
-class Fire implements Api{
-    private static instance: Fire
+export class Fire implements Api {
+    private static _instance: Fire
 
     private constructor() {
         if (!firebase.apps.length) {
@@ -82,30 +30,59 @@ class Fire implements Api{
     }
 
     public static get Instance(): Fire {
-        return this.instance || (this.instance = new Fire())
+        return this._instance || (this._instance = new Fire())
     }
 
-    reg(user: Model.UserModel): boolean {
+    public reg(user: Model.UserModel): boolean {
         db.collection('users').doc(user.id).set(jsonConvert.serializeObject(user))
         return true
     }
 
-    login(id: string, pw: string): boolean{
-        return true
+    public async login(id: string, pw: string) {
+        const user = await db.collection('users').doc(id).get()
+        if (user && user.data().password == pw) {
+            console.log(user.data())
+            User = jsonConvert.deserializeObject(user.data(), Model.UserModel)
+            return true
+        }
+        else {
+            console.log(`데이터 없음`)
+            return false
+        }
     }
 
-    insert_RestApi_Item(title: string, content: string, addr: string): boolean {
-        return true
+    public async insert_RestApi_Item(item: Model.ApiItemModel) {
+        if (User) {
+            await db.collection('restapi').doc(User.id).collection(User.id).doc().set(jsonConvert.serializeObject(item))
+            return true
+        } else {
+            return false
+        }
     }
 
-    get_ApiItemModel(): Array<Model.ApiItemModel> {
+    public async get_ApiItemModel() {
+        let list = await db.collection('restapi').doc(localStorage.getItem('id')).collection(localStorage.getItem('id')).get()
+        if (list) {
+            let array = new Array<Model.ApiItemModel>()
+            list.docs.forEach(item => {
+                array.push(jsonConvert.deserializeObject(item.data(), Model.ApiItemModel))
+            })
+            return array
+        }
         return null
+    }
+
+    public get_Item() {
+    }
+
+    public get realDB(): firebase.database.Database{
+        return firebase.database()
     }
 }
 
 interface Api {
     reg(user: Model.UserModel): boolean
-    login(id: string, pw: string): boolean
-    insert_RestApi_Item(title: string, content: string, addr: string): boolean
-    get_ApiItemModel(): Array<Model.ApiItemModel>
+    login(id: string, pw: string): Promise<boolean>
+    insert_RestApi_Item(item: Model.ApiItemModel): Promise<boolean>
+    get_ApiItemModel(): Promise<Array<Model.ApiItemModel>>
 }

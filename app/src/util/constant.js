@@ -5,7 +5,8 @@ export const URL_HOME = '/home'
 export const URL_LOGIN = '/'
 export const URL_HOME_RESTAPI = '/restapi'
 export const URL_HOME_AVVIEW = '/avview'
-const URL_HOME_CHAT = '/chat'
+export const URL_HOME_CHAT = '/chat'
+export const URL_HOME_SET = '/setting'
 
 export const URL = {
     find: (num) => {
@@ -23,5 +24,6 @@ export const URL = {
     HOME: 3,
     RESTAPI: 4,
     AVVIEW: 5,
-    CHAT: 6
+    CHAT: 6,
+    SETTING: 7
 }

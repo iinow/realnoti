@@ -12,12 +12,21 @@ let mainWindow
 
 function createWindow() {
     // Create the browser window.
-    win = new BrowserWindow({ width: 1024, height: 768 })
-    
+    win = new BrowserWindow({
+        width: 1024,
+        height: 728,
+        minWidth: 600, // set a min width!
+        minHeight: 300, // and a min height!
+        // Remove the window frame from windows applications
+        frame: false,
+        // Hide the titlebar from MacOS applications while keeping the stop lights
+        titleBarStyle: 'hidden', // or 'customButtonsOnHover',
+    })
+
     // and load the index.html of the app.
-    win.loadURL('file://'+__dirname+'/app/index.html')
-    console.log('file://'+__dirname+'/app/index.html')
-    
+    win.loadURL('file://' + __dirname + '/app/index.html')
+    console.log('file://' + __dirname + '/app/index.html')
+
     // Open the DevTools.
     // win.webContents.openDevTools()
 
@@ -35,14 +44,14 @@ function createWindow() {
     let myNotification = new Notification('Title', {
         body: 'Lorem Ipsum Dolor Sit Amet'
     })
-      
+
     myNotification.onclick = () => {
-    console.log('Notification clicked')
+        console.log('Notification clicked')
     }
 
     myNotification.show()
 
-    globalShortcut.register('CommandOrControl+X', ()=>{
+    globalShortcut.register('CommandOrControl+X', () => {
         win.webContents.openDevTools()
     })
 }

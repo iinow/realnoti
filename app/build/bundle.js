@@ -106,7 +106,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-_src_util_Firebase__WEBPACK_IMPORTED_MODULE_3__["fire"].init();
+_src_util_Firebase__WEBPACK_IMPORTED_MODULE_3__["Fire"].Instance;
 react_dom__WEBPACK_IMPORTED_MODULE_1___default.a.render(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_src_renderer_Root__WEBPACK_IMPORTED_MODULE_2__["default"], null), document.getElementById('root'));
 
 /***/ }),
@@ -597,10 +597,10 @@ exports.AvCraw = AvCraw;
 /*!************************************!*\
   !*** ./app/src/data/MenuItem.json ***!
   \************************************/
-/*! exports provided: 0, 1, 2, default */
+/*! exports provided: 0, 1, 2, 3, default */
 /***/ (function(module) {
 
-module.exports = [{"menuname":"Rest API","link":4},{"menuname":"Anime View","link":5},{"menuname":"Chat","link":6}];
+module.exports = [{"menuname":"Rest API","link":4},{"menuname":"Anime View","link":5},{"menuname":"Chat","link":6},{"menuname":"Setting","link":7}];
 
 /***/ }),
 
@@ -842,14 +842,14 @@ class Sample extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
       item.addr = this.state.addr;
       item.content = this.state.content;
       item.title = this.state.title;
-      let res = _util_Firebase__WEBPACK_IMPORTED_MODULE_3__["fire"].insert_RestApi_Item(item);
+      let res = _util_Firebase__WEBPACK_IMPORTED_MODULE_3__["Fire"].Instance.insert_RestApi_Item(item);
       console.log(`성공 여부 : ${res}`);
       console.log(res);
       this.handleCloseModal();
     });
 
     _defineProperty(this, "handleGetItemOnClick", async () => {
-      let res = await _util_Firebase__WEBPACK_IMPORTED_MODULE_3__["fire"].get_ApiItemModel(); // res.docs.forEach((data, index)=>{
+      let res = await _util_Firebase__WEBPACK_IMPORTED_MODULE_3__["Fire"].Instance.get_ApiItemModel(); // res.docs.forEach((data, index)=>{
       //     console.log(`${index}번재 ${data.data()}`)
       // })
 
@@ -1137,6 +1137,51 @@ exports.ApiItemModel = ApiItemModel_1.ApiItemModel;
 
 /***/ }),
 
+/***/ "./app/src/notification/Noti.ts":
+/*!**************************************!*\
+  !*** ./app/src/notification/Noti.ts ***!
+  \**************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var electron = __webpack_require__(/*! electron */ "electron");
+
+var notifier = electron.remote.require('node-notifier');
+
+var Noti =
+/** @class */
+function () {
+  function Noti() {}
+
+  Object.defineProperty(Noti, "instance", {
+    get: function () {
+      return this._instance || (this._instance = new Noti());
+    },
+    enumerable: true,
+    configurable: true
+  });
+
+  Noti.prototype.noti = function () {
+    notifier.notify({
+      title: "Title!!",
+      message: "Hello, There!!"
+    });
+  };
+
+  return Noti;
+}();
+
+exports.Noti = Noti;
+
+/***/ }),
+
 /***/ "./app/src/pages/AVView.jsx":
 /*!**********************************!*\
   !*** ./app/src/pages/AVView.jsx ***!
@@ -1159,6 +1204,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _util_ApiService__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(_util_ApiService__WEBPACK_IMPORTED_MODULE_6__);
 /* harmony import */ var _crawler_AvCraw__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../crawler/AvCraw */ "./app/src/crawler/AvCraw.ts");
 /* harmony import */ var _crawler_AvCraw__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(_crawler_AvCraw__WEBPACK_IMPORTED_MODULE_7__);
+/* harmony import */ var _notification_Noti__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../notification/Noti */ "./app/src/notification/Noti.ts");
+/* harmony import */ var _notification_Noti__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(_notification_Noti__WEBPACK_IMPORTED_MODULE_8__);
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 
@@ -1174,8 +1221,9 @@ const electron = __webpack_require__(/*! electron */ "electron");
 
 const remote = electron.remote; // import * as noti from 'node-notifier'
 
-let noti = window.require('node-notifier'); // const { BrowserWindow } = require('electron').remote
+let noti = window.require('node-notifier');
 
+ // const { BrowserWindow } = require('electron').remote
 
 class AVView extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
   constructor(...args) {
@@ -1186,10 +1234,10 @@ class AVView extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
     });
 
     _defineProperty(this, "handleTestOnClick", () => {
-      noti.notify({
-        title: "Title!!",
-        message: "Hello, There!!"
-      });
+      _notification_Noti__WEBPACK_IMPORTED_MODULE_8__["Noti"].instance.noti(); // noti.notify({
+      //     title: "Title!!",
+      //     message: "Hello, There!!"
+      // })
     });
   }
 
@@ -1221,6 +1269,84 @@ class AVView extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
 
 AVView.propTypes = {};
 /* harmony default export */ __webpack_exports__["default"] = (Object(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["withRouter"])(AVView));
+
+/***/ }),
+
+/***/ "./app/src/pages/Chat.jsx":
+/*!********************************!*\
+  !*** ./app/src/pages/Chat.jsx ***!
+  \********************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _util_Firebase__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../util/Firebase */ "./app/src/util/Firebase.ts");
+/* harmony import */ var _util_Firebase__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_util_Firebase__WEBPACK_IMPORTED_MODULE_2__);
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+
+
+
+
+class Chat extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
+  constructor(...args) {
+    super(...args);
+
+    _defineProperty(this, "state", {
+      msg: ''
+    });
+
+    _defineProperty(this, "handleNewChatOnClick", () => {
+      let rooms = _util_Firebase__WEBPACK_IMPORTED_MODULE_2__["Fire"].Instance.realDB.ref('chatrooms').push();
+      rooms.update({
+        msg: "Hi Hello world"
+      });
+      rooms.key;
+    });
+
+    _defineProperty(this, "handleChatOnSubmit", () => {});
+
+    _defineProperty(this, "handleSendMessageOnClick", () => {// Fire.Instance.realDB.ref().once()
+    });
+
+    _defineProperty(this, "handleMessageOnChange", e => {
+      this.setState({
+        msg: e.target.value
+      });
+    });
+  }
+
+  render() {
+    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      style: {
+        float: 'left'
+      }
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+      onChange: this.handleMessageOnChange
+    }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+      className: "button",
+      style: {
+        marginLeft: '5px'
+      },
+      onClick: this.handleSendMessageOnClick
+    }, "\uC804\uC1A1"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+      className: "button",
+      style: {
+        marginLeft: '5px'
+      },
+      onClick: this.handleNewChatOnClick
+    }, "\uCC44\uD305\uBC29 \uC0C8\uB85C")));
+  }
+
+}
+
+Chat.propTypes = {};
+/* harmony default export */ __webpack_exports__["default"] = (Chat);
 
 /***/ }),
 
@@ -1321,6 +1447,10 @@ class Home extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
       exact: true,
       path: `${this.props.match.url}${_util_constant__WEBPACK_IMPORTED_MODULE_3__["URL_HOME_AVVIEW"]}`,
       component: _index__WEBPACK_IMPORTED_MODULE_4__["AVView"]
+    }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_5__["Route"], {
+      exact: true,
+      path: `${this.props.match.url}${_util_constant__WEBPACK_IMPORTED_MODULE_3__["URL_HOME_CHAT"]}`,
+      component: _index__WEBPACK_IMPORTED_MODULE_4__["Chat"]
     })));
   }
 
@@ -1395,8 +1525,8 @@ class Login extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
 
     _defineProperty(this, "componentDidMount", () => {
       document.body.style.backgroundColor = BodyBackgroundColor;
-      document.body.style.height = '100vh';
-      document.body.style.paddingTop = '60px'; // document.body.style.width = '100vh'
+      document.body.style.height = '100vh'; // document.body.style.paddingTop = '60px'
+      // document.body.style.width = '100vh'
 
       const id = localStorage.getItem("id");
       const pw = localStorage.getItem("pw");
@@ -1449,7 +1579,7 @@ class Login extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
         // this.etxId.focus()
         alert(`id, pw 입력 바람`);
       } else {
-        if (await _util_Firebase__WEBPACK_IMPORTED_MODULE_4__["fire"].login(id, pw)) {
+        if (await _util_Firebase__WEBPACK_IMPORTED_MODULE_4__["Fire"].Instance.login(id, pw)) {
           localStorage.setItem("id", id);
           localStorage.setItem("pw", pw);
           this.setState({
@@ -1571,8 +1701,7 @@ class Register extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
     _defineProperty(this, "componentDidMount", () => {
       document.body.style.backgroundColor = BodyBackgroundColor;
       document.body.style.height = '100vh'; // document.body.style.width = '100vh'
-
-      document.body.style.paddingTop = '60px';
+      // document.body.style.paddingTop ='60px'
     });
 
     _defineProperty(this, "componentWillUnmount", () => {
@@ -1591,7 +1720,7 @@ class Register extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
       user.pw = this.state.pw;
       user.email = this.state.email;
       user.message = this.state.message;
-      _util_Firebase__WEBPACK_IMPORTED_MODULE_3__["fire"].reg(user);
+      _util_Firebase__WEBPACK_IMPORTED_MODULE_3__["Fire"].Instance.reg(user);
       this.props.history.push(_util_constant__WEBPACK_IMPORTED_MODULE_2__["URL_LOGIN"]);
       alert(`가입성공`);
     });
@@ -1756,7 +1885,7 @@ class RestApi extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
 
     _defineProperty(this, "componentDidMount", async () => {
       console.log(this.props.history.location.pathname);
-      let list = await _util_Firebase__WEBPACK_IMPORTED_MODULE_5__["fire"].get_ApiItemModel();
+      let list = await _util_Firebase__WEBPACK_IMPORTED_MODULE_5__["Fire"].Instance.get_ApiItemModel();
       this.setState({
         item: list
       });
@@ -1797,7 +1926,7 @@ RestApi.propTypes = {};
 /*!********************************!*\
   !*** ./app/src/pages/index.js ***!
   \********************************/
-/*! exports provided: Login, Home, Register, RestApi, AVView */
+/*! exports provided: Login, Home, Register, RestApi, AVView, Chat */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1816,6 +1945,10 @@ __webpack_require__.r(__webpack_exports__);
 
 /* harmony import */ var _AVView__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./AVView */ "./app/src/pages/AVView.jsx");
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "AVView", function() { return _AVView__WEBPACK_IMPORTED_MODULE_4__["default"]; });
+
+/* harmony import */ var _Chat__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./Chat */ "./app/src/pages/Chat.jsx");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Chat", function() { return _Chat__WEBPACK_IMPORTED_MODULE_5__["default"]; });
+
 
 
 
@@ -1841,6 +1974,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
 /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_3__);
 /* harmony import */ var _util_constant__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../util/constant */ "./app/src/util/constant.js");
+/* harmony import */ var frameless_titlebar__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! frameless-titlebar */ "./node_modules/frameless-titlebar/dist/index.es.js");
+/* harmony import */ var _titlebar_menu__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../titlebar/menu */ "./app/src/titlebar/menu.js");
+
+
 
 
 
@@ -1850,11 +1987,23 @@ __webpack_require__.r(__webpack_exports__);
 // import {slackTemplate} from './title'
 
 const App = () => //    document.body.style.overflow='hidden'
-react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
   style: {
-    overflow: 'hidden'
+    height: "30px"
   }
-}, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
+}, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(frameless_titlebar__WEBPACK_IMPORTED_MODULE_5__["default"] // icon={signalIcon}
+, {
+  app: "Signal",
+  menu: _titlebar_menu__WEBPACK_IMPORTED_MODULE_6__["defaultTemplate"],
+  theme: {
+    barTheme: 'dark',
+    barBackgroundColor: '#2090ea',
+    menuHighlightColor: '#2090ea',
+    barShowBorder: true,
+    barBorderBottom: '1px solid #1a70b7',
+    menuDimItems: false
+  }
+})), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
   exact: true,
   path: _util_constant__WEBPACK_IMPORTED_MODULE_4__["URL_LOGIN"],
   component: _pages_index__WEBPACK_IMPORTED_MODULE_2__["Login"]
@@ -1943,6 +2092,170 @@ const Person = {
   isStudent: () => undefined.age > 10
 };
 /* harmony default export */ __webpack_exports__["default"] = (Test);
+
+/***/ }),
+
+/***/ "./app/src/titlebar/menu.js":
+/*!**********************************!*\
+  !*** ./app/src/titlebar/menu.js ***!
+  \**********************************/
+/*! exports provided: defaultTemplate */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "defaultTemplate", function() { return defaultTemplate; });
+const defaultTemplate = [{
+  id: '1',
+  label: 'App',
+  submenu: [{
+    id: '1',
+    label: 'Disabled',
+    enabled: false,
+    after: '2'
+  }, {
+    id: '2',
+    label: 'Sub Menu',
+    // icon: 'https://www.gstatic.com/images/branding/product/1x/keep_48dp.png',
+    submenu: [{
+      label: 'Color Submenu',
+      submenu: [{
+        label: 'Light',
+        type: 'radio',
+        checked: false,
+        click: (item, win, e) => {
+          document.querySelector('html').style.background = 'rgb(240,240,240)';
+        }
+      }, {
+        label: 'Dark',
+        type: 'radio',
+        checked: true,
+        click: (item, win, e) => {
+          document.querySelector('html').style.background = 'rgb(64,64,64)';
+        }
+      }, {
+        label: 'Black',
+        type: 'radio',
+        checked: false,
+        click: (item, win, e) => {
+          document.querySelector('html').style.background = 'rgb(0,0,0)';
+        }
+      }]
+    }, {
+      label: 'Random 2' // icon: require('../assets/images/icon.png')
+
+    }, {
+      label: 'Random 3',
+      submenu: [{
+        label: 'Random 4',
+        submenu: [{
+          label: 'Random 7'
+        }, {
+          label: 'Random 8'
+        }, {
+          label: 'Random 9'
+        }, {
+          label: 'Random 10'
+        }]
+      }, {
+        label: 'Random 5'
+      }, {
+        label: 'Random 6'
+      }]
+    }]
+  }, {
+    id: '4',
+    label: 'Not visible',
+    visible: false
+  }, {
+    id: '3',
+    // icon: require('../assets/images/icon.png'),
+    label: 'Arguments',
+    click: (item, win, e) => {
+      console.log(item, win, e);
+    }
+  }, {
+    id: '5',
+    label: 'Really Long Menu Label that should be truncated'
+  }, {
+    type: 'separator'
+  }, {
+    label: 'Test Accelerator',
+    accelerator: 'CommandOrControl+Y',
+    click: (item, win, e) => {
+      ipcRenderer.send('Test');
+    }
+  }, {
+    label: 'Open Dev Tools',
+    click: (item, win, e) => {
+      win.openDevTools();
+    }
+  }, {
+    label: 'Resizable',
+    type: 'checkbox',
+    checked: true,
+    click: (item, win, e) => {
+      win.setResizable(item.checked);
+    }
+  }, {
+    label: 'Unchecked',
+    type: 'checkbox',
+    checked: false,
+    click: (item, win, e) => {
+      win.setResizable(item.checked);
+    }
+  }, {
+    label: 'Quit',
+    click: () => {
+      window.close();
+    }
+  }]
+}, {
+  id: '2',
+  label: 'Color',
+  before: '1',
+  submenu: [{
+    label: 'Light',
+    type: 'radio',
+    checked: false,
+    click: (item, win, e) => {
+      document.querySelector('html').style.background = 'rgb(240,240,240)';
+    }
+  }, {
+    label: 'Dark',
+    type: 'radio',
+    checked: true,
+    click: (item, win, e) => {
+      document.querySelector('html').style.background = 'rgb(64,64,64)';
+    }
+  }, {
+    label: 'Black',
+    type: 'radio',
+    checked: false,
+    click: (item, win, e) => {
+      document.querySelector('html').style.background = 'rgb(0,0,0)';
+    }
+  }]
+}, {
+  label: 'Disabled',
+  enabled: false,
+  submenu: [{
+    label: 'Light',
+    type: 'radio',
+    checked: false,
+    click: (item, win, e) => {
+      document.querySelector('html').style.background = 'rgb(240,240,240)';
+    }
+  }]
+}, {
+  label: 'Help',
+  submenu: [{
+    label: 'Homepage',
+    click: () => {
+      openExternal('https://github.com/Cristian006/frameless-titlebar');
+    }
+  }]
+}];
 
 /***/ }),
 
@@ -2120,8 +2433,6 @@ var __generator = this && this.__generator || function (thisArg, body) {
   }
 };
 
-var _this = this;
-
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
@@ -2147,20 +2458,33 @@ var settings = {
 };
 var jsonConvert = new json2typescript_1.JsonConvert();
 var User = undefined;
-exports.fire = {
-  init: function () {
+
+var Fire =
+/** @class */
+function () {
+  function Fire() {
     if (!firebase.apps.length) {
       firebaseApp = firebase.initializeApp(config);
       db = firebaseApp.firestore();
       db.settings(settings);
-    } // db = firebase.database()
+    }
+  }
 
-  },
-  reg: function (user) {
+  Object.defineProperty(Fire, "Instance", {
+    get: function () {
+      return this._instance || (this._instance = new Fire());
+    },
+    enumerable: true,
+    configurable: true
+  });
+
+  Fire.prototype.reg = function (user) {
     db.collection('users').doc(user.id).set(jsonConvert.serializeObject(user));
-  },
-  login: function (id, pw) {
-    return __awaiter(_this, void 0, void 0, function () {
+    return true;
+  };
+
+  Fire.prototype.login = function (id, pw) {
+    return __awaiter(this, void 0, void 0, function () {
       var user;
       return __generator(this, function (_a) {
         switch (_a.label) {
@@ -2191,10 +2515,10 @@ exports.fire = {
         }
       });
     });
-  },
-  //title: string, content: string, addr: string
-  insert_RestApi_Item: function (item) {
-    return __awaiter(_this, void 0, void 0, function () {
+  };
+
+  Fire.prototype.insert_RestApi_Item = function (item) {
+    return __awaiter(this, void 0, void 0, function () {
       return __generator(this, function (_a) {
         switch (_a.label) {
           case 0:
@@ -2219,9 +2543,10 @@ exports.fire = {
         }
       });
     });
-  },
-  get_ApiItemModel: function () {
-    return __awaiter(_this, void 0, void 0, function () {
+  };
+
+  Fire.prototype.get_ApiItemModel = function () {
+    return __awaiter(this, void 0, void 0, function () {
       var list, array_1;
       return __generator(this, function (_a) {
         switch (_a.label) {
@@ -2237,7 +2562,6 @@ exports.fire = {
               array_1 = new Array();
               list.docs.forEach(function (item) {
                 array_1.push(jsonConvert.deserializeObject(item.data(), Model.ApiItemModel));
-                console.log(item.data());
               });
               return [2
               /*return*/
@@ -2250,49 +2574,21 @@ exports.fire = {
         }
       });
     });
-  }
-};
+  };
 
-var test = function () {};
+  Fire.prototype.get_Item = function () {};
 
-var Fire =
-/** @class */
-function () {
-  function Fire() {
-    if (!firebase.apps.length) {
-      firebaseApp = firebase.initializeApp(config);
-      db = firebaseApp.firestore();
-      db.settings(settings);
-    }
-  }
-
-  Object.defineProperty(Fire, "Instance", {
+  Object.defineProperty(Fire.prototype, "realDB", {
     get: function () {
-      return this.instance || (this.instance = new Fire());
+      return firebase.database();
     },
     enumerable: true,
     configurable: true
   });
-
-  Fire.prototype.reg = function (user) {
-    db.collection('users').doc(user.id).set(jsonConvert.serializeObject(user));
-    return true;
-  };
-
-  Fire.prototype.login = function (id, pw) {
-    return true;
-  };
-
-  Fire.prototype.insert_RestApi_Item = function (title, content, addr) {
-    return true;
-  };
-
-  Fire.prototype.get_ApiItemModel = function () {
-    return null;
-  };
-
   return Fire;
 }();
+
+exports.Fire = Fire;
 
 /***/ }),
 
@@ -2300,7 +2596,7 @@ function () {
 /*!**********************************!*\
   !*** ./app/src/util/constant.js ***!
   \**********************************/
-/*! exports provided: URL_REG, URL_HOME, URL_LOGIN, URL_HOME_RESTAPI, URL_HOME_AVVIEW, URL */
+/*! exports provided: URL_REG, URL_HOME, URL_LOGIN, URL_HOME_RESTAPI, URL_HOME_AVVIEW, URL_HOME_CHAT, URL_HOME_SET, URL */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -2310,6 +2606,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "URL_LOGIN", function() { return URL_LOGIN; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "URL_HOME_RESTAPI", function() { return URL_HOME_RESTAPI; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "URL_HOME_AVVIEW", function() { return URL_HOME_AVVIEW; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "URL_HOME_CHAT", function() { return URL_HOME_CHAT; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "URL_HOME_SET", function() { return URL_HOME_SET; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "URL", function() { return URL; });
 /* harmony import */ var _renderer_Test__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../renderer/Test */ "./app/src/renderer/Test.jsx");
 
@@ -2319,6 +2617,7 @@ const URL_LOGIN = '/';
 const URL_HOME_RESTAPI = '/restapi';
 const URL_HOME_AVVIEW = '/avview';
 const URL_HOME_CHAT = '/chat';
+const URL_HOME_SET = '/setting';
 const URL = {
   find: num => {
     switch (num) {
@@ -2346,7 +2645,8 @@ const URL = {
   HOME: 3,
   RESTAPI: 4,
   AVVIEW: 5,
-  CHAT: 6
+  CHAT: 6,
+  SETTING: 7
 };
 
 /***/ }),
@@ -41767,6 +42067,1923 @@ module.exports = firebase;
 
 /***/ }),
 
+/***/ "./node_modules/frameless-titlebar/dist/index.es.js":
+/*!**********************************************************!*\
+  !*** ./node_modules/frameless-titlebar/dist/index.es.js ***!
+  \**********************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var electron__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! electron */ "electron");
+/* harmony import */ var electron__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(electron__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var lodash_isequal__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! lodash.isequal */ "./node_modules/lodash.isequal/index.js");
+/* harmony import */ var lodash_isequal__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(lodash_isequal__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var os__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! os */ "os");
+/* harmony import */ var os__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(os__WEBPACK_IMPORTED_MODULE_4__);
+
+
+
+
+
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) {
+  return typeof obj;
+} : function (obj) {
+  return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
+};
+
+var classCallCheck = function (instance, Constructor) {
+  if (!(instance instanceof Constructor)) {
+    throw new TypeError("Cannot call a class as a function");
+  }
+};
+
+var createClass = function () {
+  function defineProperties(target, props) {
+    for (var i = 0; i < props.length; i++) {
+      var descriptor = props[i];
+      descriptor.enumerable = descriptor.enumerable || false;
+      descriptor.configurable = true;
+      if ("value" in descriptor) descriptor.writable = true;
+      Object.defineProperty(target, descriptor.key, descriptor);
+    }
+  }
+
+  return function (Constructor, protoProps, staticProps) {
+    if (protoProps) defineProperties(Constructor.prototype, protoProps);
+    if (staticProps) defineProperties(Constructor, staticProps);
+    return Constructor;
+  };
+}();
+
+var defineProperty = function (obj, key, value) {
+  if (key in obj) {
+    Object.defineProperty(obj, key, {
+      value: value,
+      enumerable: true,
+      configurable: true,
+      writable: true
+    });
+  } else {
+    obj[key] = value;
+  }
+
+  return obj;
+};
+
+var _extends = Object.assign || function (target) {
+  for (var i = 1; i < arguments.length; i++) {
+    var source = arguments[i];
+
+    for (var key in source) {
+      if (Object.prototype.hasOwnProperty.call(source, key)) {
+        target[key] = source[key];
+      }
+    }
+  }
+
+  return target;
+};
+
+var inherits = function (subClass, superClass) {
+  if (typeof superClass !== "function" && superClass !== null) {
+    throw new TypeError("Super expression must either be null or a function, not " + typeof superClass);
+  }
+
+  subClass.prototype = Object.create(superClass && superClass.prototype, {
+    constructor: {
+      value: subClass,
+      enumerable: false,
+      writable: true,
+      configurable: true
+    }
+  });
+  if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;
+};
+
+var possibleConstructorReturn = function (self, call) {
+  if (!self) {
+    throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
+  }
+
+  return call && (typeof call === "object" || typeof call === "function") ? call : self;
+};
+
+var toArray = function (arr) {
+  return Array.isArray(arr) ? arr : Array.from(arr);
+};
+
+var toConsumableArray = function (arr) {
+  if (Array.isArray(arr)) {
+    for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) arr2[i] = arr[i];
+
+    return arr2;
+  } else {
+    return Array.from(arr);
+  }
+};
+
+var darkTheme = {
+  /* Title */
+  barTheme: 'dark',
+  // light, dark
+  barHeight: '22px',
+  // Change this value if you set 'titleBarStyle' to 'hiddenInset'
+  winBarHeight: '28px',
+  barColor: '#fff',
+  barTitleColor: 'inherit',
+  barBackgroundColor: '#24292e',
+  barShowBorder: false,
+  titleFontFamily: 'inherit',
+  titleFontWeight: 'normal',
+  barBorderBottom: '1px solid #000',
+  // should the icon be shown in the center of the toolbar on Mac/Linux apps alongside the app or title property
+  showIconDarLin: true,
+
+  /* Menu */
+  menuStyle: 'horizontal',
+  // horizontal, vertical
+  menuDimItems: true,
+  menuDimOpacity: 0.6,
+  menuDisabledOpacity: 0.3,
+  menuWidth: 240,
+  menuBackgroundColor: '#fff',
+  menuItemTextColor: '#fff',
+  menuItemHoverBackground: 'rgba(255,255,255,0.3)',
+  menuActiveTextColor: '#24292e',
+  menuTextHighlightColor: '#fff',
+  menuHighlightColor: '#0372ef',
+  accentStatusIcon: true,
+  menuSubLabelHeaders: true,
+  menuSubLabelColor: '#6a737d',
+  menuAcceleratorColor: '#6a737d',
+  menuShowBoxShadow: true,
+  menuBoxShadow: '0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24)',
+
+  /* Menu Overlay */
+  menuOverlayBackground: 'black',
+  menuOverlayOpacity: 0.4,
+  menuSeparatorColor: '#e1e4e8',
+
+  /* WindowControls */
+  windowControlsColor: '#fff',
+  windowCloseHover: '#fff',
+  windowCloseBackground: '#e81123',
+  windowCloseActive: '#bf0f1d',
+  windowDefaultBackground: 'rgba(255,255,255,0.3)',
+  windowDefaultActive: 'rgba(255,255,255,0.2)'
+};
+
+var lightTheme = _extends({}, darkTheme, {
+  /* Title */
+  barTheme: 'light',
+  barColor: '#24292e',
+  barBackgroundColor: '#e8e8e8',
+  barBorderBottom: '1px solid #d3d4d5',
+
+  /* Menu */
+  menuItemTextColor: '#24292e',
+  menuItemHoverBackground: 'rgba(0, 0, 0, 0.1)',
+
+  /* WindowControls */
+  windowControlsColor: '#000',
+  windowDefaultBackground: 'rgba(0, 0, 0, 0.1)',
+  windowDefaultActive: 'rgba(0, 0, 0, 0.2)'
+});
+
+var ThemeContext = react__WEBPACK_IMPORTED_MODULE_0___default.a.createContext(darkTheme);
+var ThemeConsumer = ThemeContext.Consumer;
+var ThemeProvider = ThemeContext.Provider;
+
+function styleInject(css, ref) {
+  if (ref === void 0) ref = {};
+  var insertAt = ref.insertAt;
+
+  if (!css || typeof document === 'undefined') {
+    return;
+  }
+
+  var head = document.head || document.getElementsByTagName('head')[0];
+  var style = document.createElement('style');
+  style.type = 'text/css';
+
+  if (insertAt === 'top') {
+    if (head.firstChild) {
+      head.insertBefore(style, head.firstChild);
+    } else {
+      head.appendChild(style);
+    }
+  } else {
+    head.appendChild(style);
+  }
+
+  if (style.styleSheet) {
+    style.styleSheet.cssText = css;
+  } else {
+    style.appendChild(document.createTextNode(css));
+  }
+}
+
+var css = ".styles_MenuButton__1URAL svg {\n  fill: currentColor;\n  width: 20px;\n  height: 20px;\n}\n\n.styles_MenuButton__1URAL:focus:not(.styles_focus-ring__Ie2g4) {\n  outline: none;\n}\n";
+var css$1 = {
+  "MenuButton": "styles_MenuButton__1URAL",
+  "focus-ring": "styles_focus-ring__Ie2g4"
+};
+styleInject(css);
+var styles = {
+  Wrapper: {
+    minWidth: 0
+  },
+  ButtonWrapper: {
+    width: '100%',
+    height: '100%'
+  },
+  Button: {
+    WebkitAppearance: 'none',
+    border: 'none',
+    boxShadow: 'none',
+    background: 'transparent',
+    borderRadius: 0,
+    textAlign: 'left',
+    margin: 0,
+    padding: 0,
+    height: '100%',
+    width: '100%',
+    fontSize: 12,
+    paddingLeft: 10,
+    paddingRight: 10
+  }
+};
+
+var MenuButton = function (_Component) {
+  inherits(MenuButton, _Component);
+
+  function MenuButton() {
+    classCallCheck(this, MenuButton);
+    return possibleConstructorReturn(this, (MenuButton.__proto__ || Object.getPrototypeOf(MenuButton)).apply(this, arguments));
+  }
+
+  createClass(MenuButton, [{
+    key: 'render',
+    value: function render() {
+      var _props = this.props,
+          onMouseEnter = _props.onMouseEnter,
+          onMouseLeave = _props.onMouseLeave,
+          onMouseOver = _props.onMouseOver,
+          onMouseMove = _props.onMouseMove,
+          onTouchStart = _props.onTouchStart,
+          onFocus = _props.onFocus,
+          onClick = _props.onClick,
+          label = _props.label,
+          open = _props.open,
+          enabled = _props.enabled,
+          hovering = _props.hovering,
+          rectRef = _props.rectRef;
+      var theme = this.context;
+      var backgroundColor = open ? theme.menuBackgroundColor : hovering && enabled ? theme.menuItemHoverBackground : 'transparent';
+      var borderColor = open ? theme.menuBackgroundColor : '';
+      var color = open ? theme.menuActiveTextColor : theme.menuItemTextColor;
+      var opacity = enabled ? open || hovering || !theme.menuDimItems ? 1 : theme.menuDimOpacity : theme.menuDisabledOpacity;
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement('div', {
+        style: styles.Wrapper,
+        onMouseEnter: onMouseEnter,
+        onMouseLeave: onMouseLeave,
+        onMouseOver: onMouseOver,
+        onMouseMove: onMouseMove,
+        onTouchStart: onTouchStart,
+        onFocus: onFocus,
+        onClick: onClick,
+        ref: rectRef
+      }, this.props.children, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement('div', {
+        style: styles.ButtonWrapper
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement('button', {
+        className: css$1.MenuButton,
+        style: _extends({}, styles.Button, {
+          backgroundColor: backgroundColor,
+          borderColor: borderColor,
+          color: color
+        }),
+        tabIndex: '-1'
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement('div', {
+        style: {
+          opacity: opacity
+        }
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement('span', {
+        'aria-hidden': 'true'
+      }, label)))));
+    }
+  }]);
+  return MenuButton;
+}(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
+
+MenuButton.propTypes = {
+  children: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.node,
+  enabled: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.bool,
+  label: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.oneOfType([prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.string, prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.node]).isRequired,
+  open: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.bool,
+  closed: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.bool,
+  hovering: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.bool,
+  onMouseEnter: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.func,
+  onMouseLeave: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.func,
+  onMouseOver: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.func,
+  onMouseMove: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.func,
+  onTouchStart: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.func,
+  onFocus: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.func,
+  onClick: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.func,
+  rectRef: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.func
+};
+MenuButton.contextType = ThemeContext;
+MenuButton.defaultProps = {
+  open: false,
+  closed: false,
+  hovering: false,
+  enabled: true,
+  onMouseEnter: function onMouseEnter() {},
+  onMouseLeave: function onMouseLeave() {},
+  onMouseOver: function onMouseOver() {},
+  onMouseMove: function onMouseMove() {},
+  onTouchStart: function onTouchStart() {},
+  onFocus: function onFocus() {},
+  onClick: function onClick() {},
+  rectRef: function rectRef() {}
+};
+var css$2 = ".styles_StatusIcon__36XEE {\n  width: 12px;\n  height: 12px;\n  flex-shrink: 0;\n}\n\n.styles_StatusIcon__36XEE svg {\n  width: 100%;\n  height: 100%;\n  fill: currentColor;\n}\n\n.styles_SubMenuArrow__1fsxq {\n  flex-shrink: 0;\n  opacity: 0.7;\n  height: 24px;\n  color: inherit;\n}\n\n.styles_SubMenuArrow__1fsxq svg {\n  fill: currentColor;\n}";
+var css$3 = {
+  "StatusIcon": "styles_StatusIcon__36XEE",
+  "SubMenuArrow": "styles_SubMenuArrow__1fsxq"
+};
+styleInject(css$2);
+var checked = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement('svg', {
+  width: '1792',
+  height: '1792',
+  viewBox: '0 0 1792 1792',
+  xmlns: 'http://www.w3.org/2000/svg'
+}, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement('path', {
+  d: 'M1671 566q0 40-28 68l-724 724-136 136q-28 28-68 28t-68-28l-136-136-362-362q-28-28-28-68t28-68l136-136q28-28 68-28t68 28l294 295 656-657q28-28 68-28t68 28l136 136q28 28 28 68z'
+}));
+var unchecked = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement('span', null);
+var radioUnchecked = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement('svg', {
+  width: '1792',
+  height: '1792',
+  viewBox: '0 0 1792 1792',
+  xmlns: 'http://www.w3.org/2000/svg'
+}, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement('path', {
+  d: 'M896 352q-148 0-273 73t-198 198-73 273 73 273 198 198 273 73 273-73 198-198 73-273-73-273-198-198-273-73zm768 544q0 209-103 385.5t-279.5 279.5-385.5 103-385.5-103-279.5-279.5-103-385.5 103-385.5 279.5-279.5 385.5-103 385.5 103 279.5 279.5 103 385.5z'
+}));
+var radioChecked = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement('svg', {
+  width: '1792',
+  height: '1792',
+  viewBox: '0 0 1792 1792',
+  xmlns: 'http://www.w3.org/2000/svg'
+}, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement('path', {
+  d: 'M1152 896q0 106-75 181t-181 75-181-75-75-181 75-181 181-75 181 75 75 181zm-256-544q-148 0-273 73t-198 198-73 273 73 273 198 198 273 73 273-73 198-198 73-273-73-273-198-198-273-73zm768 544q0 209-103 385.5t-279.5 279.5-385.5 103-385.5-103-279.5-279.5-103-385.5 103-385.5 279.5-279.5 385.5-103 385.5 103 279.5 279.5 103 385.5z'
+}));
+var arrow = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement('svg', {
+  version: '1.1',
+  width: '24px',
+  height: '24px'
+}, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement('g', {
+  id: 'Rounded'
+}, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement('path', {
+  d: 'M9.29,6.71L9.29,6.71c-0.39,0.39-0.39,1.02,0,1.41L13.17,12l-3.88,3.88c-0.39,0.39-0.39,1.02,0,1.41l0,0c0.39,0.39,1.02,0.39,1.41,0l4.59-4.59c0.39-0.39,0.39-1.02,0-1.41l-4.59-4.59C10.32,6.32,9.68,6.32,9.29,6.71z'
+})));
+var styles$1 = {
+  Wrapper: {
+    position: 'relative',
+    display: 'flex',
+    alignItems: 'center',
+    minWidth: 0,
+    fontSize: 12,
+    padding: '0px 10px',
+    height: 30,
+    color: 'inherit',
+    cursor: 'default'
+  },
+  Label: {
+    flexGrow: 1,
+    marginLeft: 10,
+    marginRight: 10,
+    overflow: 'hidden',
+    textOverflow: 'ellipsis',
+    whiteSpace: 'nowrap'
+  },
+  Accelerator: {
+    flexShrink: 0,
+    marginRight: 10
+  },
+  Separator: {
+    display: 'block',
+    width: '100%',
+    border: 'none',
+    height: 1
+  },
+  Icon: {
+    width: '100%',
+    height: '100%',
+    backgroundSize: 'contain',
+    backgroundPosition: 'center'
+  }
+};
+
+var MenuItem = function (_Component) {
+  inherits(MenuItem, _Component);
+
+  function MenuItem(props) {
+    classCallCheck(this, MenuItem);
+
+    var _this = possibleConstructorReturn(this, (MenuItem.__proto__ || Object.getPrototypeOf(MenuItem)).call(this, props));
+
+    _this.state = {
+      hovering: false
+    };
+    _this.handleMouseEnter = _this.handleMouseEnter.bind(_this);
+    _this.handleMouseLeave = _this.handleMouseLeave.bind(_this);
+    _this.handleClick = _this.handleClick.bind(_this);
+    return _this;
+  }
+
+  createClass(MenuItem, [{
+    key: 'handleMouseEnter',
+    value: function handleMouseEnter(e) {
+      var menuItem = this.props.menuItem;
+
+      if (menuItem.enabled === false) {
+        e.stopPropagation();
+        return;
+      }
+
+      this.setState({
+        hovering: true
+      });
+    }
+  }, {
+    key: 'handleMouseLeave',
+    value: function handleMouseLeave(e) {
+      var menuItem = this.props.menuItem;
+
+      if (menuItem.enabled === false) {
+        e.stopPropagation();
+        return;
+      }
+
+      this.setState({
+        hovering: false
+      });
+    }
+  }, {
+    key: 'handleClick',
+    value: function handleClick(e) {
+      var _props = this.props,
+          menuItem = _props.menuItem,
+          changeCheckState = _props.changeCheckState,
+          path = _props.path,
+          indx = _props.indx;
+
+      if (menuItem.enabled === false) {
+        e.stopPropagation();
+        return;
+      }
+
+      switch (menuItem.type) {
+        case 'checkbox':
+          {
+            e.persist();
+
+            var newMenuItem = _extends({}, menuItem, {
+              checked: !menuItem.checked
+            });
+
+            menuItem.click(newMenuItem, electron__WEBPACK_IMPORTED_MODULE_2__["remote"].getCurrentWindow(), e); // TODO: Change Checked State
+
+            changeCheckState(path, indx, !menuItem.checked);
+            break;
+          }
+
+        case 'radio':
+          {
+            // e.persist();
+            var _newMenuItem = _extends({}, menuItem, {
+              checked: true
+            });
+
+            menuItem.click(_newMenuItem, electron__WEBPACK_IMPORTED_MODULE_2__["remote"].getCurrentWindow(), e);
+
+            if (!menuItem.checked) {
+              // TODO: Change Checked State
+              changeCheckState(path, indx, true, true);
+            }
+
+            break;
+          }
+
+        default:
+          e.persist();
+          menuItem.click(this.props.menuItem, electron__WEBPACK_IMPORTED_MODULE_2__["remote"].getCurrentWindow(), e);
+          break;
+      }
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      var _props2 = this.props,
+          children = _props2.children,
+          menuItem = _props2.menuItem;
+      var hovering = this.state.hovering;
+      var theme = this.context;
+      var isSubMenu = menuItem.type && menuItem.type.toLowerCase() === 'submenu';
+
+      if (menuItem.visible === false) {
+        return null;
+      }
+
+      if (menuItem.type && menuItem.type.toLowerCase() === 'separator') {
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement('hr', {
+          style: _extends({}, styles$1.Separator, {
+            borderBottom: '1px solid ' + theme.menuSeparatorColor
+          })
+        });
+      }
+
+      var statusIcon = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement('span', null);
+
+      if (menuItem.type === 'radio') {
+        statusIcon = menuItem.checked ? radioChecked : radioUnchecked;
+      } else if (menuItem.type === 'checkbox') {
+        statusIcon = menuItem.checked ? checked : unchecked;
+      } else if (menuItem.icon) {
+        statusIcon = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement('div', {
+          style: _extends({}, styles$1.Icon, {
+            backgroundImage: 'url(' + menuItem.icon + ')'
+          })
+        });
+      }
+
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement('div', {
+        style: _extends({}, styles$1.Wrapper, {
+          color: hovering ? theme.menuTextHighlightColor : '',
+          opacity: menuItem.enabled ? '1' : '0.3',
+          backgroundColor: hovering ? theme.menuHighlightColor : ''
+        }),
+        onMouseEnter: this.handleMouseEnter,
+        onMouseLeave: this.handleMouseLeave,
+        onClick: this.handleClick
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement('div', {
+        className: css$3.StatusIcon,
+        style: {
+          color: hovering ? theme.menuTextHighlightColor : theme.accentStatusIcon ? theme.menuHighlightColor : theme.menuActiveTextColor
+        }
+      }, statusIcon), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement('span', {
+        style: styles$1.Label
+      }, menuItem.label), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement('span', {
+        style: _extends({}, styles$1.Accelerator, {
+          color: hovering ? theme.menuTextHighlightColor : theme.menuAcceleratorColor
+        })
+      }, menuItem.accelerator), isSubMenu && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement('div', {
+        className: css$3.SubMenuArrow
+      }, arrow), isSubMenu && this.state.hovering && children);
+    }
+  }]);
+  return MenuItem;
+}(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
+
+MenuItem.propTypes = {
+  menuItem: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.shape({
+    label: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.string,
+    enabled: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.bool,
+    checked: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.bool,
+    visible: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.bool,
+    type: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.oneOf(['normal', 'separator', 'submenu', 'checkbox', 'radio']),
+    click: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.func
+  }),
+  children: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.node,
+  indx: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.number,
+  changeCheckState: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.func
+};
+MenuItem.defaultProps = {
+  menuItem: {
+    id: '',
+    enabled: true,
+    label: '',
+    checked: false,
+    visible: true,
+    type: 'normal',
+    accelerator: '',
+    position: ''
+  },
+  children: null,
+  indx: 0,
+  changeCheckState: function changeCheckState() {}
+};
+MenuItem.contextType = ThemeContext;
+
+var getProperty = function getProperty(path, obj) {
+  return path.reduce(function (xs, x) {
+    return xs && xs[x] ? xs[x] : null;
+  }, obj);
+};
+
+var reduxSet = function reduxSet(obj, path, val) {
+  var _path = toArray(path),
+      prop = _path[0],
+      restPath = _path.slice(1);
+
+  if (typeof prop === 'undefined') {
+    if (!lodash_isequal__WEBPACK_IMPORTED_MODULE_3___default()(obj, val)) {
+      return val;
+    }
+
+    return obj;
+  }
+
+  var before = void 0;
+
+  if (prop in obj) {
+    before = obj[prop];
+  } else {
+    before = {};
+  }
+
+  var after = reduxSet(before, restPath, val);
+
+  if (after !== before) {
+    var result = void 0;
+
+    if (Array.isArray(obj)) {
+      result = obj.slice();
+      result[prop] = after;
+    } else {
+      result = _extends({}, obj, defineProperty({}, prop, after));
+    }
+
+    return result;
+  }
+
+  return obj;
+};
+
+var defaultMenuItem = {
+  id: '',
+  enabled: true,
+  label: '',
+  checked: false,
+  visible: true,
+  type: 'normal',
+  accelerator: '',
+  position: '',
+  submenu: [],
+  click: function click() {}
+};
+var darkTheme$1 = {
+  /* Title */
+  barTheme: 'dark',
+  // light, dark
+  barHeight: '22px',
+  // Change this value if you set 'titleBarStyle' to 'hiddenInset'
+  winBarHeight: '28px',
+  barColor: '#fff',
+  barTitleColor: 'inherit',
+  barBackgroundColor: '#24292e',
+  barShowBorder: false,
+  barBorderBottom: '1px solid #000',
+  // should the icon be shown in the center of the toolbar on Mac/Linux apps alongside the app or title property
+  showIconDarLin: true,
+
+  /* Menu */
+  menuStyle: 'horizontal',
+  // horizontal, vertical
+  menuDimItems: true,
+  menuDimOpacity: 0.6,
+  menuDisabledOpacity: 0.3,
+  menuWidth: 240,
+  menuBackgroundColor: '#fff',
+  menuItemTextColor: '#fff',
+  menuItemHoverBackground: 'rgba(255,255,255,0.3)',
+  menuActiveTextColor: '#24292e',
+  menuTextHighlightColor: '#fff',
+  menuHighlightColor: '#0372ef',
+  accentStatusIcon: false,
+  menuSubLabelHeaders: true,
+  menuSubLabelColor: '#6a737d',
+  menuAcceleratorColor: '#6a737d',
+  menuShowBoxShadow: true,
+  menuBoxShadow: '0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24)',
+
+  /* Menu Overlay */
+  menuOverlayBackground: 'black',
+  menuOverlayOpacity: 0.4,
+  menuSeparatorColor: '#e1e4e8',
+
+  /* WindowControls */
+  windowControlsColor: '#fff',
+  windowCloseHover: '#fff',
+  windowCloseBackground: '#e81123',
+  windowCloseActive: '#bf0f1d',
+  windowDefaultBackground: 'rgba(255,255,255,0.3)',
+  windowDefaultActive: 'rgba(255,255,255,0.2)'
+};
+
+var lightTheme$1 = _extends({}, darkTheme$1, {
+  /* Title */
+  barTheme: 'light',
+  barColor: '#24292e',
+  barBackgroundColor: '#e8e8e8',
+  barBorderBottom: '1px solid #d3d4d5',
+
+  /* Menu */
+  menuItemTextColor: '#24292e',
+  menuItemHoverBackground: 'rgba(0, 0, 0, 0.1)',
+
+  /* WindowControls */
+  windowControlsColor: '#000',
+  windowDefaultBackground: 'rgba(0, 0, 0, 0.1)',
+  windowDefaultActive: 'rgba(0, 0, 0, 0.2)'
+});
+
+var SubMenuLabelStyle = {
+  height: '20px',
+  lineHeight: '20px',
+  margin: '0px 10px',
+  fontWeight: 'bold',
+  overflow: 'hidden',
+  textOverflow: 'ellipsis',
+  whiteSpace: 'nowrap',
+  direction: 'rtl',
+  fontSize: '1em',
+  textAlign: 'left'
+};
+var styles$2 = {
+  SubMenuWrapper: {
+    position: 'absolute',
+    width: '100%',
+    padding: '5px 0px'
+  }
+};
+
+var SubMenu = function (_Component) {
+  inherits(SubMenu, _Component);
+
+  function SubMenu(props) {
+    classCallCheck(this, SubMenu);
+
+    var _this = possibleConstructorReturn(this, (SubMenu.__proto__ || Object.getPrototypeOf(SubMenu)).call(this, props));
+
+    _this.generateMenu = _this.generateMenu.bind(_this);
+    return _this;
+  }
+
+  createClass(SubMenu, [{
+    key: 'generateMenu',
+    value: function generateMenu() {
+      var _this2 = this;
+
+      var menu = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
+      var theme = this.context;
+      return menu.map(function (menuItem, i) {
+        if (menuItem.submenu) {
+          // create submenu item
+          var windowWidth = window.innerWidth;
+          var renderSide = 'right';
+          var right = _this2.props.right + theme.menuWidth; // Render menu to the left if the right side of the
+          // current menu is greater than the current window width
+
+          if (right > windowWidth) {
+            if (theme.menuWidth < _this2.props.right - theme.menuWidth) {
+              renderSide = 'left';
+              right = _this2.props.right - theme.menuWidth;
+            } else {
+              var leftDiff = _this2.props.right - theme.menuWidth;
+            }
+          }
+
+          return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(SubMenu, {
+            key: '' + i + menuItem.label,
+            level: _this2.props.level + 1,
+            right: right,
+            renderSide: renderSide,
+            changeCheckState: _this2.props.changeCheckState,
+            menuItem: _extends({}, defaultMenuItem, menuItem, {
+              type: 'submenu'
+            }),
+            path: [].concat(toConsumableArray(_this2.props.path), [i, 'submenu'])
+          });
+        }
+
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(MenuItem, {
+          key: '' + i + menuItem.label,
+          changeCheckState: _this2.props.changeCheckState,
+          menuItem: _extends({}, defaultMenuItem, menuItem),
+          indx: i,
+          path: [].concat(toConsumableArray(_this2.props.path))
+        });
+      });
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      var _props = this.props,
+          menuItem = _props.menuItem,
+          level = _props.level,
+          renderSide = _props.renderSide;
+      var theme = this.context;
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(MenuItem, {
+        menuItem: _extends({}, defaultMenuItem, menuItem)
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement('div', {
+        style: _extends({}, styles$2.SubMenuWrapper, {
+          top: theme.menuSubLabelHeaders ? '-25px' : '-5px',
+          left: renderSide === 'left' ? '-100%' : '100%',
+          maxWidth: theme.menuWidth,
+          backgroundColor: theme.menuBackgroundColor,
+          color: theme.menuActiveTextColor,
+          zIndex: level + 8,
+          boxShadow: theme.menuShowBoxShadow ? theme.menuBoxShadow : ''
+        })
+      }, theme.menuSubLabelHeaders && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement('div', {
+        style: _extends({}, SubMenuLabelStyle, {
+          color: theme.menuSubLabelColor
+        })
+      }, menuItem.label), this.generateMenu(menuItem.submenu)));
+    }
+  }]);
+  return SubMenu;
+}(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
+
+SubMenu.propTypes = {
+  menuItem: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.object,
+  level: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.number,
+  renderSide: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.string,
+  changeCheckState: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.func
+};
+SubMenu.defaultProps = {
+  menuItem: {},
+  level: 1,
+  renderSide: 'right',
+  changeCheckState: function changeCheckState() {}
+};
+SubMenu.contextType = ThemeContext;
+var css$4 = ".styles_MenuListOverlay__1kChh {\n  height: 100%;\n  overflow: hidden;\n}\n\n.styles_MenuListOverlay__1kChh:focus {\n  outline: none;\n  border: none;\n  box-shadow: none;\n}";
+var css$5 = {
+  "MenuListOverlay": "styles_MenuListOverlay__1kChh"
+};
+styleInject(css$4);
+var styles$3 = {
+  Wrapper: {
+    zIndex: 8,
+    position: 'absolute',
+    width: '100%',
+    overflow: 'hidden',
+    left: 0
+  },
+  FoldOut: {
+    background: 'transparent',
+    pointerEvents: 'none',
+    position: 'absolute',
+    top: 0
+  },
+  MenuPane: {
+    pointerEvents: 'all'
+  },
+  MenuFoldOut: {
+    paddingTop: 5,
+    paddingBottom: 5
+  }
+};
+
+var MenuList = function (_Component) {
+  inherits(MenuList, _Component);
+
+  function MenuList(props) {
+    classCallCheck(this, MenuList);
+
+    var _this = possibleConstructorReturn(this, (MenuList.__proto__ || Object.getPrototypeOf(MenuList)).call(this, props));
+
+    _this.generateMenu = _this.generateMenu.bind(_this);
+    return _this;
+  }
+
+  createClass(MenuList, [{
+    key: 'generateMenu',
+    value: function generateMenu() {
+      var _this2 = this;
+
+      var menu = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
+      var theme = this.context;
+      return menu.map(function (menuItem, i) {
+        if (menuItem.submenu || menuItem.type && menuItem.type.toLowerCase() === 'submenu') {
+          var menuWidth = _this2.props.rect.left + theme.menuWidth;
+          var windowWidth = window.innerWidth;
+          var renderSide = 'right';
+          var right = menuWidth + theme.menuWidth; // Render menu to the left if the right side of the
+          // current menu is greater than the current window width
+
+          if (right > windowWidth && theme.menuWidth < _this2.props.rect.left) {
+            renderSide = 'left';
+            right = menuWidth - theme.menuWidth;
+          }
+
+          return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(SubMenu, {
+            key: '' + i + menuItem.label,
+            level: 1,
+            right: right,
+            renderSide: renderSide,
+            changeCheckState: _this2.props.changeCheckState,
+            menuItem: _extends({}, defaultMenuItem, menuItem, {
+              type: 'submenu'
+            }),
+            path: _this2.props.vertical ? [].concat(toConsumableArray(_this2.props.path), [i, 'submenu']) : [].concat(toConsumableArray(_this2.props.path), ['submenu', i, 'submenu'])
+          });
+        }
+
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(MenuItem, {
+          key: '' + i + menuItem.label,
+          menuItem: _extends({}, defaultMenuItem, menuItem),
+          changeCheckState: _this2.props.changeCheckState,
+          indx: i,
+          path: _this2.props.vertical ? [].concat(toConsumableArray(_this2.props.path)) : [].concat(toConsumableArray(_this2.props.path), ['submenu'])
+        });
+      });
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      var _props = this.props,
+          submenu = _props.submenu,
+          rect = _props.rect;
+      var theme = this.context;
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement('div', {
+        style: _extends({}, styles$3.Wrapper, {
+          height: 'calc(100% - ' + rect.bottom + 'px)',
+          top: rect.bottom + 'px'
+        })
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement('div', {
+        className: css$5.MenuListOverlay,
+        style: {
+          background: theme.menuOverlayBackground,
+          opacity: theme.menuOverlayOpacity
+        },
+        tabIndex: '-1'
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement('div', {
+        style: _extends({}, styles$3.FoldOut, {
+          marginLeft: rect.left,
+          maxWidth: 'calc(100% - ' + rect.left + 'px)',
+          color: theme.menuActiveTextColor
+        })
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement('div', {
+        style: _extends({}, styles$3.MenuFoldOut, {
+          background: theme.menuBackgroundColor,
+          boxShadow: theme.showBoxShadow ? theme.menuBoxShadow : ''
+        })
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement('div', {
+        style: _extends({}, styles$3.MenuPane, {
+          width: theme.menuWidth
+        })
+      }, theme.menuStyle === 'vertical' && theme.menuSubLabelHeaders && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement('div', {
+        style: _extends({}, SubMenuLabelStyle, {
+          color: theme.menuSubLabelColor
+        }),
+        key: 'main-menu-sublabel'
+      }, 'Menu'), this.generateMenu(submenu)))));
+    }
+  }]);
+  return MenuList;
+}(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
+
+MenuList.propTypes = {
+  submenu: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.array,
+  path: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.array,
+  rect: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.shape({
+    height: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.number,
+    width: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.number,
+    x: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.number,
+    y: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.number
+  }).isRequired,
+  changeCheckState: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.func
+};
+MenuList.defaultProps = {
+  submenu: [],
+  path: [],
+  changeCheckState: function changeCheckState() {}
+};
+MenuList.contextType = ThemeContext;
+
+var topologicalSort = function topologicalSort(original, graph) {
+  // Sort items topologically using a depth-first approach
+  var sorted = [];
+  var visited = new Set();
+
+  var visit = function visit(mark) {
+    // if item visited return
+    if (visited.has(mark)) return; // add item to list of visited nodes
+
+    visited.add(mark); // get edges from graph for visited id
+
+    var edges = graph.get(mark);
+
+    if (edges != null) {
+      // visit each edge
+      edges.forEach(visit);
+    }
+
+    sorted.push(mark);
+  };
+
+  original.forEach(visit);
+  return sorted;
+};
+
+var areValidTemplateItems = function areValidTemplateItems(template) {
+  // validate the menu attributes
+  return template.every(function (item) {
+    if (item === null || (typeof item === 'undefined' ? 'undefined' : _typeof(item)) !== 'object') {
+      return false;
+    }
+
+    return item.hasOwnProperty('label') || item.type === 'separator';
+  });
+};
+
+var addEdge = function addEdge(graph, from, to) {
+  if (!graph.has(from)) {
+    // create edge list from
+    graph.set(from, []);
+  } // add to edge list from -> to
+
+
+  graph.get(from).push(to);
+};
+
+var sortMenuItems = function sortMenuItems(menu) {
+  var original = menu.map(function (item, i) {
+    return i;
+  });
+  var graph = new Map();
+  var idToIndex = new Map(menu.map(function (item, i) {
+    return [item.id, i];
+  })); // add graph edges to perform topological sort
+
+  menu.forEach(function (item, i) {
+    if (item.before) {
+      // get index from item before id
+      var to = idToIndex.get(item.before);
+
+      if (to != null) {
+        // add edge pointing from item before -> to current item
+        addEdge(graph, to, i);
+      }
+    }
+
+    if (item.after) {
+      // get index from item after id
+      var _to = idToIndex.get(item.after);
+
+      if (_to != null) {
+        // add edge from current item pointing -> to item after
+        addEdge(graph, i, _to);
+      }
+    }
+  }); // sort edges
+
+  var sortedOrder = topologicalSort(original, graph); // return sorted menu items
+
+  return sortedOrder.map(function (i) {
+    return menu[i];
+  });
+};
+
+var sortMenu = function sortMenu(menu) {
+  // sort menu and all submenus
+  var sorted = sortMenuItems(menu);
+
+  for (var id in sorted) {
+    var item = sorted[id];
+
+    if (Array.isArray(item.submenu)) {
+      // sort submenus
+      item.submenu = sortMenu(item.submenu);
+    }
+  }
+
+  return sorted;
+};
+
+var buildMenu = function buildMenu(menu) {
+  if (!Array.isArray(menu)) {
+    throw new TypeError('Menu must be an array');
+  }
+
+  if (!areValidTemplateItems(menu)) {
+    throw new TypeError('MenuItem must have at least one of label, role or type');
+  }
+
+  return sortMenu(menu);
+};
+
+var menuIcon = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement('svg', {
+  version: '1.1',
+  width: '24px',
+  height: '24px',
+  viewBox: '0 0 32 32'
+}, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement('path', {
+  d: 'M 4 7 L 4 9 L 28 9 L 28 7 Z M 4 15 L 4 17 L 28 17 L 28 15 Z M 4 23 L 4 25 L 28 25 L 28 23 Z '
+}));
+var styles$4 = {
+  Wrapper: {
+    display: 'flex',
+    WebkitAppRegion: 'no-drag',
+    maxWidth: 'calc(100% - 163px)'
+  }
+};
+
+var MenuBar = function (_Component) {
+  inherits(MenuBar, _Component);
+
+  function MenuBar(props) {
+    classCallCheck(this, MenuBar);
+
+    var _this = possibleConstructorReturn(this, (MenuBar.__proto__ || Object.getPrototypeOf(MenuBar)).call(this, props));
+
+    _this.onMenuButtonMouseOver = function (i) {
+      if (_this.state.clicked) {
+        _this.setState({
+          focusing: i
+        });
+      }
+    };
+
+    _this.onTouchStart = function (i) {
+      if (i !== _this.state.focusing && _this.state.clicked) {
+        _this.lock = true;
+      }
+    };
+
+    _this.onMouseMove = function (i) {
+      if (i === _this.state.focusing) return;
+
+      _this.setState({
+        focusing: i
+      });
+    };
+
+    _this.onMenuButtonClick = function (index) {
+      if (_this.lock) {
+        _this.lock = false;
+        return;
+      }
+
+      _this.setState({
+        clicked: !(_this.state.focusing === index && _this.state.clicked),
+        hovering: !(_this.state.focusing === index && _this.state.clicked) ? _this.state.hovering : -1
+      });
+    };
+
+    _this.setMenuRef = function (ref, i) {
+      if (_this.menuItems) {
+        _this.menuItems[i] = ref;
+      } else {
+        _this.menuItems = defineProperty({}, i, ref);
+      }
+    };
+
+    _this.changeCheckState = function (path, itemIndx, checked) {
+      var isRadio = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : false;
+
+      if (!isRadio) {
+        // change checked state
+        _this.setState(reduxSet(_this.state, [].concat(toConsumableArray(path), [itemIndx, 'checked']), checked));
+      } else {
+        var newState = _extends({}, _this.state);
+
+        getProperty(path, _this.state).forEach(function (menuItem, indx) {
+          if (menuItem.type === 'radio') {
+            newState = reduxSet(newState, [].concat(toConsumableArray(path), [indx, 'checked']), indx === itemIndx);
+          }
+        });
+
+        _this.setState(newState);
+      }
+    };
+
+    _this.generateHorizontalMenu = function () {
+      var menuObj = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
+      return menuObj.map(function (menuItem, i) {
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(MenuButton, {
+          key: '' + menuItem.label,
+          onMouseEnter: function onMouseEnter() {
+            if (menuItem.enabled === false) return;
+
+            _this.setState({
+              hovering: i
+            });
+          },
+          onMouseLeave: function onMouseLeave() {
+            if (menuItem.enabled === false) return;
+
+            _this.setState({
+              hovering: -1
+            });
+          },
+          onMouseOver: function onMouseOver() {
+            if (menuItem.enabled === false) return;
+
+            _this.onMenuButtonMouseOver(i);
+          },
+          onMouseMove: function onMouseMove() {
+            if (menuItem.enabled === false) return;
+
+            _this.onMouseMove(i);
+          },
+          onTouchStart: function onTouchStart() {
+            if (menuItem.enabled === false) return;
+
+            _this.onTouchStart(i);
+          },
+          onClick: function onClick() {
+            if (menuItem.enabled === false) return;
+
+            _this.onMenuButtonClick(i);
+          },
+          onFocus: function onFocus() {// idk - linting says it needs it? it has no purpose for me
+          },
+          rectRef: function rectRef(ref) {
+            return _this.setMenuRef(ref, i);
+          },
+          hovering: i === _this.state.hovering,
+          open: _this.state.clicked && i === _this.state.focusing,
+          closed: !_this.state.clicked || i !== _this.state.focusing,
+          enabled: menuItem.enabled,
+          label: menuItem.label
+        }, _this.state.clicked && i === _this.state.focusing && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(MenuList, {
+          changeCheckState: _this.changeCheckState,
+          rect: _this.menuItems[i].getBoundingClientRect(),
+          submenu: menuItem.submenu,
+          mainIndex: i,
+          path: ['menu', i]
+        }));
+      });
+    };
+
+    _this.generateVerticalMenu = function () {
+      var menuList = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(MenuButton, {
+        onMouseEnter: function onMouseEnter() {
+          _this.setState({
+            hovering: 0
+          });
+        },
+        onMouseLeave: function onMouseLeave() {
+          _this.setState({
+            hovering: -1
+          });
+        },
+        onMouseOver: function onMouseOver() {
+          _this.onMenuButtonMouseOver(0);
+        },
+        onMouseMove: function onMouseMove() {
+          _this.onMouseMove(0);
+        },
+        onTouchStart: function onTouchStart() {
+          _this.onTouchStart(0);
+        },
+        onClick: function onClick() {
+          _this.onMenuButtonClick(0);
+        },
+        onFocus: function onFocus() {// idk - linting says it needs it? it has no purpose for me
+        },
+        rectRef: function rectRef(ref) {
+          return _this.setMenuRef(ref, 0);
+        },
+        hovering: _this.state.hovering === 0,
+        open: _this.state.clicked && _this.state.focusing === 0,
+        closed: !_this.state.clicked || _this.state.focusing !== 0,
+        label: menuIcon,
+        enabled: true
+      }, _this.state.clicked && _this.state.focusing === 0 && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(MenuList, {
+        changeCheckState: _this.changeCheckState,
+        rect: _this.menuItems[0].getBoundingClientRect(),
+        submenu: menuList,
+        path: ['menu'],
+        vertical: true
+      }));
+    };
+
+    _this.state = {
+      hovering: -1,
+      focusing: 0,
+      clicked: false,
+      menu: buildMenu(props.menu)
+    };
+    return _this;
+  }
+
+  createClass(MenuBar, [{
+    key: 'componentWillReceiveProps',
+    value: function componentWillReceiveProps(nextProps) {
+      if (nextProps.menu !== this.state.menu) {
+        this.setState({
+          menu: buildMenu(nextProps.menu)
+        });
+      }
+    } // if hovering over another button while menu is clicked; change focus
+    // lock set to true to keep menu panes open
+    // if moving over a different menu button - select that menu button
+    // when a menu button is clicked
+    // we need the rect's bounds for the child menu pane
+    // path: to current submenu
+    // checked: new state
+
+  }, {
+    key: 'render',
+    value: function render() {
+      var theme = this.context;
+      var color = theme.menuItemTextColor || theme.barColor;
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement('div', {
+        style: _extends({}, styles$4.Wrapper, {
+          color: color
+        })
+      }, theme.menuStyle === 'horizontal' ? this.generateHorizontalMenu(this.state.menu) : this.generateVerticalMenu(this.state.menu));
+    }
+  }]);
+  return MenuBar;
+}(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
+
+MenuBar.propTypes = {
+  menu: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.array
+};
+MenuBar.defaultProps = {
+  menu: []
+};
+MenuBar.contextType = ThemeContext;
+var styles$5 = {
+  Bar: {
+    flexGrow: 0,
+    flexShrink: 0,
+    display: 'flex',
+    flexDirection: 'row',
+    fontSize: '12px',
+    width: '100%',
+    WebkitAppRegion: 'drag',
+    userSelect: 'none',
+    fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", Arial, sans-serif'
+  }
+};
+var currentWindow = electron__WEBPACK_IMPORTED_MODULE_2___default.a.remote.getCurrentWindow();
+
+var Bar = function (_React$Component) {
+  inherits(Bar, _React$Component);
+
+  function Bar(props) {
+    classCallCheck(this, Bar);
+
+    var _this = possibleConstructorReturn(this, (Bar.__proto__ || Object.getPrototypeOf(Bar)).call(this, props));
+
+    _this.handleDoubleClick = _this.handleDoubleClick.bind(_this);
+    return _this;
+  }
+
+  createClass(Bar, [{
+    key: 'handleDoubleClick',
+    value: function handleDoubleClick(e) {
+      var isWin = this.props.isWin;
+
+      if (!isWin) {
+        var bounds = electron__WEBPACK_IMPORTED_MODULE_2___default.a.screen.getPrimaryDisplay().workArea;
+        currentWindow.setBounds(bounds, true);
+      }
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      var props = this.props;
+      var theme = this.context;
+      var height = props.isWin ? theme.winBarHeight : theme.barHeight;
+      var backgroundColor = theme.barBackgroundColor;
+      var color = theme.barColor;
+      var borderBottom = theme.barShowBorder ? theme.barBorderBottom : '';
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement('div', {
+        style: _extends({}, styles$5.Bar, {
+          height: height,
+          backgroundColor: backgroundColor,
+          color: color,
+          borderBottom: borderBottom
+        }),
+        onDoubleClick: this.handleDoubleClick
+      }, props.children);
+    }
+  }]);
+  return Bar;
+}(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
+
+Bar.contextType = ThemeContext;
+Bar.defaultProps = {
+  isWin: false
+};
+var styles$6 = {
+  Title: {
+    margin: '0px 6px 0px 0px',
+    textAlign: 'center',
+    display: 'flex',
+    whiteSpace: 'nowrap',
+    justifyContent: 'center',
+    alignContent: 'center',
+    alignItems: 'center',
+    flexDirection: 'row',
+    WebkitAppRegion: 'drag'
+  }
+};
+
+var Title = function (_React$Component) {
+  inherits(Title, _React$Component);
+
+  function Title() {
+    classCallCheck(this, Title);
+    return possibleConstructorReturn(this, (Title.__proto__ || Object.getPrototypeOf(Title)).apply(this, arguments));
+  }
+
+  createClass(Title, [{
+    key: 'render',
+    value: function render() {
+      var props = this.props;
+      var theme = this.context;
+      var lineHeight = props.isWin ? theme.winBarHeight : theme.barHeight;
+      var padding = props.isWin ? '0px 4px' : '0 70px';
+      var flex = props.flex;
+      var color = theme.barTitleColor;
+      var fontFamily = theme.titleFontFamily;
+      var fontWeight = theme.titleFontWeight;
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement('div', {
+        style: _extends({}, styles$6.Title, {
+          lineHeight: lineHeight,
+          padding: padding,
+          color: color,
+          flex: flex,
+          fontFamily: fontFamily,
+          fontWeight: fontWeight
+        })
+      }, props.children);
+    }
+  }]);
+  return Title;
+}(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
+
+Title.contextType = ThemeContext;
+var styles$7 = {
+  ResizeHandle: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    WebkitAppRegion: 'no-drag'
+  },
+  ResizeLeft: {
+    width: '3px',
+    height: '28px'
+  },
+  ResizeTop: {
+    width: '100%',
+    height: '3px'
+  }
+};
+
+var ResizeHandle = function (_React$Component) {
+  inherits(ResizeHandle, _React$Component);
+
+  function ResizeHandle() {
+    classCallCheck(this, ResizeHandle);
+    return possibleConstructorReturn(this, (ResizeHandle.__proto__ || Object.getPrototypeOf(ResizeHandle)).apply(this, arguments));
+  }
+
+  createClass(ResizeHandle, [{
+    key: 'render',
+    value: function render() {
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement('div', {
+        style: _extends({}, styles$7.ResizeHandle, this.props.left ? styles$7.ResizeLeft : styles$7.ResizeTop)
+      });
+    }
+  }]);
+  return ResizeHandle;
+}(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
+
+ResizeHandle.defaultProps = {
+  left: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.bool,
+  top: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.bool
+};
+var styles$8 = {
+  Icon: {
+    height: '16px',
+    width: '16px',
+    margin: '6px'
+  }
+};
+
+var Icon = function (_React$Component) {
+  inherits(Icon, _React$Component);
+
+  function Icon() {
+    classCallCheck(this, Icon);
+    return possibleConstructorReturn(this, (Icon.__proto__ || Object.getPrototypeOf(Icon)).apply(this, arguments));
+  }
+
+  createClass(Icon, [{
+    key: 'render',
+    value: function render() {
+      var _props = this.props,
+          src = _props.src,
+          onIconClick = _props.onIconClick;
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement('img', {
+        src: src,
+        alt: 'app-icon',
+        onClick: onIconClick,
+        style: styles$8.Icon
+      });
+    }
+  }]);
+  return Icon;
+}(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
+
+Icon.defaultProps = {
+  src: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.string,
+  onIconClick: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.func
+};
+var css$6 = ".styles_Button__3WaZS {\n  -webkit-app-region: no-drag;\n  display: inline-block;\n  position: relative;\n  width: 45px;\n  height: 100%;\n  padding: 0;\n  margin: 0;\n  overflow: hidden;\n  border: none;\n  box-shadow: none;\n  border-radius: 0;\n  background-color: transparent;\n  transition: background-color 0.25s ease;\n  opacity: 0.5;\n}\n\n.styles_Button__3WaZS svg {  \n  fill: currentColor;\n}\n\n.styles_Button__3WaZS:focus {\n  outline: none;\n}\n\n.styles_Button__3WaZS:hover {\n  opacity: 1;\n}\n\n.styles_Button__3WaZS:hover:active {\n  transition: none;\n  opacity: 1;\n}\n";
+var styles$9 = {
+  "Button": "styles_Button__3WaZS"
+};
+styleInject(css$6);
+
+var Button = function (_Component) {
+  inherits(Button, _Component);
+
+  function Button(props) {
+    classCallCheck(this, Button);
+
+    var _this = possibleConstructorReturn(this, (Button.__proto__ || Object.getPrototypeOf(Button)).call(this, props));
+
+    _this.toggleHover = function () {
+      _this.setState({
+        hovering: !_this.state.hovering
+      });
+    };
+
+    _this.toggleFocus = function () {
+      _this.setState({
+        focused: !_this.state.focused
+      });
+    };
+
+    _this.state = {
+      hovering: false,
+      focused: false
+    };
+    return _this;
+  }
+
+  createClass(Button, [{
+    key: 'render',
+    value: function render() {
+      var _props = this.props,
+          ariaLabel = _props.ariaLabel,
+          tabIndex = _props.tabIndex,
+          disabled = _props.disabled,
+          close = _props.close,
+          onClick = _props.onClick;
+      var _state = this.state,
+          hovering = _state.hovering,
+          focused = _state.focused;
+      var backgroundColor = 'transparent';
+      var opacity = 0.5;
+      var transition = 'background-color 0.25s ease';
+      var color = this.context.windowControlsColor;
+
+      if (hovering) {
+        opacity = 1;
+        color = close ? this.context.windowCloseHover : color;
+        backgroundColor = close ? this.context.windowCloseBackground : this.context.windowDefaultBackground;
+      } else if (focused) {
+        opacity = 1;
+        color = close ? this.context.windowCloseHover : color;
+        backgroundColor = close ? this.context.windowCloseActive : this.context.windowDefaultActive;
+        transition = 'none';
+      }
+
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement('button', {
+        className: styles$9.Button,
+        style: {
+          backgroundColor: backgroundColor,
+          opacity: opacity,
+          transition: transition,
+          color: color
+        },
+        onFocus: this.toggleFocus,
+        onBlur: this.toggleFocus,
+        onMouseEnter: this.toggleHover,
+        onMouseLeave: this.toggleHover,
+        onClick: onClick,
+        'aria-label': ariaLabel,
+        tabIndex: tabIndex,
+        disabled: disabled
+      }, this.props.children);
+    }
+  }]);
+  return Button;
+}(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
+
+Button.contextType = ThemeContext;
+var currentWindow$1 = electron__WEBPACK_IMPORTED_MODULE_2___default.a.remote.getCurrentWindow();
+var styles$a = {
+  Controls: {
+    flexGrow: 0,
+    flexShrink: 0,
+    marginLeft: 'auto',
+    height: '100%'
+  }
+};
+
+var WindowControls = function (_Component) {
+  inherits(WindowControls, _Component);
+
+  function WindowControls(props) {
+    classCallCheck(this, WindowControls);
+
+    var _this = possibleConstructorReturn(this, (WindowControls.__proto__ || Object.getPrototypeOf(WindowControls)).call(this, props));
+
+    _this.handleMaximize = function (max) {
+      _this.setState({
+        isMaximized: max
+      });
+    };
+
+    _this.onMaximizeClicked = function () {
+      if (currentWindow$1.isMaximizable()) {
+        if (currentWindow$1.isMaximized()) {
+          currentWindow$1.unmaximize();
+        } else {
+          currentWindow$1.maximize();
+        }
+      }
+    };
+
+    _this.state = {
+      isMaximized: currentWindow$1.isMaximized()
+    };
+    return _this;
+  }
+
+  createClass(WindowControls, [{
+    key: 'componentDidMount',
+    value: function componentDidMount() {
+      var _this2 = this;
+
+      currentWindow$1.addListener('maximize', function () {
+        return _this2.setState({
+          isMaximized: true
+        });
+      });
+      currentWindow$1.addListener('unmaximize', function () {
+        return _this2.setState({
+          isMaximized: false
+        });
+      });
+    }
+  }, {
+    key: 'componentWillUnmount',
+    value: function componentWillUnmount() {
+      var _this3 = this;
+
+      currentWindow$1.removeListener('maximize', function () {
+        return _this3.setState({
+          isMaximized: true
+        });
+      });
+      currentWindow$1.removeListener('unmaximize', function () {
+        return _this3.setState({
+          isMaximized: false
+        });
+      });
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      var _props = this.props,
+          disableMaximize = _props.disableMaximize,
+          disableMinimize = _props.disableMinimize;
+      var isMaximized = this.state.isMaximized;
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement('div', {
+        style: styles$a.Controls
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Button, {
+        key: 'min-button',
+        ariaLabel: 'minimize',
+        tabIndex: '-1',
+        disabled: disableMinimize,
+        onClick: function onClick() {
+          return currentWindow$1.minimize();
+        }
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement('svg', {
+        version: '1.1',
+        'aria-hidden': 'true',
+        width: '10',
+        height: '10'
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement('path', {
+        d: 'M 0,5 10,5 10,6 0,6 Z'
+      }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Button, {
+        key: 'max-button',
+        ariaLabel: 'maximize',
+        tabIndex: '-1',
+        disabled: disableMaximize,
+        onClick: this.onMaximizeClicked
+      }, isMaximized ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement('svg', {
+        version: '1.1',
+        'aria-hidden': 'true',
+        width: '10',
+        height: '10'
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement('path', {
+        d: 'm 2,1e-5 0,2 -2,0 0,8 8,0 0,-2 2,0 0,-8 z m 1,1 6,0 0,6 -1,0 0,-5 -5,0 z m -2,2 6,0 0,6 -6,0 z'
+      })) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement('svg', {
+        version: '1.1',
+        'aria-hidden': 'true',
+        width: '10',
+        height: '10'
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement('path', {
+        d: 'M 0,0 0,10 10,10 10,0 Z M 1,1 9,1 9,9 1,9 Z'
+      }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Button, {
+        key: 'close-button',
+        'aria-label': 'close',
+        tabIndex: '-1',
+        onClick: function onClick() {
+          return currentWindow$1.close();
+        },
+        close: true
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement('svg', {
+        'aria-hidden': 'true',
+        version: '1.1',
+        width: '10',
+        height: '10'
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement('path', {
+        d: 'M 0,0 0,0.7 4.3,5 0,9.3 0,10 0.7,10 5,5.7 9.3,10 10,10 10,9.3 5.7,5 10,0.7 10,0 9.3,0 5,4.3 0.7,0 Z'
+      }))));
+    }
+  }]);
+  return WindowControls;
+}(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
+
+WindowControls.propTypes = {
+  disableMinimize: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.bool,
+  disableMaximize: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.bool
+};
+WindowControls.defaultProps = {
+  disableMinimize: false,
+  disableMaximize: false
+};
+
+var TitleBar = function (_Component) {
+  inherits(TitleBar, _Component);
+
+  function TitleBar() {
+    var _ref;
+
+    var _temp, _this, _ret;
+
+    classCallCheck(this, TitleBar);
+
+    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
+
+    return _ret = (_temp = (_this = possibleConstructorReturn(this, (_ref = TitleBar.__proto__ || Object.getPrototypeOf(TitleBar)).call.apply(_ref, [this].concat(args))), _this), _this.generatePlatformChildren = function (_ref2) {
+      var icon = _ref2.icon,
+          app = _ref2.app,
+          title = _ref2.title,
+          platform = _ref2.platform,
+          menu = _ref2.menu,
+          children = _ref2.children,
+          currentTheme = _ref2.currentTheme,
+          onIconClick = _ref2.onIconClick,
+          onTitleClick = _ref2.onTitleClick,
+          onCloseClick = _ref2.onCloseClick,
+          onMinimizeClick = _ref2.onMinimizeClick,
+          onMaximizeClick = _ref2.onMaximizeClick,
+          disableMaximize = _ref2.disableMaximize,
+          disableMinimize = _ref2.disableMinimize,
+          onBarDoubleClick = _ref2.onBarDoubleClick;
+
+      switch (platform) {
+        case 'win32':
+          // win32
+          return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Bar, {
+            isWin: true
+          }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(ResizeHandle, {
+            top: true
+          }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(ResizeHandle, {
+            left: true
+          }), currentTheme.menuStyle === 'vertical' && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(MenuBar, {
+            menu: menu
+          }), icon && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Icon, {
+            src: icon,
+            onClick: onIconClick
+          }), app && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Title, {
+            onClick: onTitleClick,
+            isWin: true
+          }, app), currentTheme.menuStyle === 'horizontal' && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(MenuBar, {
+            menu: menu
+          }), children, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(WindowControls, {
+            disableMinimize: disableMinimize,
+            disableMaximize: disableMaximize,
+            onCloseClick: onCloseClick,
+            onMinimizeClick: onMinimizeClick,
+            onMaximizeClick: onMaximizeClick
+          }));
+
+        default:
+          return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Bar, {
+            onDoubleClick: onBarDoubleClick
+          }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(ResizeHandle, {
+            top: true
+          }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(ResizeHandle, {
+            left: true
+          }), (title || app) && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Title, {
+            onClick: onTitleClick,
+            flex: 1
+          }, icon && currentTheme.showIconDarLin && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Icon, {
+            src: icon,
+            onClick: onIconClick
+          }), title || app));
+      }
+    }, _temp), possibleConstructorReturn(_this, _ret);
+  }
+
+  createClass(TitleBar, [{
+    key: 'render',
+    value: function render() {
+      var _props = this.props,
+          theme = _props.theme,
+          platform = _props.platform;
+
+      var currentTheme = _extends({}, theme.barTheme === 'light' ? lightTheme : darkTheme, theme);
+
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(ThemeProvider, {
+        value: currentTheme
+      }, this.generatePlatformChildren(_extends({}, this.props, {
+        currentTheme: currentTheme,
+        platform: platform === 'default' ? os__WEBPACK_IMPORTED_MODULE_4___default.a.platform() : platform || os__WEBPACK_IMPORTED_MODULE_4___default.a.platform()
+      })));
+    }
+  }]);
+  return TitleBar;
+}(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
+
+TitleBar.propTypes = {
+  children: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.node,
+  icon: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.string,
+  title: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.string,
+  platform: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.string,
+  theme: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.object,
+
+  /* Menu */
+  menu: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.array,
+
+  /* Window */
+  disableMinimize: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.bool,
+  disableMaximize: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.bool,
+
+  /* Functions */
+  onIconClick: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.func,
+  onTitleClick: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.func,
+  onCloseClick: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.func,
+  onMinimizeClick: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.func,
+  onMaximizeClick: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.func
+};
+TitleBar.defaultProps = {
+  children: null,
+
+  /* Main */
+  icon: '',
+  name: '',
+  title: '',
+  platform: '',
+  theme: {},
+
+  /* WindowControls */
+  disableMinimize: false,
+  disableMaximize: false,
+
+  /* Menu */
+  menu: [],
+
+  /* Click Listeners */
+  onIconClick: function onIconClick() {},
+  onTitleClick: function onTitleClick() {},
+  onCloseClick: function onCloseClick() {},
+  onMinimizeClick: function onMinimizeClick() {},
+  onMaximizeClick: function onMaximizeClick() {},
+  onBarDoubleClick: function onBarDoubleClick() {}
+};
+/* harmony default export */ __webpack_exports__["default"] = (TitleBar);
+
+/***/ }),
+
 /***/ "./node_modules/history/es/DOMUtils.js":
 /*!*********************************************!*\
   !*** ./node_modules/history/es/DOMUtils.js ***!
@@ -44219,6 +46436,1937 @@ function () {
 }();
 
 exports.JsonConvert = JsonConvert;
+
+/***/ }),
+
+/***/ "./node_modules/lodash.isequal/index.js":
+/*!**********************************************!*\
+  !*** ./node_modules/lodash.isequal/index.js ***!
+  \**********************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+/* WEBPACK VAR INJECTION */(function(module) {/**
+ * Lodash (Custom Build) <https://lodash.com/>
+ * Build: `lodash modularize exports="npm" -o ./`
+ * Copyright JS Foundation and other contributors <https://js.foundation/>
+ * Released under MIT license <https://lodash.com/license>
+ * Based on Underscore.js 1.8.3 <http://underscorejs.org/LICENSE>
+ * Copyright Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
+ */
+
+/** Used as the size to enable large array optimizations. */
+var LARGE_ARRAY_SIZE = 200;
+/** Used to stand-in for `undefined` hash values. */
+
+var HASH_UNDEFINED = '__lodash_hash_undefined__';
+/** Used to compose bitmasks for value comparisons. */
+
+var COMPARE_PARTIAL_FLAG = 1,
+    COMPARE_UNORDERED_FLAG = 2;
+/** Used as references for various `Number` constants. */
+
+var MAX_SAFE_INTEGER = 9007199254740991;
+/** `Object#toString` result references. */
+
+var argsTag = '[object Arguments]',
+    arrayTag = '[object Array]',
+    asyncTag = '[object AsyncFunction]',
+    boolTag = '[object Boolean]',
+    dateTag = '[object Date]',
+    errorTag = '[object Error]',
+    funcTag = '[object Function]',
+    genTag = '[object GeneratorFunction]',
+    mapTag = '[object Map]',
+    numberTag = '[object Number]',
+    nullTag = '[object Null]',
+    objectTag = '[object Object]',
+    promiseTag = '[object Promise]',
+    proxyTag = '[object Proxy]',
+    regexpTag = '[object RegExp]',
+    setTag = '[object Set]',
+    stringTag = '[object String]',
+    symbolTag = '[object Symbol]',
+    undefinedTag = '[object Undefined]',
+    weakMapTag = '[object WeakMap]';
+var arrayBufferTag = '[object ArrayBuffer]',
+    dataViewTag = '[object DataView]',
+    float32Tag = '[object Float32Array]',
+    float64Tag = '[object Float64Array]',
+    int8Tag = '[object Int8Array]',
+    int16Tag = '[object Int16Array]',
+    int32Tag = '[object Int32Array]',
+    uint8Tag = '[object Uint8Array]',
+    uint8ClampedTag = '[object Uint8ClampedArray]',
+    uint16Tag = '[object Uint16Array]',
+    uint32Tag = '[object Uint32Array]';
+/**
+ * Used to match `RegExp`
+ * [syntax characters](http://ecma-international.org/ecma-262/7.0/#sec-patterns).
+ */
+
+var reRegExpChar = /[\\^$.*+?()[\]{}|]/g;
+/** Used to detect host constructors (Safari). */
+
+var reIsHostCtor = /^\[object .+?Constructor\]$/;
+/** Used to detect unsigned integer values. */
+
+var reIsUint = /^(?:0|[1-9]\d*)$/;
+/** Used to identify `toStringTag` values of typed arrays. */
+
+var typedArrayTags = {};
+typedArrayTags[float32Tag] = typedArrayTags[float64Tag] = typedArrayTags[int8Tag] = typedArrayTags[int16Tag] = typedArrayTags[int32Tag] = typedArrayTags[uint8Tag] = typedArrayTags[uint8ClampedTag] = typedArrayTags[uint16Tag] = typedArrayTags[uint32Tag] = true;
+typedArrayTags[argsTag] = typedArrayTags[arrayTag] = typedArrayTags[arrayBufferTag] = typedArrayTags[boolTag] = typedArrayTags[dataViewTag] = typedArrayTags[dateTag] = typedArrayTags[errorTag] = typedArrayTags[funcTag] = typedArrayTags[mapTag] = typedArrayTags[numberTag] = typedArrayTags[objectTag] = typedArrayTags[regexpTag] = typedArrayTags[setTag] = typedArrayTags[stringTag] = typedArrayTags[weakMapTag] = false;
+/** Detect free variable `global` from Node.js. */
+
+var freeGlobal = typeof global == 'object' && global && global.Object === Object && global;
+/** Detect free variable `self`. */
+
+var freeSelf = typeof self == 'object' && self && self.Object === Object && self;
+/** Used as a reference to the global object. */
+
+var root = freeGlobal || freeSelf || Function('return this')();
+/** Detect free variable `exports`. */
+
+var freeExports = typeof exports == 'object' && exports && !exports.nodeType && exports;
+/** Detect free variable `module`. */
+
+var freeModule = freeExports && typeof module == 'object' && module && !module.nodeType && module;
+/** Detect the popular CommonJS extension `module.exports`. */
+
+var moduleExports = freeModule && freeModule.exports === freeExports;
+/** Detect free variable `process` from Node.js. */
+
+var freeProcess = moduleExports && freeGlobal.process;
+/** Used to access faster Node.js helpers. */
+
+var nodeUtil = function () {
+  try {
+    return freeProcess && freeProcess.binding && freeProcess.binding('util');
+  } catch (e) {}
+}();
+/* Node.js helper references. */
+
+
+var nodeIsTypedArray = nodeUtil && nodeUtil.isTypedArray;
+/**
+ * A specialized version of `_.filter` for arrays without support for
+ * iteratee shorthands.
+ *
+ * @private
+ * @param {Array} [array] The array to iterate over.
+ * @param {Function} predicate The function invoked per iteration.
+ * @returns {Array} Returns the new filtered array.
+ */
+
+function arrayFilter(array, predicate) {
+  var index = -1,
+      length = array == null ? 0 : array.length,
+      resIndex = 0,
+      result = [];
+
+  while (++index < length) {
+    var value = array[index];
+
+    if (predicate(value, index, array)) {
+      result[resIndex++] = value;
+    }
+  }
+
+  return result;
+}
+/**
+ * Appends the elements of `values` to `array`.
+ *
+ * @private
+ * @param {Array} array The array to modify.
+ * @param {Array} values The values to append.
+ * @returns {Array} Returns `array`.
+ */
+
+
+function arrayPush(array, values) {
+  var index = -1,
+      length = values.length,
+      offset = array.length;
+
+  while (++index < length) {
+    array[offset + index] = values[index];
+  }
+
+  return array;
+}
+/**
+ * A specialized version of `_.some` for arrays without support for iteratee
+ * shorthands.
+ *
+ * @private
+ * @param {Array} [array] The array to iterate over.
+ * @param {Function} predicate The function invoked per iteration.
+ * @returns {boolean} Returns `true` if any element passes the predicate check,
+ *  else `false`.
+ */
+
+
+function arraySome(array, predicate) {
+  var index = -1,
+      length = array == null ? 0 : array.length;
+
+  while (++index < length) {
+    if (predicate(array[index], index, array)) {
+      return true;
+    }
+  }
+
+  return false;
+}
+/**
+ * The base implementation of `_.times` without support for iteratee shorthands
+ * or max array length checks.
+ *
+ * @private
+ * @param {number} n The number of times to invoke `iteratee`.
+ * @param {Function} iteratee The function invoked per iteration.
+ * @returns {Array} Returns the array of results.
+ */
+
+
+function baseTimes(n, iteratee) {
+  var index = -1,
+      result = Array(n);
+
+  while (++index < n) {
+    result[index] = iteratee(index);
+  }
+
+  return result;
+}
+/**
+ * The base implementation of `_.unary` without support for storing metadata.
+ *
+ * @private
+ * @param {Function} func The function to cap arguments for.
+ * @returns {Function} Returns the new capped function.
+ */
+
+
+function baseUnary(func) {
+  return function (value) {
+    return func(value);
+  };
+}
+/**
+ * Checks if a `cache` value for `key` exists.
+ *
+ * @private
+ * @param {Object} cache The cache to query.
+ * @param {string} key The key of the entry to check.
+ * @returns {boolean} Returns `true` if an entry for `key` exists, else `false`.
+ */
+
+
+function cacheHas(cache, key) {
+  return cache.has(key);
+}
+/**
+ * Gets the value at `key` of `object`.
+ *
+ * @private
+ * @param {Object} [object] The object to query.
+ * @param {string} key The key of the property to get.
+ * @returns {*} Returns the property value.
+ */
+
+
+function getValue(object, key) {
+  return object == null ? undefined : object[key];
+}
+/**
+ * Converts `map` to its key-value pairs.
+ *
+ * @private
+ * @param {Object} map The map to convert.
+ * @returns {Array} Returns the key-value pairs.
+ */
+
+
+function mapToArray(map) {
+  var index = -1,
+      result = Array(map.size);
+  map.forEach(function (value, key) {
+    result[++index] = [key, value];
+  });
+  return result;
+}
+/**
+ * Creates a unary function that invokes `func` with its argument transformed.
+ *
+ * @private
+ * @param {Function} func The function to wrap.
+ * @param {Function} transform The argument transform.
+ * @returns {Function} Returns the new function.
+ */
+
+
+function overArg(func, transform) {
+  return function (arg) {
+    return func(transform(arg));
+  };
+}
+/**
+ * Converts `set` to an array of its values.
+ *
+ * @private
+ * @param {Object} set The set to convert.
+ * @returns {Array} Returns the values.
+ */
+
+
+function setToArray(set) {
+  var index = -1,
+      result = Array(set.size);
+  set.forEach(function (value) {
+    result[++index] = value;
+  });
+  return result;
+}
+/** Used for built-in method references. */
+
+
+var arrayProto = Array.prototype,
+    funcProto = Function.prototype,
+    objectProto = Object.prototype;
+/** Used to detect overreaching core-js shims. */
+
+var coreJsData = root['__core-js_shared__'];
+/** Used to resolve the decompiled source of functions. */
+
+var funcToString = funcProto.toString;
+/** Used to check objects for own properties. */
+
+var hasOwnProperty = objectProto.hasOwnProperty;
+/** Used to detect methods masquerading as native. */
+
+var maskSrcKey = function () {
+  var uid = /[^.]+$/.exec(coreJsData && coreJsData.keys && coreJsData.keys.IE_PROTO || '');
+  return uid ? 'Symbol(src)_1.' + uid : '';
+}();
+/**
+ * Used to resolve the
+ * [`toStringTag`](http://ecma-international.org/ecma-262/7.0/#sec-object.prototype.tostring)
+ * of values.
+ */
+
+
+var nativeObjectToString = objectProto.toString;
+/** Used to detect if a method is native. */
+
+var reIsNative = RegExp('^' + funcToString.call(hasOwnProperty).replace(reRegExpChar, '\\$&').replace(/hasOwnProperty|(function).*?(?=\\\()| for .+?(?=\\\])/g, '$1.*?') + '$');
+/** Built-in value references. */
+
+var Buffer = moduleExports ? root.Buffer : undefined,
+    Symbol = root.Symbol,
+    Uint8Array = root.Uint8Array,
+    propertyIsEnumerable = objectProto.propertyIsEnumerable,
+    splice = arrayProto.splice,
+    symToStringTag = Symbol ? Symbol.toStringTag : undefined;
+/* Built-in method references for those with the same name as other `lodash` methods. */
+
+var nativeGetSymbols = Object.getOwnPropertySymbols,
+    nativeIsBuffer = Buffer ? Buffer.isBuffer : undefined,
+    nativeKeys = overArg(Object.keys, Object);
+/* Built-in method references that are verified to be native. */
+
+var DataView = getNative(root, 'DataView'),
+    Map = getNative(root, 'Map'),
+    Promise = getNative(root, 'Promise'),
+    Set = getNative(root, 'Set'),
+    WeakMap = getNative(root, 'WeakMap'),
+    nativeCreate = getNative(Object, 'create');
+/** Used to detect maps, sets, and weakmaps. */
+
+var dataViewCtorString = toSource(DataView),
+    mapCtorString = toSource(Map),
+    promiseCtorString = toSource(Promise),
+    setCtorString = toSource(Set),
+    weakMapCtorString = toSource(WeakMap);
+/** Used to convert symbols to primitives and strings. */
+
+var symbolProto = Symbol ? Symbol.prototype : undefined,
+    symbolValueOf = symbolProto ? symbolProto.valueOf : undefined;
+/**
+ * Creates a hash object.
+ *
+ * @private
+ * @constructor
+ * @param {Array} [entries] The key-value pairs to cache.
+ */
+
+function Hash(entries) {
+  var index = -1,
+      length = entries == null ? 0 : entries.length;
+  this.clear();
+
+  while (++index < length) {
+    var entry = entries[index];
+    this.set(entry[0], entry[1]);
+  }
+}
+/**
+ * Removes all key-value entries from the hash.
+ *
+ * @private
+ * @name clear
+ * @memberOf Hash
+ */
+
+
+function hashClear() {
+  this.__data__ = nativeCreate ? nativeCreate(null) : {};
+  this.size = 0;
+}
+/**
+ * Removes `key` and its value from the hash.
+ *
+ * @private
+ * @name delete
+ * @memberOf Hash
+ * @param {Object} hash The hash to modify.
+ * @param {string} key The key of the value to remove.
+ * @returns {boolean} Returns `true` if the entry was removed, else `false`.
+ */
+
+
+function hashDelete(key) {
+  var result = this.has(key) && delete this.__data__[key];
+  this.size -= result ? 1 : 0;
+  return result;
+}
+/**
+ * Gets the hash value for `key`.
+ *
+ * @private
+ * @name get
+ * @memberOf Hash
+ * @param {string} key The key of the value to get.
+ * @returns {*} Returns the entry value.
+ */
+
+
+function hashGet(key) {
+  var data = this.__data__;
+
+  if (nativeCreate) {
+    var result = data[key];
+    return result === HASH_UNDEFINED ? undefined : result;
+  }
+
+  return hasOwnProperty.call(data, key) ? data[key] : undefined;
+}
+/**
+ * Checks if a hash value for `key` exists.
+ *
+ * @private
+ * @name has
+ * @memberOf Hash
+ * @param {string} key The key of the entry to check.
+ * @returns {boolean} Returns `true` if an entry for `key` exists, else `false`.
+ */
+
+
+function hashHas(key) {
+  var data = this.__data__;
+  return nativeCreate ? data[key] !== undefined : hasOwnProperty.call(data, key);
+}
+/**
+ * Sets the hash `key` to `value`.
+ *
+ * @private
+ * @name set
+ * @memberOf Hash
+ * @param {string} key The key of the value to set.
+ * @param {*} value The value to set.
+ * @returns {Object} Returns the hash instance.
+ */
+
+
+function hashSet(key, value) {
+  var data = this.__data__;
+  this.size += this.has(key) ? 0 : 1;
+  data[key] = nativeCreate && value === undefined ? HASH_UNDEFINED : value;
+  return this;
+} // Add methods to `Hash`.
+
+
+Hash.prototype.clear = hashClear;
+Hash.prototype['delete'] = hashDelete;
+Hash.prototype.get = hashGet;
+Hash.prototype.has = hashHas;
+Hash.prototype.set = hashSet;
+/**
+ * Creates an list cache object.
+ *
+ * @private
+ * @constructor
+ * @param {Array} [entries] The key-value pairs to cache.
+ */
+
+function ListCache(entries) {
+  var index = -1,
+      length = entries == null ? 0 : entries.length;
+  this.clear();
+
+  while (++index < length) {
+    var entry = entries[index];
+    this.set(entry[0], entry[1]);
+  }
+}
+/**
+ * Removes all key-value entries from the list cache.
+ *
+ * @private
+ * @name clear
+ * @memberOf ListCache
+ */
+
+
+function listCacheClear() {
+  this.__data__ = [];
+  this.size = 0;
+}
+/**
+ * Removes `key` and its value from the list cache.
+ *
+ * @private
+ * @name delete
+ * @memberOf ListCache
+ * @param {string} key The key of the value to remove.
+ * @returns {boolean} Returns `true` if the entry was removed, else `false`.
+ */
+
+
+function listCacheDelete(key) {
+  var data = this.__data__,
+      index = assocIndexOf(data, key);
+
+  if (index < 0) {
+    return false;
+  }
+
+  var lastIndex = data.length - 1;
+
+  if (index == lastIndex) {
+    data.pop();
+  } else {
+    splice.call(data, index, 1);
+  }
+
+  --this.size;
+  return true;
+}
+/**
+ * Gets the list cache value for `key`.
+ *
+ * @private
+ * @name get
+ * @memberOf ListCache
+ * @param {string} key The key of the value to get.
+ * @returns {*} Returns the entry value.
+ */
+
+
+function listCacheGet(key) {
+  var data = this.__data__,
+      index = assocIndexOf(data, key);
+  return index < 0 ? undefined : data[index][1];
+}
+/**
+ * Checks if a list cache value for `key` exists.
+ *
+ * @private
+ * @name has
+ * @memberOf ListCache
+ * @param {string} key The key of the entry to check.
+ * @returns {boolean} Returns `true` if an entry for `key` exists, else `false`.
+ */
+
+
+function listCacheHas(key) {
+  return assocIndexOf(this.__data__, key) > -1;
+}
+/**
+ * Sets the list cache `key` to `value`.
+ *
+ * @private
+ * @name set
+ * @memberOf ListCache
+ * @param {string} key The key of the value to set.
+ * @param {*} value The value to set.
+ * @returns {Object} Returns the list cache instance.
+ */
+
+
+function listCacheSet(key, value) {
+  var data = this.__data__,
+      index = assocIndexOf(data, key);
+
+  if (index < 0) {
+    ++this.size;
+    data.push([key, value]);
+  } else {
+    data[index][1] = value;
+  }
+
+  return this;
+} // Add methods to `ListCache`.
+
+
+ListCache.prototype.clear = listCacheClear;
+ListCache.prototype['delete'] = listCacheDelete;
+ListCache.prototype.get = listCacheGet;
+ListCache.prototype.has = listCacheHas;
+ListCache.prototype.set = listCacheSet;
+/**
+ * Creates a map cache object to store key-value pairs.
+ *
+ * @private
+ * @constructor
+ * @param {Array} [entries] The key-value pairs to cache.
+ */
+
+function MapCache(entries) {
+  var index = -1,
+      length = entries == null ? 0 : entries.length;
+  this.clear();
+
+  while (++index < length) {
+    var entry = entries[index];
+    this.set(entry[0], entry[1]);
+  }
+}
+/**
+ * Removes all key-value entries from the map.
+ *
+ * @private
+ * @name clear
+ * @memberOf MapCache
+ */
+
+
+function mapCacheClear() {
+  this.size = 0;
+  this.__data__ = {
+    'hash': new Hash(),
+    'map': new (Map || ListCache)(),
+    'string': new Hash()
+  };
+}
+/**
+ * Removes `key` and its value from the map.
+ *
+ * @private
+ * @name delete
+ * @memberOf MapCache
+ * @param {string} key The key of the value to remove.
+ * @returns {boolean} Returns `true` if the entry was removed, else `false`.
+ */
+
+
+function mapCacheDelete(key) {
+  var result = getMapData(this, key)['delete'](key);
+  this.size -= result ? 1 : 0;
+  return result;
+}
+/**
+ * Gets the map value for `key`.
+ *
+ * @private
+ * @name get
+ * @memberOf MapCache
+ * @param {string} key The key of the value to get.
+ * @returns {*} Returns the entry value.
+ */
+
+
+function mapCacheGet(key) {
+  return getMapData(this, key).get(key);
+}
+/**
+ * Checks if a map value for `key` exists.
+ *
+ * @private
+ * @name has
+ * @memberOf MapCache
+ * @param {string} key The key of the entry to check.
+ * @returns {boolean} Returns `true` if an entry for `key` exists, else `false`.
+ */
+
+
+function mapCacheHas(key) {
+  return getMapData(this, key).has(key);
+}
+/**
+ * Sets the map `key` to `value`.
+ *
+ * @private
+ * @name set
+ * @memberOf MapCache
+ * @param {string} key The key of the value to set.
+ * @param {*} value The value to set.
+ * @returns {Object} Returns the map cache instance.
+ */
+
+
+function mapCacheSet(key, value) {
+  var data = getMapData(this, key),
+      size = data.size;
+  data.set(key, value);
+  this.size += data.size == size ? 0 : 1;
+  return this;
+} // Add methods to `MapCache`.
+
+
+MapCache.prototype.clear = mapCacheClear;
+MapCache.prototype['delete'] = mapCacheDelete;
+MapCache.prototype.get = mapCacheGet;
+MapCache.prototype.has = mapCacheHas;
+MapCache.prototype.set = mapCacheSet;
+/**
+ *
+ * Creates an array cache object to store unique values.
+ *
+ * @private
+ * @constructor
+ * @param {Array} [values] The values to cache.
+ */
+
+function SetCache(values) {
+  var index = -1,
+      length = values == null ? 0 : values.length;
+  this.__data__ = new MapCache();
+
+  while (++index < length) {
+    this.add(values[index]);
+  }
+}
+/**
+ * Adds `value` to the array cache.
+ *
+ * @private
+ * @name add
+ * @memberOf SetCache
+ * @alias push
+ * @param {*} value The value to cache.
+ * @returns {Object} Returns the cache instance.
+ */
+
+
+function setCacheAdd(value) {
+  this.__data__.set(value, HASH_UNDEFINED);
+
+  return this;
+}
+/**
+ * Checks if `value` is in the array cache.
+ *
+ * @private
+ * @name has
+ * @memberOf SetCache
+ * @param {*} value The value to search for.
+ * @returns {number} Returns `true` if `value` is found, else `false`.
+ */
+
+
+function setCacheHas(value) {
+  return this.__data__.has(value);
+} // Add methods to `SetCache`.
+
+
+SetCache.prototype.add = SetCache.prototype.push = setCacheAdd;
+SetCache.prototype.has = setCacheHas;
+/**
+ * Creates a stack cache object to store key-value pairs.
+ *
+ * @private
+ * @constructor
+ * @param {Array} [entries] The key-value pairs to cache.
+ */
+
+function Stack(entries) {
+  var data = this.__data__ = new ListCache(entries);
+  this.size = data.size;
+}
+/**
+ * Removes all key-value entries from the stack.
+ *
+ * @private
+ * @name clear
+ * @memberOf Stack
+ */
+
+
+function stackClear() {
+  this.__data__ = new ListCache();
+  this.size = 0;
+}
+/**
+ * Removes `key` and its value from the stack.
+ *
+ * @private
+ * @name delete
+ * @memberOf Stack
+ * @param {string} key The key of the value to remove.
+ * @returns {boolean} Returns `true` if the entry was removed, else `false`.
+ */
+
+
+function stackDelete(key) {
+  var data = this.__data__,
+      result = data['delete'](key);
+  this.size = data.size;
+  return result;
+}
+/**
+ * Gets the stack value for `key`.
+ *
+ * @private
+ * @name get
+ * @memberOf Stack
+ * @param {string} key The key of the value to get.
+ * @returns {*} Returns the entry value.
+ */
+
+
+function stackGet(key) {
+  return this.__data__.get(key);
+}
+/**
+ * Checks if a stack value for `key` exists.
+ *
+ * @private
+ * @name has
+ * @memberOf Stack
+ * @param {string} key The key of the entry to check.
+ * @returns {boolean} Returns `true` if an entry for `key` exists, else `false`.
+ */
+
+
+function stackHas(key) {
+  return this.__data__.has(key);
+}
+/**
+ * Sets the stack `key` to `value`.
+ *
+ * @private
+ * @name set
+ * @memberOf Stack
+ * @param {string} key The key of the value to set.
+ * @param {*} value The value to set.
+ * @returns {Object} Returns the stack cache instance.
+ */
+
+
+function stackSet(key, value) {
+  var data = this.__data__;
+
+  if (data instanceof ListCache) {
+    var pairs = data.__data__;
+
+    if (!Map || pairs.length < LARGE_ARRAY_SIZE - 1) {
+      pairs.push([key, value]);
+      this.size = ++data.size;
+      return this;
+    }
+
+    data = this.__data__ = new MapCache(pairs);
+  }
+
+  data.set(key, value);
+  this.size = data.size;
+  return this;
+} // Add methods to `Stack`.
+
+
+Stack.prototype.clear = stackClear;
+Stack.prototype['delete'] = stackDelete;
+Stack.prototype.get = stackGet;
+Stack.prototype.has = stackHas;
+Stack.prototype.set = stackSet;
+/**
+ * Creates an array of the enumerable property names of the array-like `value`.
+ *
+ * @private
+ * @param {*} value The value to query.
+ * @param {boolean} inherited Specify returning inherited property names.
+ * @returns {Array} Returns the array of property names.
+ */
+
+function arrayLikeKeys(value, inherited) {
+  var isArr = isArray(value),
+      isArg = !isArr && isArguments(value),
+      isBuff = !isArr && !isArg && isBuffer(value),
+      isType = !isArr && !isArg && !isBuff && isTypedArray(value),
+      skipIndexes = isArr || isArg || isBuff || isType,
+      result = skipIndexes ? baseTimes(value.length, String) : [],
+      length = result.length;
+
+  for (var key in value) {
+    if ((inherited || hasOwnProperty.call(value, key)) && !(skipIndexes && ( // Safari 9 has enumerable `arguments.length` in strict mode.
+    key == 'length' || // Node.js 0.10 has enumerable non-index properties on buffers.
+    isBuff && (key == 'offset' || key == 'parent') || // PhantomJS 2 has enumerable non-index properties on typed arrays.
+    isType && (key == 'buffer' || key == 'byteLength' || key == 'byteOffset') || // Skip index properties.
+    isIndex(key, length)))) {
+      result.push(key);
+    }
+  }
+
+  return result;
+}
+/**
+ * Gets the index at which the `key` is found in `array` of key-value pairs.
+ *
+ * @private
+ * @param {Array} array The array to inspect.
+ * @param {*} key The key to search for.
+ * @returns {number} Returns the index of the matched value, else `-1`.
+ */
+
+
+function assocIndexOf(array, key) {
+  var length = array.length;
+
+  while (length--) {
+    if (eq(array[length][0], key)) {
+      return length;
+    }
+  }
+
+  return -1;
+}
+/**
+ * The base implementation of `getAllKeys` and `getAllKeysIn` which uses
+ * `keysFunc` and `symbolsFunc` to get the enumerable property names and
+ * symbols of `object`.
+ *
+ * @private
+ * @param {Object} object The object to query.
+ * @param {Function} keysFunc The function to get the keys of `object`.
+ * @param {Function} symbolsFunc The function to get the symbols of `object`.
+ * @returns {Array} Returns the array of property names and symbols.
+ */
+
+
+function baseGetAllKeys(object, keysFunc, symbolsFunc) {
+  var result = keysFunc(object);
+  return isArray(object) ? result : arrayPush(result, symbolsFunc(object));
+}
+/**
+ * The base implementation of `getTag` without fallbacks for buggy environments.
+ *
+ * @private
+ * @param {*} value The value to query.
+ * @returns {string} Returns the `toStringTag`.
+ */
+
+
+function baseGetTag(value) {
+  if (value == null) {
+    return value === undefined ? undefinedTag : nullTag;
+  }
+
+  return symToStringTag && symToStringTag in Object(value) ? getRawTag(value) : objectToString(value);
+}
+/**
+ * The base implementation of `_.isArguments`.
+ *
+ * @private
+ * @param {*} value The value to check.
+ * @returns {boolean} Returns `true` if `value` is an `arguments` object,
+ */
+
+
+function baseIsArguments(value) {
+  return isObjectLike(value) && baseGetTag(value) == argsTag;
+}
+/**
+ * The base implementation of `_.isEqual` which supports partial comparisons
+ * and tracks traversed objects.
+ *
+ * @private
+ * @param {*} value The value to compare.
+ * @param {*} other The other value to compare.
+ * @param {boolean} bitmask The bitmask flags.
+ *  1 - Unordered comparison
+ *  2 - Partial comparison
+ * @param {Function} [customizer] The function to customize comparisons.
+ * @param {Object} [stack] Tracks traversed `value` and `other` objects.
+ * @returns {boolean} Returns `true` if the values are equivalent, else `false`.
+ */
+
+
+function baseIsEqual(value, other, bitmask, customizer, stack) {
+  if (value === other) {
+    return true;
+  }
+
+  if (value == null || other == null || !isObjectLike(value) && !isObjectLike(other)) {
+    return value !== value && other !== other;
+  }
+
+  return baseIsEqualDeep(value, other, bitmask, customizer, baseIsEqual, stack);
+}
+/**
+ * A specialized version of `baseIsEqual` for arrays and objects which performs
+ * deep comparisons and tracks traversed objects enabling objects with circular
+ * references to be compared.
+ *
+ * @private
+ * @param {Object} object The object to compare.
+ * @param {Object} other The other object to compare.
+ * @param {number} bitmask The bitmask flags. See `baseIsEqual` for more details.
+ * @param {Function} customizer The function to customize comparisons.
+ * @param {Function} equalFunc The function to determine equivalents of values.
+ * @param {Object} [stack] Tracks traversed `object` and `other` objects.
+ * @returns {boolean} Returns `true` if the objects are equivalent, else `false`.
+ */
+
+
+function baseIsEqualDeep(object, other, bitmask, customizer, equalFunc, stack) {
+  var objIsArr = isArray(object),
+      othIsArr = isArray(other),
+      objTag = objIsArr ? arrayTag : getTag(object),
+      othTag = othIsArr ? arrayTag : getTag(other);
+  objTag = objTag == argsTag ? objectTag : objTag;
+  othTag = othTag == argsTag ? objectTag : othTag;
+  var objIsObj = objTag == objectTag,
+      othIsObj = othTag == objectTag,
+      isSameTag = objTag == othTag;
+
+  if (isSameTag && isBuffer(object)) {
+    if (!isBuffer(other)) {
+      return false;
+    }
+
+    objIsArr = true;
+    objIsObj = false;
+  }
+
+  if (isSameTag && !objIsObj) {
+    stack || (stack = new Stack());
+    return objIsArr || isTypedArray(object) ? equalArrays(object, other, bitmask, customizer, equalFunc, stack) : equalByTag(object, other, objTag, bitmask, customizer, equalFunc, stack);
+  }
+
+  if (!(bitmask & COMPARE_PARTIAL_FLAG)) {
+    var objIsWrapped = objIsObj && hasOwnProperty.call(object, '__wrapped__'),
+        othIsWrapped = othIsObj && hasOwnProperty.call(other, '__wrapped__');
+
+    if (objIsWrapped || othIsWrapped) {
+      var objUnwrapped = objIsWrapped ? object.value() : object,
+          othUnwrapped = othIsWrapped ? other.value() : other;
+      stack || (stack = new Stack());
+      return equalFunc(objUnwrapped, othUnwrapped, bitmask, customizer, stack);
+    }
+  }
+
+  if (!isSameTag) {
+    return false;
+  }
+
+  stack || (stack = new Stack());
+  return equalObjects(object, other, bitmask, customizer, equalFunc, stack);
+}
+/**
+ * The base implementation of `_.isNative` without bad shim checks.
+ *
+ * @private
+ * @param {*} value The value to check.
+ * @returns {boolean} Returns `true` if `value` is a native function,
+ *  else `false`.
+ */
+
+
+function baseIsNative(value) {
+  if (!isObject(value) || isMasked(value)) {
+    return false;
+  }
+
+  var pattern = isFunction(value) ? reIsNative : reIsHostCtor;
+  return pattern.test(toSource(value));
+}
+/**
+ * The base implementation of `_.isTypedArray` without Node.js optimizations.
+ *
+ * @private
+ * @param {*} value The value to check.
+ * @returns {boolean} Returns `true` if `value` is a typed array, else `false`.
+ */
+
+
+function baseIsTypedArray(value) {
+  return isObjectLike(value) && isLength(value.length) && !!typedArrayTags[baseGetTag(value)];
+}
+/**
+ * The base implementation of `_.keys` which doesn't treat sparse arrays as dense.
+ *
+ * @private
+ * @param {Object} object The object to query.
+ * @returns {Array} Returns the array of property names.
+ */
+
+
+function baseKeys(object) {
+  if (!isPrototype(object)) {
+    return nativeKeys(object);
+  }
+
+  var result = [];
+
+  for (var key in Object(object)) {
+    if (hasOwnProperty.call(object, key) && key != 'constructor') {
+      result.push(key);
+    }
+  }
+
+  return result;
+}
+/**
+ * A specialized version of `baseIsEqualDeep` for arrays with support for
+ * partial deep comparisons.
+ *
+ * @private
+ * @param {Array} array The array to compare.
+ * @param {Array} other The other array to compare.
+ * @param {number} bitmask The bitmask flags. See `baseIsEqual` for more details.
+ * @param {Function} customizer The function to customize comparisons.
+ * @param {Function} equalFunc The function to determine equivalents of values.
+ * @param {Object} stack Tracks traversed `array` and `other` objects.
+ * @returns {boolean} Returns `true` if the arrays are equivalent, else `false`.
+ */
+
+
+function equalArrays(array, other, bitmask, customizer, equalFunc, stack) {
+  var isPartial = bitmask & COMPARE_PARTIAL_FLAG,
+      arrLength = array.length,
+      othLength = other.length;
+
+  if (arrLength != othLength && !(isPartial && othLength > arrLength)) {
+    return false;
+  } // Assume cyclic values are equal.
+
+
+  var stacked = stack.get(array);
+
+  if (stacked && stack.get(other)) {
+    return stacked == other;
+  }
+
+  var index = -1,
+      result = true,
+      seen = bitmask & COMPARE_UNORDERED_FLAG ? new SetCache() : undefined;
+  stack.set(array, other);
+  stack.set(other, array); // Ignore non-index properties.
+
+  while (++index < arrLength) {
+    var arrValue = array[index],
+        othValue = other[index];
+
+    if (customizer) {
+      var compared = isPartial ? customizer(othValue, arrValue, index, other, array, stack) : customizer(arrValue, othValue, index, array, other, stack);
+    }
+
+    if (compared !== undefined) {
+      if (compared) {
+        continue;
+      }
+
+      result = false;
+      break;
+    } // Recursively compare arrays (susceptible to call stack limits).
+
+
+    if (seen) {
+      if (!arraySome(other, function (othValue, othIndex) {
+        if (!cacheHas(seen, othIndex) && (arrValue === othValue || equalFunc(arrValue, othValue, bitmask, customizer, stack))) {
+          return seen.push(othIndex);
+        }
+      })) {
+        result = false;
+        break;
+      }
+    } else if (!(arrValue === othValue || equalFunc(arrValue, othValue, bitmask, customizer, stack))) {
+      result = false;
+      break;
+    }
+  }
+
+  stack['delete'](array);
+  stack['delete'](other);
+  return result;
+}
+/**
+ * A specialized version of `baseIsEqualDeep` for comparing objects of
+ * the same `toStringTag`.
+ *
+ * **Note:** This function only supports comparing values with tags of
+ * `Boolean`, `Date`, `Error`, `Number`, `RegExp`, or `String`.
+ *
+ * @private
+ * @param {Object} object The object to compare.
+ * @param {Object} other The other object to compare.
+ * @param {string} tag The `toStringTag` of the objects to compare.
+ * @param {number} bitmask The bitmask flags. See `baseIsEqual` for more details.
+ * @param {Function} customizer The function to customize comparisons.
+ * @param {Function} equalFunc The function to determine equivalents of values.
+ * @param {Object} stack Tracks traversed `object` and `other` objects.
+ * @returns {boolean} Returns `true` if the objects are equivalent, else `false`.
+ */
+
+
+function equalByTag(object, other, tag, bitmask, customizer, equalFunc, stack) {
+  switch (tag) {
+    case dataViewTag:
+      if (object.byteLength != other.byteLength || object.byteOffset != other.byteOffset) {
+        return false;
+      }
+
+      object = object.buffer;
+      other = other.buffer;
+
+    case arrayBufferTag:
+      if (object.byteLength != other.byteLength || !equalFunc(new Uint8Array(object), new Uint8Array(other))) {
+        return false;
+      }
+
+      return true;
+
+    case boolTag:
+    case dateTag:
+    case numberTag:
+      // Coerce booleans to `1` or `0` and dates to milliseconds.
+      // Invalid dates are coerced to `NaN`.
+      return eq(+object, +other);
+
+    case errorTag:
+      return object.name == other.name && object.message == other.message;
+
+    case regexpTag:
+    case stringTag:
+      // Coerce regexes to strings and treat strings, primitives and objects,
+      // as equal. See http://www.ecma-international.org/ecma-262/7.0/#sec-regexp.prototype.tostring
+      // for more details.
+      return object == other + '';
+
+    case mapTag:
+      var convert = mapToArray;
+
+    case setTag:
+      var isPartial = bitmask & COMPARE_PARTIAL_FLAG;
+      convert || (convert = setToArray);
+
+      if (object.size != other.size && !isPartial) {
+        return false;
+      } // Assume cyclic values are equal.
+
+
+      var stacked = stack.get(object);
+
+      if (stacked) {
+        return stacked == other;
+      }
+
+      bitmask |= COMPARE_UNORDERED_FLAG; // Recursively compare objects (susceptible to call stack limits).
+
+      stack.set(object, other);
+      var result = equalArrays(convert(object), convert(other), bitmask, customizer, equalFunc, stack);
+      stack['delete'](object);
+      return result;
+
+    case symbolTag:
+      if (symbolValueOf) {
+        return symbolValueOf.call(object) == symbolValueOf.call(other);
+      }
+
+  }
+
+  return false;
+}
+/**
+ * A specialized version of `baseIsEqualDeep` for objects with support for
+ * partial deep comparisons.
+ *
+ * @private
+ * @param {Object} object The object to compare.
+ * @param {Object} other The other object to compare.
+ * @param {number} bitmask The bitmask flags. See `baseIsEqual` for more details.
+ * @param {Function} customizer The function to customize comparisons.
+ * @param {Function} equalFunc The function to determine equivalents of values.
+ * @param {Object} stack Tracks traversed `object` and `other` objects.
+ * @returns {boolean} Returns `true` if the objects are equivalent, else `false`.
+ */
+
+
+function equalObjects(object, other, bitmask, customizer, equalFunc, stack) {
+  var isPartial = bitmask & COMPARE_PARTIAL_FLAG,
+      objProps = getAllKeys(object),
+      objLength = objProps.length,
+      othProps = getAllKeys(other),
+      othLength = othProps.length;
+
+  if (objLength != othLength && !isPartial) {
+    return false;
+  }
+
+  var index = objLength;
+
+  while (index--) {
+    var key = objProps[index];
+
+    if (!(isPartial ? key in other : hasOwnProperty.call(other, key))) {
+      return false;
+    }
+  } // Assume cyclic values are equal.
+
+
+  var stacked = stack.get(object);
+
+  if (stacked && stack.get(other)) {
+    return stacked == other;
+  }
+
+  var result = true;
+  stack.set(object, other);
+  stack.set(other, object);
+  var skipCtor = isPartial;
+
+  while (++index < objLength) {
+    key = objProps[index];
+    var objValue = object[key],
+        othValue = other[key];
+
+    if (customizer) {
+      var compared = isPartial ? customizer(othValue, objValue, key, other, object, stack) : customizer(objValue, othValue, key, object, other, stack);
+    } // Recursively compare objects (susceptible to call stack limits).
+
+
+    if (!(compared === undefined ? objValue === othValue || equalFunc(objValue, othValue, bitmask, customizer, stack) : compared)) {
+      result = false;
+      break;
+    }
+
+    skipCtor || (skipCtor = key == 'constructor');
+  }
+
+  if (result && !skipCtor) {
+    var objCtor = object.constructor,
+        othCtor = other.constructor; // Non `Object` object instances with different constructors are not equal.
+
+    if (objCtor != othCtor && 'constructor' in object && 'constructor' in other && !(typeof objCtor == 'function' && objCtor instanceof objCtor && typeof othCtor == 'function' && othCtor instanceof othCtor)) {
+      result = false;
+    }
+  }
+
+  stack['delete'](object);
+  stack['delete'](other);
+  return result;
+}
+/**
+ * Creates an array of own enumerable property names and symbols of `object`.
+ *
+ * @private
+ * @param {Object} object The object to query.
+ * @returns {Array} Returns the array of property names and symbols.
+ */
+
+
+function getAllKeys(object) {
+  return baseGetAllKeys(object, keys, getSymbols);
+}
+/**
+ * Gets the data for `map`.
+ *
+ * @private
+ * @param {Object} map The map to query.
+ * @param {string} key The reference key.
+ * @returns {*} Returns the map data.
+ */
+
+
+function getMapData(map, key) {
+  var data = map.__data__;
+  return isKeyable(key) ? data[typeof key == 'string' ? 'string' : 'hash'] : data.map;
+}
+/**
+ * Gets the native function at `key` of `object`.
+ *
+ * @private
+ * @param {Object} object The object to query.
+ * @param {string} key The key of the method to get.
+ * @returns {*} Returns the function if it's native, else `undefined`.
+ */
+
+
+function getNative(object, key) {
+  var value = getValue(object, key);
+  return baseIsNative(value) ? value : undefined;
+}
+/**
+ * A specialized version of `baseGetTag` which ignores `Symbol.toStringTag` values.
+ *
+ * @private
+ * @param {*} value The value to query.
+ * @returns {string} Returns the raw `toStringTag`.
+ */
+
+
+function getRawTag(value) {
+  var isOwn = hasOwnProperty.call(value, symToStringTag),
+      tag = value[symToStringTag];
+
+  try {
+    value[symToStringTag] = undefined;
+    var unmasked = true;
+  } catch (e) {}
+
+  var result = nativeObjectToString.call(value);
+
+  if (unmasked) {
+    if (isOwn) {
+      value[symToStringTag] = tag;
+    } else {
+      delete value[symToStringTag];
+    }
+  }
+
+  return result;
+}
+/**
+ * Creates an array of the own enumerable symbols of `object`.
+ *
+ * @private
+ * @param {Object} object The object to query.
+ * @returns {Array} Returns the array of symbols.
+ */
+
+
+var getSymbols = !nativeGetSymbols ? stubArray : function (object) {
+  if (object == null) {
+    return [];
+  }
+
+  object = Object(object);
+  return arrayFilter(nativeGetSymbols(object), function (symbol) {
+    return propertyIsEnumerable.call(object, symbol);
+  });
+};
+/**
+ * Gets the `toStringTag` of `value`.
+ *
+ * @private
+ * @param {*} value The value to query.
+ * @returns {string} Returns the `toStringTag`.
+ */
+
+var getTag = baseGetTag; // Fallback for data views, maps, sets, and weak maps in IE 11 and promises in Node.js < 6.
+
+if (DataView && getTag(new DataView(new ArrayBuffer(1))) != dataViewTag || Map && getTag(new Map()) != mapTag || Promise && getTag(Promise.resolve()) != promiseTag || Set && getTag(new Set()) != setTag || WeakMap && getTag(new WeakMap()) != weakMapTag) {
+  getTag = function (value) {
+    var result = baseGetTag(value),
+        Ctor = result == objectTag ? value.constructor : undefined,
+        ctorString = Ctor ? toSource(Ctor) : '';
+
+    if (ctorString) {
+      switch (ctorString) {
+        case dataViewCtorString:
+          return dataViewTag;
+
+        case mapCtorString:
+          return mapTag;
+
+        case promiseCtorString:
+          return promiseTag;
+
+        case setCtorString:
+          return setTag;
+
+        case weakMapCtorString:
+          return weakMapTag;
+      }
+    }
+
+    return result;
+  };
+}
+/**
+ * Checks if `value` is a valid array-like index.
+ *
+ * @private
+ * @param {*} value The value to check.
+ * @param {number} [length=MAX_SAFE_INTEGER] The upper bounds of a valid index.
+ * @returns {boolean} Returns `true` if `value` is a valid index, else `false`.
+ */
+
+
+function isIndex(value, length) {
+  length = length == null ? MAX_SAFE_INTEGER : length;
+  return !!length && (typeof value == 'number' || reIsUint.test(value)) && value > -1 && value % 1 == 0 && value < length;
+}
+/**
+ * Checks if `value` is suitable for use as unique object key.
+ *
+ * @private
+ * @param {*} value The value to check.
+ * @returns {boolean} Returns `true` if `value` is suitable, else `false`.
+ */
+
+
+function isKeyable(value) {
+  var type = typeof value;
+  return type == 'string' || type == 'number' || type == 'symbol' || type == 'boolean' ? value !== '__proto__' : value === null;
+}
+/**
+ * Checks if `func` has its source masked.
+ *
+ * @private
+ * @param {Function} func The function to check.
+ * @returns {boolean} Returns `true` if `func` is masked, else `false`.
+ */
+
+
+function isMasked(func) {
+  return !!maskSrcKey && maskSrcKey in func;
+}
+/**
+ * Checks if `value` is likely a prototype object.
+ *
+ * @private
+ * @param {*} value The value to check.
+ * @returns {boolean} Returns `true` if `value` is a prototype, else `false`.
+ */
+
+
+function isPrototype(value) {
+  var Ctor = value && value.constructor,
+      proto = typeof Ctor == 'function' && Ctor.prototype || objectProto;
+  return value === proto;
+}
+/**
+ * Converts `value` to a string using `Object.prototype.toString`.
+ *
+ * @private
+ * @param {*} value The value to convert.
+ * @returns {string} Returns the converted string.
+ */
+
+
+function objectToString(value) {
+  return nativeObjectToString.call(value);
+}
+/**
+ * Converts `func` to its source code.
+ *
+ * @private
+ * @param {Function} func The function to convert.
+ * @returns {string} Returns the source code.
+ */
+
+
+function toSource(func) {
+  if (func != null) {
+    try {
+      return funcToString.call(func);
+    } catch (e) {}
+
+    try {
+      return func + '';
+    } catch (e) {}
+  }
+
+  return '';
+}
+/**
+ * Performs a
+ * [`SameValueZero`](http://ecma-international.org/ecma-262/7.0/#sec-samevaluezero)
+ * comparison between two values to determine if they are equivalent.
+ *
+ * @static
+ * @memberOf _
+ * @since 4.0.0
+ * @category Lang
+ * @param {*} value The value to compare.
+ * @param {*} other The other value to compare.
+ * @returns {boolean} Returns `true` if the values are equivalent, else `false`.
+ * @example
+ *
+ * var object = { 'a': 1 };
+ * var other = { 'a': 1 };
+ *
+ * _.eq(object, object);
+ * // => true
+ *
+ * _.eq(object, other);
+ * // => false
+ *
+ * _.eq('a', 'a');
+ * // => true
+ *
+ * _.eq('a', Object('a'));
+ * // => false
+ *
+ * _.eq(NaN, NaN);
+ * // => true
+ */
+
+
+function eq(value, other) {
+  return value === other || value !== value && other !== other;
+}
+/**
+ * Checks if `value` is likely an `arguments` object.
+ *
+ * @static
+ * @memberOf _
+ * @since 0.1.0
+ * @category Lang
+ * @param {*} value The value to check.
+ * @returns {boolean} Returns `true` if `value` is an `arguments` object,
+ *  else `false`.
+ * @example
+ *
+ * _.isArguments(function() { return arguments; }());
+ * // => true
+ *
+ * _.isArguments([1, 2, 3]);
+ * // => false
+ */
+
+
+var isArguments = baseIsArguments(function () {
+  return arguments;
+}()) ? baseIsArguments : function (value) {
+  return isObjectLike(value) && hasOwnProperty.call(value, 'callee') && !propertyIsEnumerable.call(value, 'callee');
+};
+/**
+ * Checks if `value` is classified as an `Array` object.
+ *
+ * @static
+ * @memberOf _
+ * @since 0.1.0
+ * @category Lang
+ * @param {*} value The value to check.
+ * @returns {boolean} Returns `true` if `value` is an array, else `false`.
+ * @example
+ *
+ * _.isArray([1, 2, 3]);
+ * // => true
+ *
+ * _.isArray(document.body.children);
+ * // => false
+ *
+ * _.isArray('abc');
+ * // => false
+ *
+ * _.isArray(_.noop);
+ * // => false
+ */
+
+var isArray = Array.isArray;
+/**
+ * Checks if `value` is array-like. A value is considered array-like if it's
+ * not a function and has a `value.length` that's an integer greater than or
+ * equal to `0` and less than or equal to `Number.MAX_SAFE_INTEGER`.
+ *
+ * @static
+ * @memberOf _
+ * @since 4.0.0
+ * @category Lang
+ * @param {*} value The value to check.
+ * @returns {boolean} Returns `true` if `value` is array-like, else `false`.
+ * @example
+ *
+ * _.isArrayLike([1, 2, 3]);
+ * // => true
+ *
+ * _.isArrayLike(document.body.children);
+ * // => true
+ *
+ * _.isArrayLike('abc');
+ * // => true
+ *
+ * _.isArrayLike(_.noop);
+ * // => false
+ */
+
+function isArrayLike(value) {
+  return value != null && isLength(value.length) && !isFunction(value);
+}
+/**
+ * Checks if `value` is a buffer.
+ *
+ * @static
+ * @memberOf _
+ * @since 4.3.0
+ * @category Lang
+ * @param {*} value The value to check.
+ * @returns {boolean} Returns `true` if `value` is a buffer, else `false`.
+ * @example
+ *
+ * _.isBuffer(new Buffer(2));
+ * // => true
+ *
+ * _.isBuffer(new Uint8Array(2));
+ * // => false
+ */
+
+
+var isBuffer = nativeIsBuffer || stubFalse;
+/**
+ * Performs a deep comparison between two values to determine if they are
+ * equivalent.
+ *
+ * **Note:** This method supports comparing arrays, array buffers, booleans,
+ * date objects, error objects, maps, numbers, `Object` objects, regexes,
+ * sets, strings, symbols, and typed arrays. `Object` objects are compared
+ * by their own, not inherited, enumerable properties. Functions and DOM
+ * nodes are compared by strict equality, i.e. `===`.
+ *
+ * @static
+ * @memberOf _
+ * @since 0.1.0
+ * @category Lang
+ * @param {*} value The value to compare.
+ * @param {*} other The other value to compare.
+ * @returns {boolean} Returns `true` if the values are equivalent, else `false`.
+ * @example
+ *
+ * var object = { 'a': 1 };
+ * var other = { 'a': 1 };
+ *
+ * _.isEqual(object, other);
+ * // => true
+ *
+ * object === other;
+ * // => false
+ */
+
+function isEqual(value, other) {
+  return baseIsEqual(value, other);
+}
+/**
+ * Checks if `value` is classified as a `Function` object.
+ *
+ * @static
+ * @memberOf _
+ * @since 0.1.0
+ * @category Lang
+ * @param {*} value The value to check.
+ * @returns {boolean} Returns `true` if `value` is a function, else `false`.
+ * @example
+ *
+ * _.isFunction(_);
+ * // => true
+ *
+ * _.isFunction(/abc/);
+ * // => false
+ */
+
+
+function isFunction(value) {
+  if (!isObject(value)) {
+    return false;
+  } // The use of `Object#toString` avoids issues with the `typeof` operator
+  // in Safari 9 which returns 'object' for typed arrays and other constructors.
+
+
+  var tag = baseGetTag(value);
+  return tag == funcTag || tag == genTag || tag == asyncTag || tag == proxyTag;
+}
+/**
+ * Checks if `value` is a valid array-like length.
+ *
+ * **Note:** This method is loosely based on
+ * [`ToLength`](http://ecma-international.org/ecma-262/7.0/#sec-tolength).
+ *
+ * @static
+ * @memberOf _
+ * @since 4.0.0
+ * @category Lang
+ * @param {*} value The value to check.
+ * @returns {boolean} Returns `true` if `value` is a valid length, else `false`.
+ * @example
+ *
+ * _.isLength(3);
+ * // => true
+ *
+ * _.isLength(Number.MIN_VALUE);
+ * // => false
+ *
+ * _.isLength(Infinity);
+ * // => false
+ *
+ * _.isLength('3');
+ * // => false
+ */
+
+
+function isLength(value) {
+  return typeof value == 'number' && value > -1 && value % 1 == 0 && value <= MAX_SAFE_INTEGER;
+}
+/**
+ * Checks if `value` is the
+ * [language type](http://www.ecma-international.org/ecma-262/7.0/#sec-ecmascript-language-types)
+ * of `Object`. (e.g. arrays, functions, objects, regexes, `new Number(0)`, and `new String('')`)
+ *
+ * @static
+ * @memberOf _
+ * @since 0.1.0
+ * @category Lang
+ * @param {*} value The value to check.
+ * @returns {boolean} Returns `true` if `value` is an object, else `false`.
+ * @example
+ *
+ * _.isObject({});
+ * // => true
+ *
+ * _.isObject([1, 2, 3]);
+ * // => true
+ *
+ * _.isObject(_.noop);
+ * // => true
+ *
+ * _.isObject(null);
+ * // => false
+ */
+
+
+function isObject(value) {
+  var type = typeof value;
+  return value != null && (type == 'object' || type == 'function');
+}
+/**
+ * Checks if `value` is object-like. A value is object-like if it's not `null`
+ * and has a `typeof` result of "object".
+ *
+ * @static
+ * @memberOf _
+ * @since 4.0.0
+ * @category Lang
+ * @param {*} value The value to check.
+ * @returns {boolean} Returns `true` if `value` is object-like, else `false`.
+ * @example
+ *
+ * _.isObjectLike({});
+ * // => true
+ *
+ * _.isObjectLike([1, 2, 3]);
+ * // => true
+ *
+ * _.isObjectLike(_.noop);
+ * // => false
+ *
+ * _.isObjectLike(null);
+ * // => false
+ */
+
+
+function isObjectLike(value) {
+  return value != null && typeof value == 'object';
+}
+/**
+ * Checks if `value` is classified as a typed array.
+ *
+ * @static
+ * @memberOf _
+ * @since 3.0.0
+ * @category Lang
+ * @param {*} value The value to check.
+ * @returns {boolean} Returns `true` if `value` is a typed array, else `false`.
+ * @example
+ *
+ * _.isTypedArray(new Uint8Array);
+ * // => true
+ *
+ * _.isTypedArray([]);
+ * // => false
+ */
+
+
+var isTypedArray = nodeIsTypedArray ? baseUnary(nodeIsTypedArray) : baseIsTypedArray;
+/**
+ * Creates an array of the own enumerable property names of `object`.
+ *
+ * **Note:** Non-object values are coerced to objects. See the
+ * [ES spec](http://ecma-international.org/ecma-262/7.0/#sec-object.keys)
+ * for more details.
+ *
+ * @static
+ * @since 0.1.0
+ * @memberOf _
+ * @category Object
+ * @param {Object} object The object to query.
+ * @returns {Array} Returns the array of property names.
+ * @example
+ *
+ * function Foo() {
+ *   this.a = 1;
+ *   this.b = 2;
+ * }
+ *
+ * Foo.prototype.c = 3;
+ *
+ * _.keys(new Foo);
+ * // => ['a', 'b'] (iteration order is not guaranteed)
+ *
+ * _.keys('hi');
+ * // => ['0', '1']
+ */
+
+function keys(object) {
+  return isArrayLike(object) ? arrayLikeKeys(object) : baseKeys(object);
+}
+/**
+ * This method returns a new empty array.
+ *
+ * @static
+ * @memberOf _
+ * @since 4.13.0
+ * @category Util
+ * @returns {Array} Returns the new empty array.
+ * @example
+ *
+ * var arrays = _.times(2, _.stubArray);
+ *
+ * console.log(arrays);
+ * // => [[], []]
+ *
+ * console.log(arrays[0] === arrays[1]);
+ * // => false
+ */
+
+
+function stubArray() {
+  return [];
+}
+/**
+ * This method returns `false`.
+ *
+ * @static
+ * @memberOf _
+ * @since 4.13.0
+ * @category Util
+ * @returns {boolean} Returns `false`.
+ * @example
+ *
+ * _.times(2, _.stubFalse);
+ * // => [false, false]
+ */
+
+
+function stubFalse() {
+  return false;
+}
+
+module.exports = isEqual;
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../webpack/buildin/module.js */ "./node_modules/webpack/buildin/module.js")(module)))
 
 /***/ }),
 
@@ -63636,6 +67784,40 @@ module.exports = warning;
 
 /***/ }),
 
+/***/ "./node_modules/webpack/buildin/module.js":
+/*!***********************************!*\
+  !*** (webpack)/buildin/module.js ***!
+  \***********************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = function (module) {
+  if (!module.webpackPolyfill) {
+    module.deprecate = function () {};
+
+    module.paths = []; // module.parent = undefined by default
+
+    if (!module.children) module.children = [];
+    Object.defineProperty(module, "loaded", {
+      enumerable: true,
+      get: function () {
+        return module.l;
+      }
+    });
+    Object.defineProperty(module, "id", {
+      enumerable: true,
+      get: function () {
+        return module.i;
+      }
+    });
+    module.webpackPolyfill = 1;
+  }
+
+  return module;
+};
+
+/***/ }),
+
 /***/ 0:
 /*!****************************!*\
   !*** multi ./app/index.js ***!
@@ -63656,6 +67838,17 @@ module.exports = __webpack_require__(/*! E:\DEV\vcode\v2_oneProcess\realnoti\app
 /***/ (function(module, exports) {
 
 module.exports = require("electron");
+
+/***/ }),
+
+/***/ "os":
+/*!*********************!*\
+  !*** external "os" ***!
+  \*********************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = require("os");
 
 /***/ })
 

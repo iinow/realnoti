@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { URL_LOGIN } from '../util/constant'
-import { fire } from '../util/Firebase'
+import { Fire } from '../util/Firebase'
 import * as Model from '../model/index'
 
 const REG_STYLE = {
@@ -25,7 +25,7 @@ class Register extends Component {
         document.body.style.backgroundColor = BodyBackgroundColor
         document.body.style.height = '100vh'
         // document.body.style.width = '100vh'
-        document.body.style.paddingTop ='60px'
+        // document.body.style.paddingTop ='60px'
     }
 
     componentWillUnmount = () => {
@@ -48,7 +48,7 @@ class Register extends Component {
         user.email = this.state.email
         user.message = this.state.message
 
-        fire.reg(user)
+        Fire.Instance.reg(user)
         this.props.history.push(URL_LOGIN)
         alert(`가입성공`)
     }

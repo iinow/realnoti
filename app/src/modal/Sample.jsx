@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import ReactModal from 'react-modal'
-import { fire } from '../util/Firebase'
+import { Fire } from '../util/Firebase'
 import * as Model from '../model/index'
 // ReactModal.setAppElement('#root')
 
@@ -86,14 +86,14 @@ class Sample extends Component {
         item.content = this.state.content
         item.title = this.state.title
 
-        let res = fire.insert_RestApi_Item(item)
+        let res = Fire.Instance.insert_RestApi_Item(item)
         console.log(`성공 여부 : ${res}`)
         console.log(res)
         this.handleCloseModal()
     }
 
     handleGetItemOnClick = async () => {
-        let res =  await fire.get_ApiItemModel()
+        let res =  await Fire.Instance.get_ApiItemModel()
         // res.docs.forEach((data, index)=>{
         //     console.log(`${index}번재 ${data.data()}`)
         // })

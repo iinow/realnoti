@@ -11,6 +11,7 @@ const electron = require('electron')
 const remote = electron.remote
 // import * as noti from 'node-notifier'
 let noti = window.require('node-notifier')
+import { Noti } from '../notification/Noti'
 // const { BrowserWindow } = require('electron').remote
 
 class AVView extends Component {
@@ -19,10 +20,11 @@ class AVView extends Component {
     }
 
     handleTestOnClick = () => {
-        noti.notify({
-            title: "Title!!",
-            message: "Hello, There!!"
-        })
+        Noti.instance.noti()
+        // noti.notify({
+        //     title: "Title!!",
+        //     message: "Hello, There!!"
+        // })
     }
 
     render() {

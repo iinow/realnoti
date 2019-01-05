@@ -63,6 +63,7 @@ class Home extends Component {
                 <div id="page-content-wrapper">
                     <Route exact path={`${this.props.match.url}${URL.URL_HOME_RESTAPI}`} component={PAGE.RestApi} />
                     <Route exact path={`${this.props.match.url}${URL.URL_HOME_AVVIEW}`} component={PAGE.AVView} />
+                    <Route exact path={`${this.props.match.url}${URL.URL_HOME_CHAT}`} component={PAGE.Chat} />
                 </div>
                 {/* <div style={{ margin: '30px' }}>
                     Hello ???
