@@ -54,9 +54,7 @@ class Home extends Component {
             <div id="wrapper" className="toggled">
                 <LeftMenu
                     props={this.props}
-                    item={
-                        leftmenujson
-                    }
+                    item={leftmenujson}
                     title="시작이당"
                     imgPath={'file://' + remote.app.getAppPath() + '/app/resource/moe.PNG'} />
 
@@ -64,6 +62,7 @@ class Home extends Component {
                     <Route exact path={`${this.props.match.url}${URL.URL_HOME_RESTAPI}`} component={PAGE.RestApi} />
                     <Route exact path={`${this.props.match.url}${URL.URL_HOME_AVVIEW}`} component={PAGE.AVView} />
                     <Route exact path={`${this.props.match.url}${URL.URL_HOME_CHAT}`} component={PAGE.Chat} />
+                    <Route exact path={`${this.props.match.url}${URL.URL_HOME_SET}`} component={PAGE.Setting} />
                 </div>
                 {/* <div style={{ margin: '30px' }}>
                     Hello ???

@@ -1297,21 +1297,54 @@ class Chat extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
   constructor(...args) {
     super(...args);
 
+    _defineProperty(this, "messages", void 0);
+
+    _defineProperty(this, "mykey", void 0);
+
     _defineProperty(this, "state", {
       msg: ''
     });
 
-    _defineProperty(this, "handleNewChatOnClick", () => {
-      let rooms = _util_Firebase__WEBPACK_IMPORTED_MODULE_2__["Fire"].Instance.realDB.ref('chatrooms').push();
-      rooms.update({
-        msg: "Hi Hello world"
+    _defineProperty(this, "componentDidMount", async () => {
+      let rooms = _util_Firebase__WEBPACK_IMPORTED_MODULE_2__["Fire"].Instance.realDB.ref(`chatrooms`);
+      await rooms.on('value', snap => {
+        snap.forEach(item => {
+          const {
+            id
+          } = item.val();
+
+          if (id == localStorage.getItem('id')) {
+            this.mykey = item.key;
+            console.log(item.key);
+          }
+        });
       });
-      rooms.key;
+      let mess = _util_Firebase__WEBPACK_IMPORTED_MODULE_2__["Fire"].Instance.realDB.ref(`chatrooms/${this.mykey}`);
+      await mess.on('value', snap => {
+        snap.forEach(item => {
+          console.log(item.val());
+        });
+      });
+    });
+
+    _defineProperty(this, "handleNewChatOnClick", () => {
+      let rooms = _util_Firebase__WEBPACK_IMPORTED_MODULE_2__["Fire"].Instance.realDB.ref(`chatrooms`).push();
+      rooms.update({
+        id: localStorage.getItem('id'),
+        messages: []
+      }); // rooms.key
+
+      this.messages = rooms.child("messages"); // rooms.on("child_added", item=>{
+      // })
     });
 
     _defineProperty(this, "handleChatOnSubmit", () => {});
 
-    _defineProperty(this, "handleSendMessageOnClick", () => {// Fire.Instance.realDB.ref().once()
+    _defineProperty(this, "handleSendMessageOnClick", () => {
+      this.messages.push({
+        id: localStorage.getItem('id'),
+        msg: this.state.msg
+      });
     });
 
     _defineProperty(this, "handleMessageOnChange", e => {
@@ -1327,6 +1360,7 @@ class Chat extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
         float: 'left'
       }
     }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+      className: "input",
       onChange: this.handleMessageOnChange
     }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
       className: "button",
@@ -1451,6 +1485,10 @@ class Home extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
       exact: true,
       path: `${this.props.match.url}${_util_constant__WEBPACK_IMPORTED_MODULE_3__["URL_HOME_CHAT"]}`,
       component: _index__WEBPACK_IMPORTED_MODULE_4__["Chat"]
+    }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_5__["Route"], {
+      exact: true,
+      path: `${this.props.match.url}${_util_constant__WEBPACK_IMPORTED_MODULE_3__["URL_HOME_SET"]}`,
+      component: _index__WEBPACK_IMPORTED_MODULE_4__["Setting"]
     })));
   }
 
@@ -1922,11 +1960,39 @@ RestApi.propTypes = {};
 
 /***/ }),
 
+/***/ "./app/src/pages/Setting.jsx":
+/*!***********************************!*\
+  !*** ./app/src/pages/Setting.jsx ***!
+  \***********************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_1__);
+
+
+
+class Setting extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
+  render() {
+    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null);
+  }
+
+}
+
+Setting.propTypes = {};
+/* harmony default export */ __webpack_exports__["default"] = (Setting);
+
+/***/ }),
+
 /***/ "./app/src/pages/index.js":
 /*!********************************!*\
   !*** ./app/src/pages/index.js ***!
   \********************************/
-/*! exports provided: Login, Home, Register, RestApi, AVView, Chat */
+/*! exports provided: Login, Home, Register, RestApi, AVView, Chat, Setting */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1948,6 +2014,10 @@ __webpack_require__.r(__webpack_exports__);
 
 /* harmony import */ var _Chat__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./Chat */ "./app/src/pages/Chat.jsx");
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Chat", function() { return _Chat__WEBPACK_IMPORTED_MODULE_5__["default"]; });
+
+/* harmony import */ var _Setting__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./Setting */ "./app/src/pages/Setting.jsx");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Setting", function() { return _Setting__WEBPACK_IMPORTED_MODULE_6__["default"]; });
+
 
 
 
@@ -1982,17 +2052,13 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
- // import TitleBar from 'electron-titlebar'
-//import menu from './AppMenu'
-// import {slackTemplate} from './title'
 
-const App = () => //    document.body.style.overflow='hidden'
-react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+
+const App = () => react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
   style: {
     height: "30px"
   }
-}, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(frameless_titlebar__WEBPACK_IMPORTED_MODULE_5__["default"] // icon={signalIcon}
-, {
+}, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(frameless_titlebar__WEBPACK_IMPORTED_MODULE_5__["default"], {
   app: "Signal",
   menu: _titlebar_menu__WEBPACK_IMPORTED_MODULE_6__["defaultTemplate"],
   theme: {
@@ -2014,10 +2080,7 @@ react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__W
   exact: true,
   path: _util_constant__WEBPACK_IMPORTED_MODULE_4__["URL_REG"],
   component: _pages_index__WEBPACK_IMPORTED_MODULE_2__["Register"]
-})); // if(!location.hash.length){
-//     location.hash = '/'
-// }
-
+}));
 
 App.propTypes = {};
 /* harmony default export */ __webpack_exports__["default"] = (App);
@@ -2638,6 +2701,9 @@ const URL = {
 
       case URL.CHAT:
         return URL_HOME_CHAT;
+
+      case URL.SETTING:
+        return URL_HOME_SET;
     }
   },
   LOGIN: 1,

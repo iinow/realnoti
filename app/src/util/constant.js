@@ -17,6 +17,7 @@ export const URL = {
             case URL.REG: return URL_REG
             case URL.HOME: return URL_HOME
             case URL.CHAT: return URL_HOME_CHAT
+            case URL.SETTING: return URL_HOME_SET
         }
     },
     LOGIN: 1,
